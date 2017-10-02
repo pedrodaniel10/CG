@@ -12,7 +12,7 @@ function addFieldTorus(obj, x, y, z) {
   mesh.rotation.x = Math.PI / 2;
   obj.add(mesh);
 }
-
+/*
 function addFieldTorusStack(obj, x, y, z) {
     'use strict';
     let nTorus = Math.floor(3 + 3*Math.random());
@@ -20,7 +20,7 @@ function addFieldTorusStack(obj, x, y, z) {
         addFieldTorus(obj, x, y + i*TORUS_RADIUS, z);
     }
 }
-
+*/
 function createField(x, y, z) {
   'use strict';
   var field = new THREE.Object3D();
@@ -31,13 +31,13 @@ function createField(x, y, z) {
   let fieldWidth = TABLE_SIZEZ - 2*k;
 
   for (let x = -fieldLength / 2; x <= fieldLength / 2; x += fieldLength / TORUS_X_N) {
-      addFieldTorusStack(field, x, 0, fieldWidth / 2);
-      addFieldTorusStack(field, x, 0, -fieldWidth / 2);
+      addFieldTorus(field, x, 0, fieldWidth / 2);
+      addFieldTorus(field, x, 0, -fieldWidth / 2);
   }
 
   for (let z = -fieldWidth / 2; z <= fieldWidth / 2; z += fieldWidth / TORUS_Z_N) {
-      addFieldTorusStack(field, fieldLength / 2, 0, z);
-      addFieldTorusStack(field, -fieldLength / 2, 0, z);
+      addFieldTorus(field, fieldLength / 2, 0, z);
+      addFieldTorus(field, -fieldLength / 2, 0, z);
   }
 
   scene.add(field);
