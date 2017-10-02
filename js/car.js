@@ -1,7 +1,7 @@
 function addWheel(obj, x, y, z, r) {
   'use strict';
   geometry = new THREE.TorusGeometry(1, 1, 16, 32);
-  material = new THREE.MeshBasicMaterial({ color: 0x000000});
+  material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true});
   mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(x, y, z);
   mesh.rotation.y = r * Math.PI / 2;
@@ -11,7 +11,7 @@ function addWheel(obj, x, y, z, r) {
 function addCarBack(obj, x, y, z) {
   'use strict';
   geometry = new THREE.CubeGeometry(11, 9, 10);
-  material = new THREE.MeshBasicMaterial({ color: 0xff2b2b});
+  material = new THREE.MeshBasicMaterial({ color: 0xff2b2b, wireframe: true});
   mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(x, y, z);
   obj.add(mesh);
@@ -20,7 +20,7 @@ function addCarBack(obj, x, y, z) {
 function addCarFront(obj, x, y, z) {
   'use strict';
   geometry = new THREE.CubeGeometry(10, 4, 10);
-  material = new THREE.MeshBasicMaterial({ color: 0xfcfcfc});
+  material = new THREE.MeshBasicMaterial({ color: 0xfcfcfc, wireframe: true});
   mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(x, y, z);
   obj.add(mesh);
@@ -29,7 +29,7 @@ function addCarFront(obj, x, y, z) {
 function addCarTop(obj, x, y, z) {
   'use strict';
   geometry = new THREE.CubeGeometry(8, 1, 4);
-  material = new THREE.MeshBasicMaterial({ color: 0xff2b2b});
+  material = new THREE.MeshBasicMaterial({ color: 0xff2b2b, wireframe: true});
   mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(x, y, z);
   obj.add(mesh);

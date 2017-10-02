@@ -23,7 +23,7 @@ function addTableTop(obj, x, y, z) {
 function createTable(x, y, z) {
   'use strict';
   var table = new THREE.Object3D();
-  material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+  material = new THREE.MeshBasicMaterial({ color: 0xc4f6ff, wireframe: true });
 
   addTableTop(table, 0, 0, 0);
   /*

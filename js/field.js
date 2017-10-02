@@ -21,7 +21,7 @@ function addFieldTorusStack(obj, x, y, z) {
 function createField(x, y, z) {
   'use strict';
   var field = new THREE.Object3D();
-  material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+  material = new THREE.MeshBasicMaterial({ color: 0xe68200, wireframe: true });
 
   addFieldTorusStack(field, 5, 0, -1);
 
