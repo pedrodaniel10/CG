@@ -1,3 +1,7 @@
+var TABLE_SIZEX = 180;
+var TABLE_SIZEY = 2;
+var TABLE_SIZEZ = 80;
+
 function addTableLeg(obj, x, y, z) {
   'use strict';
   geometry = new THREE.CubeGeometry(2, 6, 2);
@@ -8,7 +12,7 @@ function addTableLeg(obj, x, y, z) {
 
 function addTableTop(obj, x, y, z) {
   'use strict';
-  geometry = new THREE.CubeGeometry(180, 2, 80);
+  geometry = new THREE.CubeGeometry(TABLE_SIZEX, TABLE_SIZEY, TABLE_SIZEZ);
   mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(x, y, z);
   obj.add(mesh);
