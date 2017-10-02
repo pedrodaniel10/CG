@@ -18,7 +18,7 @@ function createCamera() {
   'use strict';
   camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
 
-  camera.position.x = 50;
+  camera.position.x = 200;
   camera.position.y = 50;
   camera.position.z = 50;
   camera.lookAt(scene.position);
