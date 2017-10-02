@@ -37,6 +37,7 @@ function createScene() {
 
   scene.add(new THREE.AxisHelper(10));
   createTable(0, 0, 0);
+  createCar(30, 30, 20);
 }
 
 function onResize() {
