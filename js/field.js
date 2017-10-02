@@ -5,7 +5,7 @@ var TORUS_INSIDE_MARGIN = 130;
 var TORUS_X_N = 30;
 var TORUS_Z_N = 15;
 
-function addFieldTorus(obj, x, y, z) {
+function addFieldTorusStack(obj, x, y, z) {
   'use strict';
   geometry = new THREE.TorusGeometry(TORUS_SIZE, TORUS_RADIUS, 16, 32);
   mesh = new THREE.Mesh(geometry, material);
@@ -13,15 +13,15 @@ function addFieldTorus(obj, x, y, z) {
   mesh.rotation.x = Math.PI / 2;
   obj.add(mesh);
 }
-/*
-function addFieldTorusStack(obj, x, y, z) {
+
+function addFieldTorus(obj, x, y, z) {
     'use strict';
     let nTorus = Math.floor(3 + 3*Math.random());
     for (let i = 0; i < nTorus; i++) {
-        addFieldTorus(obj, x, y + i*TORUS_RADIUS, z);
+        addFieldTorusStack(obj, x, y + i*TORUS_RADIUS, z);
     }
 }
-*/
+
 function createField(x, y, z) {
   'use strict';
   var field = new THREE.Object3D();
