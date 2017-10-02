@@ -1,7 +1,7 @@
 var camera, cameraOrthographic, scene, renderer;
 var isOrthographic = false;
 
-var orthographicScale = 3.3;
+var orthographicScale = 1.4*(window.innerWidth / window.innerHeight);
 
 var geometry, material, mesh;
 
@@ -48,6 +48,7 @@ function createScene() {
 
 function onResize() {
   'use strict';
+  orthographicScale = 1.4*(window.innerWidth / window.innerHeight);
   renderer.setSize(window.innerWidth, window.innerHeight);
   if (window.innerHeight > 0 && window.innerWidth > 0) {
     camera.aspect = renderer.getSize().width / renderer.getSize().height;
