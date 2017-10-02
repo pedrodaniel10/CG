@@ -1,10 +1,12 @@
-var TABLE_SIZEX = 180;
+var TABLE_SIZEX = 900;
 var TABLE_SIZEY = 6;
-var TABLE_SIZEZ = 80;
+var TABLE_SIZEZ = 400;
+
+var SCALE_TABLE = TABLE_SIZEX / TABLE_SIZEZ;
 
 function addTableLeg(obj, x, y, z) {
   'use strict';
-  geometry = new THREE.CubeGeometry(6, 30, 6);
+  geometry = new THREE.CubeGeometry(LEG_SIZEX, 30, LEG_SIZEZ);
   mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(x, y, z);
   obj.add(mesh);
@@ -24,10 +26,12 @@ function createTable(x, y, z) {
   material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
 
   addTableTop(table, 0, 0, 0);
+  /*
   addTableLeg(table, -87, -12, -37);
   addTableLeg(table, -87, -12, 37);
   addTableLeg(table, 87, -12, 37);
   addTableLeg(table, 87, -12, -37);
+  */
 
   scene.add(table);
   table.position.x = x;

@@ -1,6 +1,8 @@
 var camera, cameraOrthographic, scene, renderer;
 var isOrthographic = false;
 
+var orthographicScale = 3.3;
+
 var geometry, material, mesh;
 
 function render() {
@@ -18,14 +20,17 @@ function createCamera() {
   'use strict';
   camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
 
-  camera.position.x = 125;
-  camera.position.y = 75;
-  camera.position.z = 100;
+  camera.position.x = 280;
+  camera.position.y = 250;
+  camera.position.z = 500;
   camera.lookAt(scene.position);
 
-  cameraOrthographic = new THREE.OrthographicCamera( window.innerWidth / - 16, window.innerWidth / 16, window.innerHeight / 16, window.innerHeight / - 16, 1, 50);
+  cameraOrthographic = new THREE.OrthographicCamera( window.innerWidth / - orthographicScale,
+                                                     window.innerWidth / orthographicScale,
+                                                     window.innerHeight / orthographicScale,
+                                                     window.innerHeight / - orthographicScale, 1, 450);
   cameraOrthographic.position.x = 0;
-  cameraOrthographic.position.y = 50;
+  cameraOrthographic.position.y = 250;
   cameraOrthographic.position.z = 0;
   cameraOrthographic.lookAt(scene.position);
 }
