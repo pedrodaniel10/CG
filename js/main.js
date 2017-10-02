@@ -63,7 +63,7 @@ function onKeyDown(e) {
 
     case 83: //S
     case 115: //s
-      console.log(isOrthographic);
+      isOrthographic = !isOrthographic;
       break;
   }
 }
