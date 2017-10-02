@@ -1,10 +1,17 @@
-var camera, scene, renderer;
+var camera, cameraOrthographic, scene, renderer;
+var isOrthographic = false;
 
 var geometry, material, mesh;
 
 function render() {
   'use strict';
-  renderer.render(scene, camera);
+  if(isOrthographic){
+    renderer.render(scene, cameraOrthographic);
+  }
+  else{
+
+    renderer.render(scene, camera);
+  }
 }
 
 function createCamera() {
@@ -15,6 +22,12 @@ function createCamera() {
   camera.position.y = 50;
   camera.position.z = 50;
   camera.lookAt(scene.position);
+
+  cameraOrthographic = new THREE.OrthographicCamera( window.innerWidth / - 16, window.innerWidth / 16, window.innerHeight / 16, window.innerHeight / - 16, 1, 50);
+  cameraOrthographic.position.x = 0;
+  cameraOrthographic.position.y = 50;
+  cameraOrthographic.position.z = 0;
+  cameraOrthographic.lookAt(scene.position);
 }
 
 
@@ -46,6 +59,11 @@ function onKeyDown(e) {
           node.material.wireframe = !node.material.wireframe;
         }
       });
+      break;
+
+    case 83: //S
+    case 115: //s
+      console.log(isOrthographic);
       break;
   }
 }
