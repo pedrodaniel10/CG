@@ -52,6 +52,11 @@ function onResize() {
   if (window.innerHeight > 0 && window.innerWidth > 0) {
     camera.aspect = renderer.getSize().width / renderer.getSize().height;
     camera.updateProjectionMatrix();
+    cameraOrthographic.left = renderer.getSize().width / -orthographicScale;
+    cameraOrthographic.right = renderer.getSize().width / orthographicScale;
+    cameraOrthographic.top = renderer.getSize().height / orthographicScale;
+    cameraOrthographic.bottom = renderer.getSize().height / -orthographicScale;
+    cameraOrthographic.updateProjectionMatrix();
   }
 }
 
