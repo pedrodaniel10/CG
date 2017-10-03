@@ -45,7 +45,7 @@ function createScene() {
 
   scene.add(new THREE.AxisHelper(10));
   createTable(0, -TABLE_SIZEY/2, 0);
-  car = createCar(30, 1, 20, 0, 0, 1);
+  scene.add(new Car(30, 1, 20, 0, 0, 1));
   createField(0, 0, 0);
 }
 
@@ -101,7 +101,7 @@ function onKeyUp(e){
 
 function animate() {
   'use strict';
-  checkMove(car);
+  //checkMove(car);
   render();
   requestAnimationFrame(animate);
 }
