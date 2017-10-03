@@ -3,7 +3,7 @@ var isOrthographic = false;
 
 var clock = new THREE.Clock();
 
-var screenConst = 450000;
+var screenConst = 425000;
 var orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
 
 var geometry, material, mesh;
