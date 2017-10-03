@@ -1,9 +1,12 @@
 var camera, cameraOrthographic, scene, renderer;
 var isOrthographic = false;
 
+var clock = new THREE.Clock();
 var orthographicScale = 1.4*(window.innerWidth / window.innerHeight);
 
 var geometry, material, mesh;
+
+var car;
 
 function render() {
   'use strict';
@@ -42,7 +45,7 @@ function createScene() {
 
   scene.add(new THREE.AxisHelper(10));
   createTable(0, -TABLE_SIZEY/2, 0);
-  createCar(30, 1, 20);
+  car = createCar(30, 1, 20, 0, 0, 1);
   createField(0, 0, 0);
 }
 
@@ -78,12 +81,27 @@ function onKeyDown(e) {
     case 115: //s
       isOrthographic = !isOrthographic;
       break;
+
+    case 38: //up arrow
+      keyUpPress = true;
+      breakUpPress = false;
+      break;
+  }
+}
+
+function onKeyUp(e){
+  'use strict'
+  switch (e.keyCode) {
+    case 38: //up arrow
+      keyUpPress = false;
+      breakUpPress = true;
+      break;
   }
 }
 
 function animate() {
   'use strict';
-
+  checkMove(car);
   render();
   requestAnimationFrame(animate);
 }
@@ -101,4 +119,5 @@ function init() {
 
   window.addEventListener("resize", onResize);
   window.addEventListener("keydown", onKeyDown)
+  window.addEventListener("keyup", onKeyUp)
 }
