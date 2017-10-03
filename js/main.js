@@ -8,7 +8,7 @@ var orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
 
 var geometry, material, mesh;
 
-var car;
+var car, orange1, orange2, orange3, butter1;
 
 function render() {
   'use strict';
@@ -47,10 +47,20 @@ function createScene() {
 
   createTable(0, -TABLE_SIZEY/2, 0);
 
-  car = new Car(100, 1, 0)
+  car = new Car(100, 1, 0);
+  orange1 = new Orange(130, 0, 100);
+  orange2 = new Orange(-300, 0, 30);
+  orange2.rotateZ(0.35);
+  orange3 = new Orange(418, 0, -130);
+  orange3.rotateX(0.5);
+  butter1 = new Butter(180, 0, 30);
+
   createField(0, 0, 0);
   scene.add(car);
-
+  scene.add(orange1);
+  scene.add(orange2);
+  scene.add(orange3);
+  scene.add(butter1);
   scene.add(new THREE.AxisHelper(100));
 }
 
