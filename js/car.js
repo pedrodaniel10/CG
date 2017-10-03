@@ -1,7 +1,7 @@
 'use strict';
 var keyUpPress=false, breakUpPress=true;
 
-class Car extends ObjectBase {
+class Car extends Object3D {
     constructor(x, y, z, dx, dy, dz) {
         super(x - 10.5, y + 3, z - 5);
         this.DOF = new THREE.Vector3(dx, dy, dz);

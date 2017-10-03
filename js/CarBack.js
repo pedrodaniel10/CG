@@ -1,4 +1,4 @@
-class CarBack extends ObjectBase {
+class CarBack extends Mesh {
   constructor(x, y, z){
     super(x,y,z);
     this.geometry = new THREE.CubeGeometry(11, 9, 10);

@@ -1,6 +1,6 @@
 'use strict';
 
-class CarWheel extends ObjectBase {
+class CarWheel extends Mesh {
     constructor(x, y, z, r) {
         super(x, y, z);
         this.geometry = new THREE.TorusGeometry(1, 1, 16, 32);

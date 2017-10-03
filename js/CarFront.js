@@ -1,6 +1,6 @@
 'use strict';
 
-class CarFront extends ObjectBase {
+class CarFront extends Mesh {
     constructor(x, y, z, r) {
         super(x, y, z);
         this.geometry = new THREE.CubeGeometry(10, 4, 10);
