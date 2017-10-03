@@ -47,7 +47,7 @@ function createScene() {
 
   scene.add(new THREE.AxisHelper(10));
   createTable(0, -TABLE_SIZEY/2, 0);
-  scene.add(new Car(30, 1, 20, 0, 0, 1));
+  scene.add(new Car(0, 1, 0, 1, 0, 0));
   createField(0, 0, 0);
 }
 
