@@ -3,8 +3,7 @@ var isOrthographic = false;
 
 var clock = new THREE.Clock();
 
-var screenConstant = (window.innerWidth / window.innerHeight)*153088
-var orthographicScale = (window.innerWidth * window.innerHeight) / screenConstant;
+var orthographicScale = (window.innerWidth * window.innerHeight)/314938;
 
 var geometry, material, mesh;
 
@@ -53,7 +52,7 @@ function createScene() {
 
 function onResize() {
   'use strict';
-  orthographicScale = (window.innerWidth * window.innerHeight) / screenConstant;
+  orthographicScale = (window.innerWidth * window.innerHeight)/314938;
   renderer.setSize(window.innerWidth, window.innerHeight);
   if (window.innerHeight > 0 && window.innerWidth > 0) {
     camera.aspect = renderer.getSize().width / renderer.getSize().height;
