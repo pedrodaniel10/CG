@@ -1,7 +1,7 @@
+'use strict';
 var keyUpPress=false, breakUpPress=true;
 
 function addWheel(obj, x, y, z, r) {
-  'use strict';
   geometry = new THREE.TorusGeometry(1, 1, 16, 32);
   material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true});
   mesh = new THREE.Mesh(geometry, material);
@@ -11,7 +11,6 @@ function addWheel(obj, x, y, z, r) {
 }
 
 function addCarBack(obj, x, y, z) {
-  'use strict';
   geometry = new THREE.CubeGeometry(11, 9, 10);
   material = new THREE.MeshBasicMaterial({ color: 0xff2b2b, wireframe: true});
   mesh = new THREE.Mesh(geometry, material);
@@ -20,7 +19,6 @@ function addCarBack(obj, x, y, z) {
 }
 
 function addCarFront(obj, x, y, z) {
-  'use strict';
   geometry = new THREE.CubeGeometry(10, 4, 10);
   material = new THREE.MeshBasicMaterial({ color: 0xfcfcfc, wireframe: true});
   mesh = new THREE.Mesh(geometry, material);
@@ -29,7 +27,6 @@ function addCarFront(obj, x, y, z) {
 }
 
 function addCarTop(obj, x, y, z) {
-  'use strict';
   geometry = new THREE.CubeGeometry(9, 1, 4);
   material = new THREE.MeshBasicMaterial({ color: 0xff2b2b, wireframe: true});
   mesh = new THREE.Mesh(geometry, material);
@@ -38,7 +35,6 @@ function addCarTop(obj, x, y, z) {
 }
 
 function createCar(x, y, z, dx, dy, dz) {
-  'use strict';
   var car = new THREE.Object3D();
   car.DOF = new THREE.Vector3(dx,dy,dz);
   car.DOF.normalize();
@@ -47,11 +43,11 @@ function createCar(x, y, z, dx, dy, dz) {
   addCarBack(car, 5.5, 4.5, 5);
   addCarFront(car, 16, 2, 5);
   addCarTop(car, 15.5, 4.5, 5);
-  addWheel(car, 5, 0, -1, 0);
-  addWheel(car, 5, 0, 11, 0);
-  addWheel(car, 16, 0, -1, 0);
-  addWheel(car, 16, 0, 11, 0);
-  addWheel(car, -1, 5, 5, 1);
+  car.add(new CarWheel(5, 0, -1, 0));
+  car.add(new CarWheel(5, 0, 11, 0));
+  car.add(new CarWheel(16, 0, -1, 0));
+  car.add(new CarWheel(16, 0, 11, 0));
+  car.add(new CarWheel(-1, 5, 5, 1));
 
   car.lookAt(car.DOF);
 
