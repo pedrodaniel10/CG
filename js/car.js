@@ -4,12 +4,11 @@ var keyUpPress=false, breakUpPress=true;
 class Car extends Object3D {
     constructor(x, y, z) {
         super();
-        this.translateX(-10.5);
-        this.translateY(3);
-        this.translateZ(-5);
+        this.add(new THREE.AxisHelper(100));
+
+        this.position.set(x,y,z);
 
         this.DOF = new THREE.Vector3(1, 0, 0);
-        this.DOF.normalize();
         this.velocity = new THREE.Vector3();
 
         this.add(new CarBack(5.5, 4.5, 5));
@@ -20,6 +19,11 @@ class Car extends Object3D {
         this.add(new CarWheel(16, 0, -1, 0));
         this.add(new CarWheel(16, 0, 11, 0));
         this.add(new CarWheel(-1, 5, 5, 1));
+    }
+
+    getDOF(){
+      var z_axis = this.getWorldDirection();
+      return new THREE.Vector3(z_axis.getComponent(2), 0, -z_axis.getComponent(0));
     }
 }
 /*

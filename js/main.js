@@ -45,10 +45,13 @@ function createScene() {
   'use strict';
   scene = new THREE.Scene();
 
-  scene.add(new THREE.AxisHelper(10));
   createTable(0, -TABLE_SIZEY/2, 0);
-  scene.add(new Car(0, 1, 0, 1, 0, 0));
+
+  car = new Car(100, 1, 0)
   createField(0, 0, 0);
+  scene.add(car);
+
+  scene.add(new THREE.AxisHelper(100));
 }
 
 function onResize() {
