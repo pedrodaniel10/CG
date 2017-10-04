@@ -1,7 +1,7 @@
 'use strict';
 
 class Car extends Object3D {
-    constructor(x, y, z) {
+    constructor() {
         super();
         //this.add(new THREE.AxisHelper(100));
         this.add(new CarBack(5.5, 4.5, 5));
@@ -22,7 +22,7 @@ class Car extends Object3D {
         this.downB = false;
 
         //variables
-        this.velocity=0;
+        this.velocity = 0;
 
         //constants
         this.maximumSpeed = 180;

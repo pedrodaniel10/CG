@@ -1,63 +1,46 @@
-var TORUS_SIZE = 3;
-var TORUS_RADIUS = 1;
-var TORUS_OUTSIDE_MARGIN = 20;
-var TORUS_INSIDE_MARGIN = 110;
-var TORUS_X_N = 30;
-var TORUS_Z_N = 15;
+'use strict';
 
-function addFieldTorusStack(obj, x, y, z) {
-  'use strict';
-  geometry = new THREE.TorusGeometry(TORUS_SIZE, TORUS_RADIUS, 16, 32);
-  mesh = new THREE.Mesh(geometry, material);
-  mesh.position.set(x, y + TORUS_RADIUS, z);
-  mesh.rotation.x = Math.PI / 2;
-  obj.add(mesh);
-}
+class Field extends Object3D {
+    constructor() {
+        super();
 
-function addFieldTorus(obj, x, y, z) {
-    'use strict';
-    addFieldTorusStack(obj, x, y + TORUS_RADIUS, z);
-}
+        this.TORUS_SIZE = 3;
+        this.TORUS_RADIUS = 1;
+        this.TORUS_OUTSIDE_MARGIN = 20;
+        this.TORUS_INSIDE_MARGIN = 110;
+        this.TORUS_X_N = 30;
+        this.TORUS_Z_N = 15;
 
-function createField(x, y, z) {
-  'use strict';
-  var field = new THREE.Object3D();
-  material = new THREE.MeshBasicMaterial({ color: 0xe68200, wireframe: true });
+        let k = this.TORUS_OUTSIDE_MARGIN + this.TORUS_SIZE;
+        let fieldLength = this.TABLE_SIZEX - 2*k;
+        let fieldWidth = this.TABLE_SIZEZ - 2*k;
 
-  let k = TORUS_OUTSIDE_MARGIN + TORUS_SIZE;
-  let fieldLength = TABLE_SIZEX - 2*k;
-  let fieldWidth = TABLE_SIZEZ - 2*k;
+        let n = 40;
+        for (let x = -fieldLength / 2; x <= fieldLength / 2; x += fieldLength / n) {
+            this.add(new Cheerio(field, x, 0, fieldWidth / 2, TORUS_SIZE, TORUS_RADIUS));
+            this.add(new Cheerio(field, x, 0, -fieldWidth / 2, TORUS_SIZE, TORUS_RADIUS));
+        }
 
-  let n = 40;
-  for (let x = -fieldLength / 2; x <= fieldLength / 2; x += fieldLength / n) {
-      addFieldTorus(field, x, 0, fieldWidth / 2);
-      addFieldTorus(field, x, 0, -fieldWidth / 2);
-  }
+        n = 18;
+        for (let z = -fieldWidth / 2; z <= fieldWidth / 2; z += fieldWidth / n) {
+            this.add(new Cheerio(field, fieldLength / 2, 0, z, TORUS_SIZE, TORUS_RADIUS));
+            this.add(new Cheerio(field, -fieldLength / 2, 0, z, TORUS_SIZE, TORUS_RADIUS));
+        }
 
-  n = 18;
-  for (let z = -fieldWidth / 2; z <= fieldWidth / 2; z += fieldWidth / n) {
-      addFieldTorus(field, fieldLength / 2, 0, z);
-      addFieldTorus(field, -fieldLength / 2, 0, z);
-  }
+        k = this.TORUS_INSIDE_MARGIN + this.TORUS_SIZE;
+        fieldLength = this.TABLE_SIZEX - 2*k;
+        fieldWidth = this.TABLE_SIZEZ - 2*k;
 
-  k = TORUS_INSIDE_MARGIN + TORUS_SIZE;
-  fieldLength = TABLE_SIZEX - 2*k;
-  fieldWidth = TABLE_SIZEZ - 2*k;
+        n = 30;
+        for (let x = -fieldLength / 2; x <= fieldLength / 2; x += fieldLength / n) {
+            this.add(new Cheerio(field, x, 0, fieldWidth / 2, TORUS_SIZE, TORUS_RADIUS));
+            this.add(new Cheerio(field, x, 0, -fieldWidth / 2, TORUS_SIZE, TORUS_RADIUS));
+        }
 
-  n = 30;
-  for (let x = -fieldLength / 2; x <= fieldLength / 2; x += fieldLength / n) {
-      addFieldTorus(field, x, 0, fieldWidth / 2);
-      addFieldTorus(field, x, 0, -fieldWidth / 2);
-  }
-
-  n = 8;
-  for (let z = -fieldWidth / 2; z <= fieldWidth / 2; z += fieldWidth / n) {
-      addFieldTorus(field, fieldLength / 2, 0, z);
-      addFieldTorus(field, -fieldLength / 2, 0, z);
-  }
-
-  scene.add(field);
-  field.position.x = x;
-  field.position.y = y;
-  field.position.z = z;
+        n = 8;
+        for (let z = -fieldWidth / 2; z <= fieldWidth / 2; z += fieldWidth / n) {
+            this.add(new Cheerio(field, fieldLength / 2, 0, z, TORUS_SIZE, TORUS_RADIUS));
+            this.add(new Cheerio(field, -fieldLength / 2, 0, z, TORUS_SIZE, TORUS_RADIUS));
+        }
+    }
 }

@@ -11,6 +11,7 @@ var geometry, material, mesh;
 var car;
 var orange1, orange2, orange3;
 var butter1, butter2, butter3, butter4, butter5;
+var field;
 
 var keyState = {};
 window.addEventListener('keydown',function(e){
@@ -25,8 +26,7 @@ function render() {
   if(isOrthographic){
     renderer.render(scene, cameraOrthographic);
   }
-  else{
-
+  else {
     renderer.render(scene, camera);
   }
 }
@@ -57,7 +57,7 @@ function createScene() {
 
   createTable(0, -TABLE_SIZEY/2, 0);
 
-  car = new Car(100, 1, 0);
+  car = new Car();
 
   orange1 = new Orange(130, 0, 100);
   orange2 = new Orange(-300, 0, 30);
@@ -76,7 +76,7 @@ function createScene() {
   butter5 = new Butter(-300, 0, -80);
   butter5.rotateY(-0.6);
 
-  createField(0, 0, 0);
+  field = new Field();
 
   scene.add(car);
   scene.add(orange1);
@@ -87,6 +87,7 @@ function createScene() {
   scene.add(butter3);
   scene.add(butter4);
   scene.add(butter5);
+  scene.add(field);
   scene.add(new THREE.AxisHelper(100));
 }
 
