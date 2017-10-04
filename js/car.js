@@ -20,8 +20,6 @@ class Car extends Object3D {
         this.left = false;
         this.upB = false;
         this.downB = false;
-        this.rightB = false;
-        this.leftB = false;
 
         //variables
         this.velocity=0;
@@ -30,6 +28,7 @@ class Car extends Object3D {
         this.maximumSpeed = 200;
         this.minimumSpeed = 0;
         this.aceleration = 1000;
+        this.constantCurve = 1/2000;
     }
 
     getDOF(){
@@ -52,13 +51,12 @@ class Car extends Object3D {
      if (this.downB) {
        this.moveBackwards(-this.aceleration, delta);
      }
-     if(this.right){
-
+     if(keyState[39]){
+       this.turnRight();
      }
-     else if (this.left) {
-
+     else if (keyState[37]) {
+       this.turnLeft();
      }
-     console.log(keyState);
    }
 
    moveFoward(aceleration, delta){
@@ -122,7 +120,13 @@ class Car extends Object3D {
      this.position.x += vecPosition.x;
      this.position.y += vecPosition.y;
      this.position.z += vecPosition.z;
-
    }
 
+   turnRight(){
+     this.rotateY(-this.velocity * this.constantCurve)
+   }
+
+   turnLeft(){
+     this.rotateY(this.velocity * this.constantCurve)
+   }
 }
