@@ -1,16 +1,9 @@
 'use strict';
-var keyUpPress=false, breakUpPress=true;
 
 class Car extends Object3D {
     constructor(x, y, z) {
         super();
         this.add(new THREE.AxisHelper(100));
-
-        this.position.set(x,y,z);
-
-        this.DOF = new THREE.Vector3(1, 0, 0);
-        this.velocity = new THREE.Vector3();
-
         this.add(new CarBack(5.5, 4.5, 5));
         this.add(new CarFront(16, 2, 5));
         this.add(new CarTop(15.5, 4.5, 5));
@@ -19,72 +12,116 @@ class Car extends Object3D {
         this.add(new CarWheel(16, 0, -1, 0));
         this.add(new CarWheel(16, 0, 11, 0));
         this.add(new CarWheel(-1, 5, 5, 1));
+
+        //booleans
+        this.up = false;
+        this.down = false;
+        this.right = false;
+        this.left = false;
+        this.upB = false;
+        this.downB = false;
+        this.rightB = false;
+        this.leftB = false;
+
+        //variables
+        this.velocity=0;
+
+        //constants
+        this.maximumSpeed = 200;
+        this.minimumSpeed = 0;
+        this.aceleration = 1000;
     }
 
     getDOF(){
-      var z_axis = this.getWorldDirection();
-      return new THREE.Vector3(z_axis.getComponent(2), 0, -z_axis.getComponent(0));
-    }
+     var z_axis = this.getWorldDirection();
+     return new THREE.Vector3(z_axis.getComponent(2), 0, -z_axis.getComponent(0));
+   }
+
+   checkMove(){
+     var delta = clock.getDelta();
+
+     if(this.up){
+       this.moveFoward(this.aceleration, delta);
+     }
+     else if (this.upB) {
+       this.moveFoward(-this.aceleration, delta);
+     }
+     if (this.down) {
+       this.moveBackwards(this.aceleration, delta);
+     }
+     else if (this.downB) {
+       this.moveBackwards(-this.aceleration, delta);
+     }
+     if(this.right){
+
+     }
+     else if (this.left) {
+
+     }
+   }
+
+   moveFoward(aceleration, delta){
+     var deslocation;
+     var vecPosition = new THREE.Vector3(0,0,0);
+     if(this.velocity==0 && aceleration > 0){
+       deslocation = Math.abs(Math.pow(delta,2)*aceleration/2);
+       vecPosition = this.getDOF();
+       vecPosition.setLength(deslocation);
+       this.velocity = aceleration * delta;
+     }
+     else if (this.velocity!=0 && aceleration > 0) {
+       deslocation = Math.abs((Math.pow(delta,2)*aceleration)/2 + this.velocity * delta)
+       vecPosition = this.getDOF();
+       vecPosition.setLength(deslocation);
+       this.velocity = Math.min(aceleration * delta + this.velocity, this.maximumSpeed);
+     }
+     else if (this.velocity!=0 && aceleration < 0) {
+       deslocation = Math.abs((Math.pow(delta,2)*aceleration)/2 + this.velocity * delta)
+       vecPosition = this.getDOF();
+       vecPosition.setLength(deslocation);
+       this.velocity = Math.max(((aceleration*delta) + this.velocity), this.minimumSpeed);
+     }
+     else {
+       this.up = false;
+       this.upB = false;
+     }
+     this.position.x += vecPosition.x;
+     this.position.y += vecPosition.y;
+     this.position.z += vecPosition.z;
+   }
+
+   moveBackwards(aceleration, delta){
+     var deslocation;
+     var vecPosition = new THREE.Vector3(0,0,0);
+     if(this.velocity==0 && aceleration > 0){
+       deslocation = Math.abs(Math.pow(delta,2)*aceleration/2);
+       vecPosition = this.getDOF();
+       vecPosition.negate();
+       vecPosition.setLength(deslocation);
+       this.velocity = aceleration * delta;
+     }
+     else if (this.velocity!=0 && aceleration > 0) {
+       deslocation = Math.abs((Math.pow(delta,2)*aceleration)/2 + this.velocity * delta)
+       vecPosition = this.getDOF();
+       vecPosition.negate();
+       vecPosition.setLength(deslocation);
+       this.velocity = Math.min(aceleration * delta + this.velocity, this.maximumSpeed);
+     }
+     else if (this.velocity!=0 && aceleration < 0) {
+       deslocation = Math.abs((Math.pow(delta,2)*aceleration)/2 + this.velocity * delta)
+       vecPosition = this.getDOF();
+       vecPosition.negate();
+       vecPosition.setLength(deslocation);
+       this.velocity = Math.max(((aceleration*delta) + this.velocity), this.minimumSpeed);
+     }
+     else{
+       this.down = false;
+       this.downB = false;
+     }
+     this.position.x += vecPosition.x;
+     this.position.y += vecPosition.y;
+     this.position.z += vecPosition.z;
+
+   }
+
 }
-/*
-function createCar(x, y, z, dx, dy, dz) {
-  var car = new THREE.Object3D();
-  car.DOF = new THREE.Vector3(dx,dy,dz);
-  car.DOF.normalize();
-  car.velocity = new THREE.Vector3();
-
-  car.add(new CarBack(5.5, 4.5, 5));
-  car.add(new CarFront(16, 2, 5));
-  car.add(new CarTop(15.5, 4.5, 5));
-  car.add(new CarWheel(5, 0, -1, 0));
-  car.add(new CarWheel(5, 0, 11, 0));
-  car.add(new CarWheel(16, 0, -1, 0));
-  car.add(new CarWheel(16, 0, 11, 0));
-  car.add(new CarWheel(-1, 5, 5, 1));
-
-  car.lookAt(car.DOF);
-
-  scene.add(car);
-  car.position.x = x - 10.5;
-  car.position.y = y + 3;
-  car.position.z = z - 5;
-
-  return car;
-}
-*/
-function newPosition(car){
-  car.position.x += car.velocity.getComponent(0);
-  car.position.y += car.velocity.getComponent(1);
-  car.position.z += car.velocity.getComponent(2);
-}
-
-function moveStraight(car,aceleration, maximumSpeed, deltaTime){
-  //null velocity, put direction of DOF
-  if(car.velocity.getComponent(0) == 0 &&
-     car.velocity.getComponent(1) == 0 &&
-     car.velocity.getComponent(2) == 0){
-       if (aceleration > 0){
-        car.velocity.set(car.DOF.getComponent(0),car.DOF.getComponent(1),car.DOF.getComponent(2))
-        car.velocity.setLength(aceleration * deltaTime);
-        newPosition(car);
-      }
-  }
-  else {
-    var newVelocity = car.velocity.length() + aceleration * deltaTime;
-    car.velocity.setLength(Math.min(maximumSpeed, newVelocity));
-    newPosition(car);
-  }
-}
-/*
-function checkMove(car){
-  //Time key pressed
-  var delta = clock.getDelta();
-
-  if(keyUpPress){
-    moveStraight(car, 1 ,1, delta);
-  }
-  else if(breakUpPress){
-    moveStraight(car, -1, 1, delta);
-  }
-}
-*/

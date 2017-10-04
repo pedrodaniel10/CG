@@ -116,8 +116,13 @@ function onKeyDown(e) {
       break;
 
     case 38: //up arrow
-      keyUpPress = true;
-      breakUpPress = false;
+      car.up = true;
+      car.upB = false;
+      break;
+
+    case 40: //down arrow
+      car.down = true;
+      car.downB = false;
       break;
   }
 }
@@ -126,15 +131,20 @@ function onKeyUp(e){
   'use strict'
   switch (e.keyCode) {
     case 38: //up arrow
-      keyUpPress = false;
-      breakUpPress = true;
+      car.up = false;
+      car.upB = true;
       break;
-  }
+
+  case 40: //down arrow
+    car.down = false;
+    car.downB = true;
+    break;
+}
 }
 
 function animate() {
   'use strict';
-  //checkMove(car);
+  car.checkMove();
   render();
   requestAnimationFrame(animate);
 }
