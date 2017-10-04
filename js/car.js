@@ -3,7 +3,7 @@
 class Car extends Object3D {
     constructor(x, y, z) {
         super();
-        this.add(new THREE.AxisHelper(100));
+        //this.add(new THREE.AxisHelper(100));
         this.add(new CarBack(5.5, 4.5, 5));
         this.add(new CarFront(16, 2, 5));
         this.add(new CarTop(15.5, 4.5, 5));
@@ -25,10 +25,11 @@ class Car extends Object3D {
         this.velocity=0;
 
         //constants
-        this.maximumSpeed = 200;
+        this.maximumSpeed = 180;
         this.minimumSpeed = 0;
-        this.aceleration = 1000;
-        this.constantCurve = 1/2000;
+        this.forwardAcceleration = 150;
+        this.backwardAcceleration = 60;
+        this.constantCurve = 1/4000;
     }
 
     getDOF(){
@@ -40,16 +41,16 @@ class Car extends Object3D {
      var delta = clock.getDelta();
 
      if(keyState[38]){
-       this.moveFoward(this.aceleration, delta);
+       this.moveFoward(this.forwardAcceleration, delta);
      }
      if (keyState[40]) {
-       this.moveBackwards(this.aceleration, delta);
+       this.moveBackwards(this.backwardAcceleration, delta);
      }
      if (this.upB) {
-       this.moveFoward(-this.aceleration, delta);
+       this.moveFoward(-this.forwardAcceleration, delta);
      }
      if (this.downB) {
-       this.moveBackwards(-this.aceleration, delta);
+       this.moveBackwards(-this.backwardAcceleration, delta);
      }
      if(keyState[39]){
        this.turnRight();
@@ -59,26 +60,26 @@ class Car extends Object3D {
      }
    }
 
-   moveFoward(aceleration, delta){
+   moveFoward(acceleration, delta){
      var deslocation;
      var vecPosition = new THREE.Vector3(0,0,0);
-     if(this.velocity==0 && aceleration > 0){
-       deslocation = Math.abs(Math.pow(delta,2)*aceleration/2);
+     if(this.velocity==0 && acceleration > 0){
+       deslocation = Math.abs(Math.pow(delta,2)*acceleration/2);
        vecPosition = this.getDOF();
        vecPosition.setLength(deslocation);
-       this.velocity = aceleration * delta;
+       this.velocity = acceleration * delta;
      }
-     else if (this.velocity!=0 && aceleration > 0) {
-       deslocation = Math.abs((Math.pow(delta,2)*aceleration)/2 + this.velocity * delta)
+     else if (this.velocity!=0 && acceleration > 0) {
+       deslocation = Math.abs((Math.pow(delta,2)*acceleration)/2 + this.velocity * delta)
        vecPosition = this.getDOF();
        vecPosition.setLength(deslocation);
-       this.velocity = Math.min(aceleration * delta + this.velocity, this.maximumSpeed);
+       this.velocity = Math.min(acceleration * delta + this.velocity, this.maximumSpeed);
      }
-     else if (this.velocity!=0 && aceleration < 0) {
-       deslocation = Math.abs((Math.pow(delta,2)*aceleration)/2 + this.velocity * delta)
+     else if (this.velocity!=0 && acceleration < 0) {
+       deslocation = Math.abs((Math.pow(delta,2)*acceleration)/2 + this.velocity * delta)
        vecPosition = this.getDOF();
        vecPosition.setLength(deslocation);
-       this.velocity = Math.max(((aceleration*delta) + this.velocity), this.minimumSpeed);
+       this.velocity = Math.max(((acceleration*delta) + this.velocity), this.minimumSpeed);
      }
      else {
        this.up = false;
@@ -89,29 +90,29 @@ class Car extends Object3D {
      this.position.z += vecPosition.z;
    }
 
-   moveBackwards(aceleration, delta){
+   moveBackwards(acceleration, delta){
      var deslocation;
      var vecPosition = new THREE.Vector3(0,0,0);
-     if(this.velocity==0 && aceleration > 0){
-       deslocation = Math.abs(Math.pow(delta,2)*aceleration/2);
+     if(this.velocity==0 && acceleration > 0){
+       deslocation = Math.abs(Math.pow(delta,2)*acceleration/2);
        vecPosition = this.getDOF();
        vecPosition.negate();
        vecPosition.setLength(deslocation);
-       this.velocity = aceleration * delta;
+       this.velocity = acceleration * delta;
      }
-     else if (this.velocity!=0 && aceleration > 0) {
-       deslocation = Math.abs((Math.pow(delta,2)*aceleration)/2 + this.velocity * delta)
+     else if (this.velocity!=0 && acceleration > 0) {
+       deslocation = Math.abs((Math.pow(delta,2)*acceleration)/2 + this.velocity * delta)
        vecPosition = this.getDOF();
        vecPosition.negate();
        vecPosition.setLength(deslocation);
-       this.velocity = Math.min(aceleration * delta + this.velocity, this.maximumSpeed);
+       this.velocity = Math.min(acceleration * delta + this.velocity, this.maximumSpeed);
      }
-     else if (this.velocity!=0 && aceleration < 0) {
-       deslocation = Math.abs((Math.pow(delta,2)*aceleration)/2 + this.velocity * delta)
+     else if (this.velocity!=0 && acceleration < 0) {
+       deslocation = Math.abs((Math.pow(delta,2)*acceleration)/2 + this.velocity * delta)
        vecPosition = this.getDOF();
        vecPosition.negate();
        vecPosition.setLength(deslocation);
-       this.velocity = Math.max(((aceleration*delta) + this.velocity), this.minimumSpeed);
+       this.velocity = Math.max(((acceleration*delta) + this.velocity), this.minimumSpeed);
      }
      else{
        this.down = false;
