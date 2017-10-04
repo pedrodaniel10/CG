@@ -12,6 +12,14 @@ var car;
 var orange1, orange2, orange3;
 var butter1, butter2, butter3, butter4, butter5;
 
+var keyState = {};
+window.addEventListener('keydown',function(e){
+    keyState[e.keyCode || e.which] = true;
+},true);
+window.addEventListener('keyup',function(e){
+    keyState[e.keyCode || e.which] = false;
+},true);
+
 function render() {
   'use strict';
   if(isOrthographic){
@@ -69,7 +77,7 @@ function createScene() {
   butter5.rotateY(-0.6);
 
   createField(0, 0, 0);
-  
+
   scene.add(car);
   scene.add(orange1);
   scene.add(orange2);
@@ -96,6 +104,7 @@ function onResize() {
     cameraOrthographic.updateProjectionMatrix();
   }
 }
+
 
 function onKeyDown(e) {
   'use strict'

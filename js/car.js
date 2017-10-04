@@ -40,16 +40,16 @@ class Car extends Object3D {
    checkMove(){
      var delta = clock.getDelta();
 
-     if(this.up){
+     if(keyState[38]){
        this.moveFoward(this.aceleration, delta);
      }
-     else if (this.upB) {
-       this.moveFoward(-this.aceleration, delta);
-     }
-     if (this.down) {
+     if (keyState[40]) {
        this.moveBackwards(this.aceleration, delta);
      }
-     else if (this.downB) {
+     if (this.upB) {
+       this.moveFoward(-this.aceleration, delta);
+     }
+     if (this.downB) {
        this.moveBackwards(-this.aceleration, delta);
      }
      if(this.right){
@@ -58,6 +58,7 @@ class Car extends Object3D {
      else if (this.left) {
 
      }
+     console.log(keyState);
    }
 
    moveFoward(aceleration, delta){
