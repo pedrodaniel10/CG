@@ -110,10 +110,17 @@ class Car extends Object3D {
    }
 
    turnRight(){
-     this.rotateY(-this.velocity * this.constantCurve)
+     if(this.lastKeyPressed == "up")
+        this.rotateY(-this.velocity * this.constantCurve);
+     else
+        this.rotateY(this.velocity * this.constantCurve);
    }
 
    turnLeft(){
-     this.rotateY(this.velocity * this.constantCurve)
+     if(this.lastKeyPressed == "up")
+        this.rotateY(this.velocity * this.constantCurve);
+     else {
+        this.rotateY(-this.velocity * this.constantCurve);
+     }
    }
 }
