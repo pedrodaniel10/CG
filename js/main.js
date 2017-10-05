@@ -124,32 +124,14 @@ function onKeyDown(e) {
     case 115: //s
       isOrthographic = !isOrthographic;
       break;
-
-    case 38: //up arrow
-      car.up = true;
-      car.upB = false;
-      break;
-
-    case 40: //down arrow
-      car.down = true;
-      car.downB = false;
-      break;
   }
 }
 
 function onKeyUp(e){
   'use strict'
   switch (e.keyCode) {
-    case 38: //up arrow
-      car.up = false;
-      car.upB = true;
-      break;
 
-  case 40: //down arrow
-    car.down = false;
-    car.downB = true;
-    break;
-}
+  }
 }
 
 function animate() {
