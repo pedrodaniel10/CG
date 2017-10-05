@@ -34,9 +34,7 @@ function createCamera() {
                                                      window.innerWidth / orthographicScale,
                                                      window.innerHeight / orthographicScale,
                                                      window.innerHeight / -orthographicScale, 1, 450);
-  cameraOrthographic.position.x = 0;
-  cameraOrthographic.position.y = 250;
-  cameraOrthographic.position.z = 0;
+  cameraOrthographic.position.set(0,250,0)
   cameraOrthographic.lookAt(scene.position);
 
   cameras.push(camera);
@@ -96,10 +94,6 @@ function onKeyUp(e){
   switch (e.keyCode) {
 
   }
-}
-
-function update(){
-  car.checkMove();
 }
 
 function animate() {
