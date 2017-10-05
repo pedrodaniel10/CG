@@ -1,7 +1,7 @@
 'use strict';
 
 class Field extends Object3D {
-    constructor() {
+    constructor(tableSIZEX,tableSIZEY,tableSIZEZ) {
         super();
 
         this.SIZE = 3;
@@ -12,8 +12,8 @@ class Field extends Object3D {
         this.Z_N = 15;
 
         let k = this.OUTSIDE_MARGIN + this.SIZE;
-        let fieldLength = table.SIZEX - 2*k;
-        let fieldWidth = table.SIZEZ - 2*k;
+        let fieldLength = tableSIZEX - 2*k;
+        let fieldWidth = tableSIZEZ - 2*k;
 
         let n = 40;
         for (let x = -fieldLength / 2; x <= fieldLength / 2; x += fieldLength / n) {
@@ -28,8 +28,8 @@ class Field extends Object3D {
         }
 
         k = this.INSIDE_MARGIN + this.SIZE;
-        fieldLength = table.SIZEX - 2*k;
-        fieldWidth = table.SIZEZ - 2*k;
+        fieldLength = tableSIZEX - 2*k;
+        fieldWidth = tableSIZEZ - 2*k;
 
         n = 30;
         for (let x = -fieldLength / 2; x <= fieldLength / 2; x += fieldLength / n) {
@@ -43,4 +43,5 @@ class Field extends Object3D {
             this.add(new Cheerio(-fieldLength / 2, 0, z, this.SIZE, this.RADIUS));
         }
     }
+
 }

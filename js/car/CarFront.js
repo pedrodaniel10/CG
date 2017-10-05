@@ -9,4 +9,5 @@ class CarFront extends Mesh {
         this.geometry = new THREE.CubeGeometry(10, 4, 10);
         this.material = new THREE.MeshBasicMaterial({ color: 0xfcfcfc, wireframe: true});
     }
+
 }

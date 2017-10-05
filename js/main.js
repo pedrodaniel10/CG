@@ -1,6 +1,5 @@
-var scene, renderer;
+var scene, renderer, baseObject;
 var cameras = [], cameraIndex=0;
-var isOrthographic = false;
 
 var clock = new THREE.Clock();
 
@@ -8,11 +7,6 @@ var screenConst = 450000;
 var orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
 
 var geometry, material, mesh;
-
-var table, car;
-var orange1, orange2, orange3;
-var butter1, butter2, butter3, butter4, butter5;
-var field;
 
 var keyState = {};
 window.addEventListener('keydown',function(e){
@@ -47,47 +41,16 @@ function createCamera() {
 
   cameras.push(camera);
   cameras.push(cameraOrthographic);
+  cameras.push(baseObject.car.camera);
 }
 
 
 function createScene() {
   'use strict';
   scene = new THREE.Scene();
-
-  table = new Table();
-  car = new Car();
-
-  orange1 = new Orange(130, 0, 100);
-  orange2 = new Orange(-300, 0, 30);
-  orange2.rotateZ(0.35);
-  orange3 = new Orange(418, 0, -130);
-  orange3.rotateX(0.5);
-
-  butter1 = new Butter(330, 0, 30);
-  butter1.rotateY(0);
-  butter2 = new Butter(230, 0, -80);
-  butter2.rotateY(1);
-  butter3 = new Butter(-140, 0, 160);
-  butter3.rotateY(-0.3);
-  butter4 = new Butter(20, 0, -160);
-  butter4.rotateY(0.1);
-  butter5 = new Butter(-300, 0, -80);
-  butter5.rotateY(-0.6);
-
-  field = new Field();
-
-  scene.add(table);
-  scene.add(car);
-  scene.add(orange1);
-  scene.add(orange2);
-  scene.add(orange3);
-  scene.add(butter1);
-  scene.add(butter2);
-  scene.add(butter3);
-  scene.add(butter4);
-  scene.add(butter5);
-  scene.add(field);
-  scene.add(new THREE.AxisHelper(100));
+  baseObject = new ObjectBase();
+  scene.add(baseObject);
+  //scene.add(new THREE.AxisHelper(100));
 }
 
 function onResize() {
@@ -102,6 +65,8 @@ function onResize() {
     cameras[1].top = renderer.getSize().height / orthographicScale;
     cameras[1].bottom = renderer.getSize().height / -orthographicScale;
     cameras[1].updateProjectionMatrix();
+    cameras[2].aspect = renderer.getSize().width / renderer.getSize().height;
+    cameras[2].updateProjectionMatrix();
   }
 }
 
@@ -139,7 +104,7 @@ function update(){
 
 function animate() {
   'use strict';
-  update();
+  baseObject.update();
   render();
   requestAnimationFrame(animate);
 }

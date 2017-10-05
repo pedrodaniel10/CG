@@ -4,15 +4,20 @@ var shiet2 = false;
 class Car extends Object3D {
     constructor() {
         super();
-        //this.add(new THREE.AxisHelper(100));
-        this.add(new CarBack(5.5, 4.5, 5));
-        this.add(new CarFront(16, 2, 5));
-        this.add(new CarTop(15.5, 4.5, 5));
-        this.add(new CarWheel(5, 0, -1, 0));
-        this.add(new CarWheel(5, 0, 11, 0));
-        this.add(new CarWheel(16, 0, -1, 0));
-        this.add(new CarWheel(16, 0, 11, 0));
-        this.add(new CarWheel(-1, 5, 5, 1));
+        //Car components
+        this.carBack = new CarBack(5.5, 4.5, 5);
+        this.carFront = new CarFront(16, 2, 5);
+        this.carTop = new CarTop(15.5, 4.5, 5);
+        this.wheelBackLeft = new CarWheel(5, 0, -1, 0);
+        this.wheelBackRight = new CarWheel(5, 0, 11, 0);
+        this.wheelFrontLeft = new CarWheel(16, 0, -1, 0);
+        this.wheelFrontRight = new CarWheel(16, 0, 11, 0);
+        this.wheelBack = new CarWheel(-1, 5, 5, 1);
+
+        //camera
+        this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 500);
+        this.camera.position.set(-55,30,0);
+        this.camera.lookAt(new THREE.Vector3());
 
         //variables
         this.velocity = 0;
@@ -27,6 +32,17 @@ class Car extends Object3D {
         this.breakingBackward = 2.5;
         this.frictionBackwards = 2;
         this.constantCurve = 1/4000;
+
+        //add elements
+        this.add(this.carBack);
+        this.add(this.carFront);
+        this.add(this.carTop);
+        this.add(this.wheelBackLeft);
+        this.add(this.wheelBackRight);
+        this.add(this.wheelFrontLeft);
+        this.add(this.wheelFrontRight);
+        this.add(this.wheelBack);
+        this.add(this.camera);
     }
 
     getDOF(){
@@ -122,5 +138,9 @@ class Car extends Object3D {
      else {
         this.rotateY(-this.velocity * this.constantCurve);
      }
+   }
+   //override
+   update(){
+      this.checkMove();
    }
 }
