@@ -32,6 +32,7 @@ class Car extends Object3D {
         this.breakingBackward = 2.5;
         this.frictionBackwards = 2;
         this.constantCurve = 1/4000;
+        this.wheelTurnAngle = 0.58904862;
 
         //add elements
         this.add(this.carBack);
@@ -55,6 +56,8 @@ class Car extends Object3D {
      var dof = this.getDOF();
      var negateDof = this.getDOF();
      negateDof.negate();
+     this.wheelFrontLeft.rotation.y = 0;
+     this.wheelFrontRight.rotation.y = 0;
 
      if(!keyState[38] && keyState[40] && this.lastKeyPressed=="up"){
        if(this.velocity != 0)
@@ -94,9 +97,17 @@ class Car extends Object3D {
       }
      }
      if(keyState[39]){
+       if (this.wheelFrontLeft.rotation.y > -this.wheelTurnAngle) {
+         this.wheelFrontLeft.rotateY(-this.wheelTurnAngle);
+         this.wheelFrontRight.rotateY(-this.wheelTurnAngle);
+       }
        this.turnRight();
      }
      else if (keyState[37]) {
+       if (this.wheelFrontLeft.rotation.y < this.wheelTurnAngle) {
+         this.wheelFrontLeft.rotateY(this.wheelTurnAngle);
+         this.wheelFrontRight.rotateY(this.wheelTurnAngle);
+       }
        this.turnLeft();
      }
    }
