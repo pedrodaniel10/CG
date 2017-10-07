@@ -25,17 +25,17 @@ class ObjectBase extends THREE.Object3D {
 
         this.field = new Field(this.table.SIZEX, this.table.SIZEY, this.table.SIZEZ);
 
-        scene.add(this.table);
-        scene.add(this.car);
-        scene.add(this.orange1);
-        scene.add(this.orange2);
-        scene.add(this.orange3);
-        scene.add(this.butter1);
-        scene.add(this.butter2);
-        scene.add(this.butter3);
-        scene.add(this.butter4);
-        scene.add(this.butter5);
-        scene.add(this.field);
+        this.add(this.table);
+        this.add(this.car);
+        this.add(this.orange1);
+        this.add(this.orange2);
+        this.add(this.orange3);
+        this.add(this.butter1);
+        this.add(this.butter2);
+        this.add(this.butter3);
+        this.add(this.butter4);
+        this.add(this.butter5);
+        this.add(this.field);
     }
 
     //override
