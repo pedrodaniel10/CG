@@ -21,7 +21,7 @@ class Car extends Object3D {
 
         //variables
         this.velocity = 0;
-        this.lastKeyPressed="up";
+        this.lastKeyPressed='u';
 
         //constants
         this.maximumSpeed = 180;
@@ -59,39 +59,39 @@ class Car extends Object3D {
      this.wheelFrontLeft.rotation.y = 0;
      this.wheelFrontRight.rotation.y = 0;
 
-     if(!keyState[38] && keyState[40] && this.lastKeyPressed=="up"){
+     if(!keyState[38] && keyState[40] && this.lastKeyPressed=='u'){
        if(this.velocity != 0)
           this.accelerate(-this.forwardAcceleration*this.breakingFoward, delta, dof);
        else {
-          this.lastKeyPressed = "down";
+          this.lastKeyPressed = 'd';
        }
      }
-     else if (keyState[38] && !keyState[40] && this.lastKeyPressed=="down") {
+     else if (keyState[38] && !keyState[40] && this.lastKeyPressed=='d') {
        if(this.velocity != 0)
           this.accelerate(-this.backwardAcceleration*this.breakingBackward, delta, negateDof);
        else {
-         this.lastKeyPressed = "up";
+         this.lastKeyPressed = 'u';
        }
      }
      else if(keyState[38]){
-       if(this.lastKeyPressed == "down"){
+       if(this.lastKeyPressed == 'd'){
          this.velocity=0;
-         this.lastKeyPressed = "up";
+         this.lastKeyPressed = 'u';
        }
        this.accelerate(this.forwardAcceleration, delta, dof);
      }
      else if (keyState[40]) {
-       if(this.lastKeyPressed == "up"){
+       if(this.lastKeyPressed == 'u'){
          this.velocity=0;
-         this.lastKeyPressed = "down";
+         this.lastKeyPressed = 'd';
        }
        this.accelerate(this.backwardAcceleration, delta, negateDof);
      }
-     else if(!keyState[38] && !keyState[40] && this.lastKeyPressed=="up"){
+     else if(!keyState[38] && !keyState[40] && this.lastKeyPressed=='u'){
        if(this.velocity != 0)
           this.accelerate(-this.forwardAcceleration, delta, dof);
      }
-     else if (!keyState[38] && !keyState[40] && this.lastKeyPressed=="down") {
+     else if (!keyState[38] && !keyState[40] && this.lastKeyPressed=='d') {
        if(this.velocity != 0){
           this.accelerate(-this.backwardAcceleration * this.frictionBackwards, delta, negateDof);
       }
@@ -137,14 +137,14 @@ class Car extends Object3D {
    }
 
    turnRight(){
-     if(this.lastKeyPressed == "up")
+     if(this.lastKeyPressed == 'u')
         this.rotateY(-this.velocity * this.constantCurve);
      else
         this.rotateY(this.velocity * this.constantCurve);
    }
 
    turnLeft(){
-     if(this.lastKeyPressed == "up")
+     if(this.lastKeyPressed == 'u')
         this.rotateY(this.velocity * this.constantCurve);
      else {
         this.rotateY(-this.velocity * this.constantCurve);
