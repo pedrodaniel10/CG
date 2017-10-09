@@ -1,6 +1,8 @@
 var scene, renderer, baseObject;
 var cameras = [], cameraIndex=0;
 
+var aClicked = false;
+
 var clock = new THREE.Clock();
 
 var screenConst = 450000;
@@ -75,11 +77,7 @@ function onKeyDown(e) {
 
     case 65: //A
     case 97: //a
-      scene.traverse(function (node) {
-        if (node instanceof THREE.Mesh) {
-          node.material.wireframe = !node.material.wireframe;
-        }
-      });
+      aClicked = !aClicked;
       break;
 
     case 83: //S
@@ -96,9 +94,21 @@ function onKeyUp(e){
   }
 }
 
+function update(){
+  if(aClicked){
+    scene.traverse(function (node) {
+      if (node instanceof THREE.Mesh) {
+        node.material.wireframe = !node.material.wireframe;
+      }
+    });
+    aClicked = false;
+  }
+  baseObject.update();
+}
+
 function animate() {
   'use strict';
-  baseObject.update();
+  update();
   render();
   requestAnimationFrame(animate);
 }
@@ -112,7 +122,6 @@ function init() {
 
   createScene();
   createCamera();
-  render();
 
   window.addEventListener("resize", onResize);
   window.addEventListener("keydown", onKeyDown)
