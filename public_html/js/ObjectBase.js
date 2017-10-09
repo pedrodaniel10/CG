@@ -3,38 +3,50 @@
 class ObjectBase extends THREE.Object3D {
     constructor() {
         super();
+
+        // Constants
+        this.NUM_ORANGES = 3;
+        this.NUM_BUTTER = 5;
+        this.OBJ_MARGIN = 0.8;
+
         this.table = new Table();
         this.car = new Car();
 
-        this.orange1 = new Orange(130, 0, 100);
-        this.orange2 = new Orange(-300, 0, 30);
-        this.orange2.rotateZ(0.35);
-        this.orange3 = new Orange(418, 0, -130);
-        this.orange3.rotateX(0.5);
+        this.oranges = [];
+        for (let i = 0; i < this.NUM_ORANGES; i++) {
+            let rand_x = (Math.random() - 1/2) * this.table.SIZEX * this.OBJ_MARGIN;
+            let rand_z = (Math.random() - 1/2) * this.table.SIZEZ * this.OBJ_MARGIN;
+            let rot_x = Math.random()*2 - 1;
+            let rot_z = Math.random()*2 - 1;
+            let new_orange = new Orange(rand_x, 0, rand_z);
+            new_orange.rotateX(rot_x);
+            new_orange.rotateZ(rot_z);
+            this.oranges.push(new_orange);
+        }
 
-        this.butter1 = new Butter(330, 0, 30);
-        this.butter1.rotateY(0);
-        this.butter2 = new Butter(230, 0, -80);
-        this.butter2.rotateY(1);
-        this.butter3 = new Butter(-140, 0, 160);
-        this.butter3.rotateY(-0.3);
-        this.butter4 = new Butter(20, 0, -160);
-        this.butter4.rotateY(0.1);
-        this.butter5 = new Butter(-300, 0, -80);
-        this.butter5.rotateY(-0.6);
+        this.butter = [];
+        for (let i = 0; i < this.NUM_BUTTER; i++) {
+            let rand_x = (Math.random() - 1/2) * this.table.SIZEX * this.OBJ_MARGIN;
+            let rand_z = (Math.random() - 1/2) * this.table.SIZEZ * this.OBJ_MARGIN;
+            let rot_y = Math.random()*2 - 1;
+            let new_butter = new Butter(rand_x, 0, rand_z);
+            new_butter.rotateY(rot_y);
+            this.butter.push(new_butter);
+        }
 
         this.field = new Field(this.table.SIZEX, this.table.SIZEY, this.table.SIZEZ);
 
         this.add(this.table);
         this.add(this.car);
-        this.add(this.orange1);
-        this.add(this.orange2);
-        this.add(this.orange3);
-        this.add(this.butter1);
-        this.add(this.butter2);
-        this.add(this.butter3);
-        this.add(this.butter4);
-        this.add(this.butter5);
+
+        for (let i = 0; i < this.NUM_ORANGES; i++) {
+            this.add(this.oranges[i]);
+        }
+
+        for (let i = 0; i < this.NUM_BUTTER; i++) {
+            this.add(this.butter[i]);
+        }
+
         this.add(this.field);
     }
 
