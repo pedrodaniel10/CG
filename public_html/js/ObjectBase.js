@@ -12,6 +12,8 @@ class ObjectBase extends THREE.Object3D {
         this.table = new Table();
         this.car = new Car();
 
+        this.objects = [];
+//ter um array de todos os objetos para a proxima entrega
         this.oranges = [];
         for (let i = 0; i < this.NUM_ORANGES; i++) {
             let rand_x = (Math.random() - 1/2) * this.table.SIZEX * this.OBJ_MARGIN;
@@ -33,6 +35,9 @@ class ObjectBase extends THREE.Object3D {
             new_butter.rotateY(rot_y);
             this.butter.push(new_butter);
         }
+
+        this.objects.concat(this.oranges);
+        this.objects.concat(this.butter);
 
         this.field = new Field(this.table.SIZEX, this.table.SIZEY, this.table.SIZEZ);
 

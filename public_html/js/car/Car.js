@@ -20,7 +20,6 @@ class Car extends Object3D {
         this.camera.lookAt(new THREE.Vector3());
 
         //variables
-        this.velocity = 0;
         this.lastKeyPressed='u';
 
         //constants

@@ -1,11 +1,9 @@
-'use strict';
+class Cheerio extends Object3D {
+  constructor(x, y, z, size, radius) {
+      super();
+      this.cheerioBody = new CheerioBody(0, 0, 0, size, radius);
 
-class Cheerio extends Mesh {
-    constructor(x, y, z, s, r) {
-        super(x, y, z);
-        this.geometry = new THREE.TorusGeometry(s, r, 16, 32);
-        this.material = new THREE.MeshBasicMaterial({ color: 0xe68200, wireframe: true});
-        this.rotation.x = Math.PI / 2;
-        this.position.y = y + r;
-    }
+      this.add(this.cheerioBody);
+      this.position.set(x, y, z);
+  }
 }
