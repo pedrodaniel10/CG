@@ -36,27 +36,23 @@ class ObjectBase extends THREE.Object3D {
             this.butter.push(new_butter);
         }
 
-        this.objects.concat(this.oranges);
-        this.objects.concat(this.butter);
-
         this.field = new Field(this.table.SIZEX, this.table.SIZEY, this.table.SIZEZ);
+        this.cheerios = this.field.getCheerios();
+
+        this.objects = this.objects.concat(this.cheerios);
+        this.objects = this.objects.concat(this.oranges);
+        this.objects = this.objects.concat(this.butter);
 
         this.add(this.table);
         this.add(this.car);
 
-        for (let i = 0; i < this.NUM_ORANGES; i++) {
-            this.add(this.oranges[i]);
+        for (let i = 0; i < this.objects.length; i++) {
+            this.add(this.objects[i]);
         }
-
-        for (let i = 0; i < this.NUM_BUTTER; i++) {
-            this.add(this.butter[i]);
-        }
-
-        this.add(this.field);
     }
 
     //override
-    update(){
+    update() {
       this.car.update();
     }
 }

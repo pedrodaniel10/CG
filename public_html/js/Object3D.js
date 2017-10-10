@@ -6,21 +6,21 @@ class Object3D extends THREE.Object3D {
         this.axisHelper = new THREE.AxisHelper(100);
     }
 
-    setAxisOn(){
+    setAxisOn() {
       this.add(this.axisHelper);
     }
 
-    setAxisOff(){
+    setAxisOff() {
       this.remove(this.axisHelper);
     }
 
-    getDOF(){
+    getDOF() {
     }
 
     accelerate() {
     }
 
-    update(){
+    update() {
     }
 
     //posicao e direccao tem de estar aqui (aceleracao, velocidade..) tem de estar mais cenas aqui

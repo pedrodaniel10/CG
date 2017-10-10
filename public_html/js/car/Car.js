@@ -46,12 +46,12 @@ class Car extends Object3D {
         this.add(this.camera);
     }
 
-    getDOF(){
+    getDOF() {
      var z_axis = this.getWorldDirection();
      return new THREE.Vector3(z_axis.getComponent(2), 0, -z_axis.getComponent(0));
    }
 
-   checkMove(){
+   checkMove() {
      var delta = clock.getDelta();
      var dof = this.getDOF();
      var negateDof = this.getDOF();
@@ -59,7 +59,7 @@ class Car extends Object3D {
      this.wheelFrontLeft.rotation.y = 0;
      this.wheelFrontRight.rotation.y = 0;
 
-     if(!keyState[38] && keyState[40] && this.lastKeyPressed=='u'){
+     if(!keyState[38] && keyState[40] && this.lastKeyPressed=='u') {
        if(this.velocity != 0)
           this.accelerate(-this.forwardAcceleration*this.breakingFoward, delta, dof);
        else {
@@ -73,30 +73,30 @@ class Car extends Object3D {
          this.lastKeyPressed = 'u';
        }
      }
-     else if(keyState[38]){
-       if(this.lastKeyPressed == 'd'){
+     else if(keyState[38]) {
+       if(this.lastKeyPressed == 'd') {
          this.velocity=0;
          this.lastKeyPressed = 'u';
        }
        this.accelerate(this.forwardAcceleration, delta, dof);
      }
      else if (keyState[40]) {
-       if(this.lastKeyPressed == 'u'){
+       if(this.lastKeyPressed == 'u') {
          this.velocity=0;
          this.lastKeyPressed = 'd';
        }
        this.accelerate(this.backwardAcceleration, delta, negateDof);
      }
-     else if(!keyState[38] && !keyState[40] && this.lastKeyPressed=='u'){
+     else if(!keyState[38] && !keyState[40] && this.lastKeyPressed=='u') {
        if(this.velocity != 0)
           this.accelerate(-this.forwardAcceleration, delta, dof);
      }
      else if (!keyState[38] && !keyState[40] && this.lastKeyPressed=='d') {
-       if(this.velocity != 0){
+       if(this.velocity != 0) {
           this.accelerate(-this.backwardAcceleration * this.frictionBackwards, delta, negateDof);
       }
      }
-     if(keyState[39]){
+     if(keyState[39]) {
        if (this.wheelFrontLeft.rotation.y > -this.wheelTurnAngle) {
          this.wheelFrontLeft.rotateY(-this.wheelTurnAngle);
          this.wheelFrontRight.rotateY(-this.wheelTurnAngle);
@@ -112,11 +112,11 @@ class Car extends Object3D {
      }
    }
 
-   accelerate(acceleration, delta, direction){
+   accelerate(acceleration, delta, direction) {
      var deslocation;
 
      this.directionMove = direction.clone();
-     if(this.velocity==0 && acceleration > 0){
+     if(this.velocity==0 && acceleration > 0) {
        deslocation = Math.abs(Math.pow(delta,2)*acceleration/2);
        direction.setLength(deslocation);
        this.velocity = acceleration * delta;
@@ -136,14 +136,14 @@ class Car extends Object3D {
      this.position.z += direction.z;
    }
 
-   turnRight(){
+   turnRight() {
      if(this.lastKeyPressed == 'u')
         this.rotateY(-this.velocity * this.constantCurve);
      else
         this.rotateY(this.velocity * this.constantCurve);
    }
 
-   turnLeft(){
+   turnLeft() {
      if(this.lastKeyPressed == 'u')
         this.rotateY(this.velocity * this.constantCurve);
      else {
@@ -151,7 +151,7 @@ class Car extends Object3D {
      }
    }
    //override
-   update(){
+   update() {
       this.checkMove();
    }
 }
