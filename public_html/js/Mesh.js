@@ -5,15 +5,15 @@ class Mesh extends THREE.Mesh {
         this.axisHelper = new THREE.AxisHelper(100);
     }
 
-    setAxisOn(){
+    setAxisOn() {
       this.add(this.axisHelper);
     }
 
-    setAxisOff(){
+    setAxisOff() {
       this.remove(this.axisHelper);
     }
 
-    update(){
+    update() {
 
     }
 }

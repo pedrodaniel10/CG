@@ -1,5 +1,5 @@
 class CarBack extends Mesh {
-  constructor(x, y, z){
+  constructor(x, y, z) {
     super(x,y,z);
     this.translateX(-10.5);
     this.translateY(3);

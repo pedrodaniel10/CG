@@ -11,10 +11,10 @@ var orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
 var geometry, material, mesh;
 
 var keyState = {};
-window.addEventListener('keydown',function(e){
+window.addEventListener('keydown',function(e) {
     keyState[e.keyCode || e.which] = true;
 },true);
-window.addEventListener('keyup',function(e){
+window.addEventListener('keyup',function(e) {
     keyState[e.keyCode || e.which] = false;
 },true);
 
@@ -87,15 +87,15 @@ function onKeyDown(e) {
   }
 }
 
-function onKeyUp(e){
+function onKeyUp(e) {
   'use strict'
   switch (e.keyCode) {
 
   }
 }
 
-function update(){
-  if(aClicked){
+function update() {
+  if (aClicked) {
     scene.traverse(function (node) {
       if (node instanceof THREE.Mesh) {
         node.material.wireframe = !node.material.wireframe;
