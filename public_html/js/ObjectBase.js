@@ -13,7 +13,7 @@ class ObjectBase extends THREE.Object3D {
         this.car = new Car();
 
         this.objects = [];
-//ter um array de todos os objetos para a proxima entrega
+        
         this.oranges = [];
         for (let i = 0; i < this.NUM_ORANGES; i++) {
             let rand_x = (Math.random() - 1/2) * this.table.SIZEX * this.OBJ_MARGIN;
