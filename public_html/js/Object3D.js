@@ -14,7 +14,15 @@ class Object3D extends THREE.Object3D {
       this.remove(this.axisHelper);
     }
 
-    update(){
-//posicao e direccao tem de estar aqui (aceleracao, velocidade..) tem de estar mais cenas aqui
+    getDOF(){
     }
+
+    accelerate() {
+    }
+
+    update(){
+    }
+
+    //posicao e direccao tem de estar aqui (aceleracao, velocidade..) tem de estar mais cenas aqui
+
 }
