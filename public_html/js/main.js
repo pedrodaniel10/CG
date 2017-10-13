@@ -11,10 +11,10 @@ var orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
 var geometry, material, mesh;
 
 var keyState = {};
-window.addEventListener('keydown',function(e) {
+window.addEventListener('keydown',function(e){
     keyState[e.keyCode || e.which] = true;
 },true);
-window.addEventListener('keyup',function(e) {
+window.addEventListener('keyup',function(e){
     keyState[e.keyCode || e.which] = false;
 },true);
 
@@ -25,12 +25,12 @@ function render() {
 
 function createCamera() {
   'use strict';
-  var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+  var cameraFar = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
 
-  camera.position.x = 280;
-  camera.position.y = 250;
-  camera.position.z = 500;
-  camera.lookAt(scene.position);
+  cameraFar.position.x = 280;
+  cameraFar.position.y = 250;
+  cameraFar.position.z = 500;
+  cameraFar.lookAt(scene.position);
 
   var cameraOrthographic = new THREE.OrthographicCamera( window.innerWidth / -orthographicScale,
                                                      window.innerWidth / orthographicScale,
@@ -39,8 +39,8 @@ function createCamera() {
   cameraOrthographic.position.set(0,250,0)
   cameraOrthographic.lookAt(scene.position);
 
-  cameras.push(camera);
   cameras.push(cameraOrthographic);
+  cameras.push(cameraFar);
   cameras.push(baseObject.car.camera);
 }
 
@@ -58,13 +58,16 @@ function onResize() {
   orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
   renderer.setSize(window.innerWidth, window.innerHeight);
   if (window.innerHeight > 0 && window.innerWidth > 0) {
-    cameras[0].aspect = renderer.getSize().width / renderer.getSize().height;
+
+    cameras[0].left = renderer.getSize().width / -orthographicScale;
+    cameras[0].right = renderer.getSize().width / orthographicScale;
+    cameras[0].top = renderer.getSize().height / orthographicScale;
+    cameras[0].bottom = renderer.getSize().height / -orthographicScale;
     cameras[0].updateProjectionMatrix();
-    cameras[1].left = renderer.getSize().width / -orthographicScale;
-    cameras[1].right = renderer.getSize().width / orthographicScale;
-    cameras[1].top = renderer.getSize().height / orthographicScale;
-    cameras[1].bottom = renderer.getSize().height / -orthographicScale;
+
+    cameras[1].aspect = renderer.getSize().width / renderer.getSize().height;
     cameras[1].updateProjectionMatrix();
+
     cameras[2].aspect = renderer.getSize().width / renderer.getSize().height;
     cameras[2].updateProjectionMatrix();
   }
@@ -80,9 +83,14 @@ function onKeyDown(e) {
       aClicked = !aClicked;
       break;
 
-    case 83: //S
-    case 115: //s
-      cameraIndex = (cameraIndex + 1) % cameras.length;
+    case 49: //1
+      cameraIndex = 0;
+      break;
+    case 50: //2
+      cameraIndex = 1;
+      break;
+    case 51: //3
+      cameraIndex = 2;
       break;
   }
 }
@@ -95,7 +103,7 @@ function onKeyUp(e) {
 }
 
 function update() {
-  if (aClicked) {
+  if(aClicked) {
     scene.traverse(function (node) {
       if (node instanceof THREE.Mesh) {
         node.material.wireframe = !node.material.wireframe;
