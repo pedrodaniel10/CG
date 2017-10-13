@@ -1,5 +1,5 @@
 var scene, renderer, baseObject;
-var cameraOrthographic;
+var cameras = [], cameraIndex=0;
 
 var aClicked = false;
 
@@ -20,18 +20,28 @@ window.addEventListener('keyup',function(e) {
 
 function render() {
   'use strict';
-    renderer.render(scene, cameraOrthographic);
+    renderer.render(scene, cameras[cameraIndex]);
 }
 
 function createCamera() {
   'use strict';
+  var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
 
-  cameraOrthographic = new THREE.OrthographicCamera( window.innerWidth / -orthographicScale,
+  camera.position.x = 280;
+  camera.position.y = 250;
+  camera.position.z = 500;
+  camera.lookAt(scene.position);
+
+  var cameraOrthographic = new THREE.OrthographicCamera( window.innerWidth / -orthographicScale,
                                                      window.innerWidth / orthographicScale,
                                                      window.innerHeight / orthographicScale,
                                                      window.innerHeight / -orthographicScale, 1, 450);
   cameraOrthographic.position.set(0,250,0)
   cameraOrthographic.lookAt(scene.position);
+
+  cameras.push(camera);
+  cameras.push(cameraOrthographic);
+  cameras.push(baseObject.car.camera);
 }
 
 
@@ -48,11 +58,15 @@ function onResize() {
   orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
   renderer.setSize(window.innerWidth, window.innerHeight);
   if (window.innerHeight > 0 && window.innerWidth > 0) {
-    cameraOrthographic.left = renderer.getSize().width / -orthographicScale;
-    cameraOrthographic.right = renderer.getSize().width / orthographicScale;
-    cameraOrthographic.top = renderer.getSize().height / orthographicScale;
-    cameraOrthographic.bottom = renderer.getSize().height / -orthographicScale;
-    cameraOrthographic.updateProjectionMatrix();
+    cameras[0].aspect = renderer.getSize().width / renderer.getSize().height;
+    cameras[0].updateProjectionMatrix();
+    cameras[1].left = renderer.getSize().width / -orthographicScale;
+    cameras[1].right = renderer.getSize().width / orthographicScale;
+    cameras[1].top = renderer.getSize().height / orthographicScale;
+    cameras[1].bottom = renderer.getSize().height / -orthographicScale;
+    cameras[1].updateProjectionMatrix();
+    cameras[2].aspect = renderer.getSize().width / renderer.getSize().height;
+    cameras[2].updateProjectionMatrix();
   }
 }
 
@@ -64,6 +78,11 @@ function onKeyDown(e) {
     case 65: //A
     case 97: //a
       aClicked = !aClicked;
+      break;
+
+    case 83: //S
+    case 115: //s
+      cameraIndex = (cameraIndex + 1) % cameras.length;
       break;
   }
 }
