@@ -15,7 +15,7 @@ class Car extends Object3D {
         this.wheelBack = new CarWheel(-1, 5, 5, 1);
 
         //camera
-        this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 500);
+        this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
         this.camera.position.set(-55,30,0);
         this.camera.lookAt(new THREE.Vector3());
 

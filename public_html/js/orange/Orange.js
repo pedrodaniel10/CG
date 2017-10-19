@@ -11,11 +11,6 @@ class Orange extends Object3D {
         this.add(this.orangeBody);
         this.add(this.orangeLeaf);
 
-        let rot_x = Math.random()*2 - 1;
-        let rot_z = Math.random()*2 - 1;
-        this.rotateX(rot_x);
-        this.rotateZ(rot_z);
-
         //random ATRIBUTES
         this.setRandomPosition();
         this.setRandomDirection();
@@ -27,7 +22,7 @@ class Orange extends Object3D {
         //constants
         this.velocityIncrement = 10;
         this.tickNumber = 20;
-        this.ticksRespawn = 200;
+        this.ticksRespawn = 150;
     }
 
     setRandomDirection(){
@@ -57,23 +52,20 @@ class Orange extends Object3D {
        */
        var inTable = this.inTable();
        if(!inTable && !this.outOfBoard){
-         this.remove(this.orangeBody);
-         this.remove(this.orangeLeaf);
-
+        this.position.set(999,999,999);
          this.velocity = 0;
          this.tickCounter = 0;
          this.outOfBoard = true;
 
-         this.setRandomPosition();
-         this.setRandomDirection();
+
        }
        else if(this.tickCounter == 0 && !this.outOfBoard){
          this.velocity+= this.velocityIncrement;
        }
        else if(this.tickCounter == 0 && this.outOfBoard){
          this.velocity+= this.velocityIncrement;
-         this.add(this.orangeBody);
-         this.add(this.orangeLeaf);
+         this.setRandomPosition();
+         this.setRandomDirection();
          this.outOfBoard = false;
        }
 
