@@ -51,8 +51,7 @@ class Car extends Object3D {
      return new THREE.Vector3(z_axis.getComponent(2), 0, -z_axis.getComponent(0));
    }
 
-   checkMove() {
-     var delta = clock.getDelta();
+   checkMove(delta) {
      var dof = this.getDOF();
      var negateDof = this.getDOF();
      negateDof.negate();
@@ -151,7 +150,7 @@ class Car extends Object3D {
      }
    }
    //override
-   update() {
-      this.checkMove();
+   update(delta) {
+      this.checkMove(delta);
    }
 }

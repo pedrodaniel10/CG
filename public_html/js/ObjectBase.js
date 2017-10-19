@@ -1,28 +1,26 @@
 'use strict';
 
+var NUM_ORANGES = 3;
+var NUM_BUTTER = 5;
+var OBJ_MARGIN = 0.8;
+
 class ObjectBase extends THREE.Object3D {
     constructor() {
         super();
 
         // Constants
-        this.NUM_ORANGES = 3;
-        this.NUM_BUTTER = 5;
-        this.OBJ_MARGIN = 0.8;
+        this.NUM_ORANGES = NUM_ORANGES;
+        this.NUM_BUTTER = NUM_BUTTER;
+        this.OBJ_MARGIN = OBJ_MARGIN;
 
         this.table = new Table();
         this.car = new Car();
 
-        this.objects = [];
-        
+        this.objects = [this.car];
+
         this.oranges = [];
         for (let i = 0; i < this.NUM_ORANGES; i++) {
-            let rand_x = (Math.random() - 1/2) * this.table.SIZEX * this.OBJ_MARGIN;
-            let rand_z = (Math.random() - 1/2) * this.table.SIZEZ * this.OBJ_MARGIN;
-            let rot_x = Math.random()*2 - 1;
-            let rot_z = Math.random()*2 - 1;
-            let new_orange = new Orange(rand_x, 0, rand_z);
-            new_orange.rotateX(rot_x);
-            new_orange.rotateZ(rot_z);
+            let new_orange = new Orange(0, 0, 0);
             this.oranges.push(new_orange);
         }
 
@@ -52,7 +50,9 @@ class ObjectBase extends THREE.Object3D {
     }
 
     //override
-    update() {
-      this.car.update();
+    update(delta) {
+      var delta = clock.getDelta();
+      for(let i=0; i<this.objects.length; i++)
+        this.objects[i].update(delta);
     }
 }
