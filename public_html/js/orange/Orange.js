@@ -7,6 +7,7 @@ class Orange extends Object3D {
         super(x, y, z);
         this.orangeBody = new OrangeBody(0, 0, 0);
         this.orangeLeaf = new OrangeLeaf(5, 34, 5);
+        this.boundingVolume = new BoundingSphere(x, y, z, ORANGE_RADIUS);
 
         this.add(this.orangeBody);
         this.add(this.orangeLeaf);
@@ -51,12 +52,12 @@ class Orange extends Object3D {
              -limitZ < this.position.z && this.position.z < limitZ;
     }
 
-    move(delta){
+    move(delta) {
       /* after tickNumber calls to update the velocity of this object
        * is incremented by velocityIncrement
        */
        var inTable = this.inTable();
-       if(!inTable && !this.outOfBoard){
+       if(!inTable && !this.outOfBoard) {
          this.remove(this.orangeBody);
          this.remove(this.orangeLeaf);
 
@@ -67,31 +68,29 @@ class Orange extends Object3D {
          this.setRandomPosition();
          this.setRandomDirection();
        }
-       else if(this.tickCounter == 0 && !this.outOfBoard){
+       else if(this.tickCounter === 0 && !this.outOfBoard) {
          this.velocity+= this.velocityIncrement;
        }
-       else if(this.tickCounter == 0 && this.outOfBoard){
+       else if(this.tickCounter === 0 && this.outOfBoard) {
          this.velocity+= this.velocityIncrement;
          this.add(this.orangeBody);
          this.add(this.orangeLeaf);
          this.outOfBoard = false;
        }
 
-       if(inTable){
-
+       if(inTable) {
         this.tickCounter = (this.tickCounter + 1) % this.tickNumber;
-
 
         var deslocation = this.velocity * delta;
 
         var deslocationVec = this.direction.clone();
-        deslocationVec.setLength(deslocation)
+        deslocationVec.setLength(deslocation);
 
         this.position.x += deslocationVec.x;
         this.position.y += deslocationVec.y;
         this.position.z += deslocationVec.z;
       }
-      else{
+      else {
         this.tickCounter = (this.tickCounter + 1) % this.ticksRespawn;
       }
 
