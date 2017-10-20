@@ -52,15 +52,10 @@ class Orange extends Object3D {
        * is incremented by velocityIncrement
        */
        var inTable = this.inTable();
-<<<<<<< HEAD
+
        if(!inTable && !this.outOfBoard){
         this.position.set(999,999,999);
-=======
-       if(!inTable && !this.outOfBoard) {
-         this.remove(this.orangeBody);
-         this.remove(this.orangeLeaf);
 
->>>>>>> origin/master
          this.velocity = 0;
          this.tickCounter = 0;
          this.outOfBoard = true;
