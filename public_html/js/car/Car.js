@@ -13,10 +13,10 @@ class Car extends Object3D {
         this.wheelFrontLeft = new CarWheel(16, 0, -1, 0);
         this.wheelFrontRight = new CarWheel(16, 0, 11, 0);
         this.wheelBack = new CarWheel(-1, 5, 5, 1);
-        
+
         //collisions
         // ISTO TA MAL
-        this.boundingVolume = new BoundingSphere(this.position.x, this.position.y + 4, this.position.z, 10);
+        this.boundingVolume = new BoundingSphere(this.position.x, this.position.z);
 
         //camera
         this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
@@ -47,6 +47,7 @@ class Car extends Object3D {
         this.add(this.wheelFrontLeft);
         this.add(this.wheelFrontRight);
         this.add(this.wheelBack);
+        this.add(this.boundingVolume)
         this.add(this.camera);
     }
 

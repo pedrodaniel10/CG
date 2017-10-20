@@ -7,10 +7,11 @@ class Orange extends Object3D {
         super(x, y, z);
         this.orangeBody = new OrangeBody(0, 0, 0);
         this.orangeLeaf = new OrangeLeaf(5, 34, 5);
-        this.boundingVolume = new BoundingSphere(x, y, z, ORANGE_RADIUS);
+        this.boundingVolume = new BoundingSphere(0, 0, ORANGE_RADIUS * 0.3);
 
         this.add(this.orangeBody);
         this.add(this.orangeLeaf);
+        this.add(this.boundingVolume);
 
         //random ATRIBUTES
         this.setRandomPosition();

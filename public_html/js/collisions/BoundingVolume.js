@@ -1,8 +1,8 @@
 'use strict';
 
 class BoundingVolume extends Object3D {
-    constructor(x, y, z) {
-        super(x, y, z);
+    constructor(x, z) {
+        super(x, 0, z);
     }
 
     centerDistanceTo(boundingVolume) {
@@ -10,7 +10,7 @@ class BoundingVolume extends Object3D {
     }
 
     collides(boundingVolume) {
-        // abstract method
+        /* abstract method */
         return false;
     }
 }

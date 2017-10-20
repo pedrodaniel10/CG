@@ -1,8 +1,8 @@
 'use strict';
 
 class BoundingSphere extends BoundingVolume {
-    constructor(x, y, z, r) {
-        super(x, y, z);
+    constructor(x, z, r) {
+        super(x, z);
         this.radius = r;
     }
 

@@ -1,9 +1,9 @@
 'use strict';
 
 class AxisAlignedBoundingBox extends BoundingVolume {
-    constructor(x, y, z, sx, sy, sz) {
-        super(x, y, z);
-        this.size = THREE.Vector3D(sx, sy, sz);
+    constructor(x, z, sx, sz) {
+        super(x, z);
+        this.size = new THREE.Vector2(sx, sz);
     }
 
     collides(boundingVolume) {
@@ -12,8 +12,13 @@ class AxisAlignedBoundingBox extends BoundingVolume {
 
         else if (boundingVolume instanceof AxisAlignedBoundingBox)
             return collisionAABBToAABB(this, boundingVolume);
-            
+
         else
             return false;
+    }
+
+    //override
+    update(delta) {
+        // TODO
     }
 }
