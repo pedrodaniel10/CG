@@ -5,11 +5,6 @@
         <group name="RC">
             <file>file:/C:/Users/Asus/Documents/GitHub/CG/public_html/index.html</file>
         </group>
-        <group>
-            <file>file:/C:/Users/Asus/Documents/GitHub/CG/public_html/js/butter/ButterBody.js</file>
-            <file>file:/C:/Users/Asus/Documents/GitHub/CG/public_html/index.html</file>
-            <file>file:/C:/Users/Asus/Documents/GitHub/CG/public_html/js/butter/Butter.js</file>
-        </group>
         <group name="CG">
             <file>file:/C:/Users/Asus/Documents/GitHub/CG/public_html/js/ObjectBase.js</file>
             <file>file:/C:/Users/Asus/Documents/GitHub/CG/public_html/js/butter/ButterBody.js</file>
@@ -17,5 +12,6 @@
             <file>file:/C:/Users/Asus/Documents/GitHub/CG/public_html/js/butter/Butter.js</file>
             <file>file:/C:/Users/Asus/Documents/GitHub/CG/public_html/js/car/Car.js</file>
         </group>
+        <group/>
     </open-files>
 </project-private>

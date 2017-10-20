@@ -5,13 +5,15 @@ class BoundingSphere extends BoundingVolume {
         super(x, y, z);
         this.radius = r;
     }
-    
+
     collides(boundingVolume) {
-        if (boundingVolume instanceof BoundingSphere) {
-            return this.radius + boundingVolume.radius <= this.centerDistanceTo(boundingVolume);
-        }
-        else {
+        if (boundingVolume instanceof BoundingSphere)
+            return collisionSphereToSphere(this, boundingVolume);
+
+        else if (boundingVolume instanceof AxisAlignedBoundingBox)
+            return collisionSphereToAABB(this, boundingVolume);
+
+        else
             return false;
-        }
     }
 }
