@@ -20,7 +20,7 @@ class AxisAlignedBoundingBox extends BoundingVolume {
         /* calculate distance */
         var dist = new THREE.Vector2(
                 Math.max(minx - point.x, 0, point.x - maxx),
-                Math.max(minz - point.y, 0, point.y - maxz)
+                Math.max(minz - point.z, 0, point.z - maxz)
             );
         return dist.length();
     }
