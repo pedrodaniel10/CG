@@ -1,6 +1,9 @@
 'use strict';
 var shiet1 = false;
 var shiet2 = false;
+
+var CAR_RADIUS = 22;
+
 class Car extends Object3D {
     constructor() {
         super();
@@ -16,7 +19,7 @@ class Car extends Object3D {
 
         //collisions
         // ISTO TA MAL
-        this.boundingVolume = new BoundingSphere(this.position.x, this.position.z);
+        this.boundingVolume = new BoundingSphere(0, 0, CAR_RADIUS);
 
         //camera
         this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);

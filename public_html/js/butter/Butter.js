@@ -1,5 +1,7 @@
 'use strict';
 
+var BUTTER_RADIUS = 95;
+
 class Butter extends Object3D {
     constructor(x, y, z) {
         super(x, y, z);
