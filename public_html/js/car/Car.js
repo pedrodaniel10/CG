@@ -2,7 +2,7 @@
 var shiet1 = false;
 var shiet2 = false;
 
-var CAR_RADIUS = 22;
+var CAR_RADIUS = 12;
 
 class Car extends SolidObject {
     constructor() {

@@ -7,7 +7,7 @@ class Orange extends SolidObject {
         super(x, y, z);
         this.orangeBody = new OrangeBody(0, 0, 0);
         this.orangeLeaf = new OrangeLeaf(5, 34, 5);
-        this.boundingVolume = new BoundingSphere(0, 0, ORANGE_RADIUS * 0.3);
+        this.boundingVolume = new BoundingSphere(0, 0, ORANGE_RADIUS*0.8);
 
         this.add(this.orangeBody);
         this.add(this.orangeLeaf);
