@@ -1,3 +1,5 @@
+'use strict';
+
 class Cheerio extends SolidObject {
     constructor(x, y, z, size, radius) {
         super();

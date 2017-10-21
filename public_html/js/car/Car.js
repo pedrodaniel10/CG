@@ -1,4 +1,5 @@
 'use strict';
+
 var shiet1 = false;
 var shiet2 = false;
 
@@ -169,10 +170,10 @@ class Car extends SolidObject {
             negateDof.negate();
             this.accelerate(this.backwardAcceleration, delta, negateDof);
         }
-        if (solidObject instanceof Orange) {
+        if (solidObject instanceof Orange ||
+            solidObject instanceof FieldLimit) {
             this.position.set(0, 0, 0);
             this.velocity = 0;
-
         }
     }
 }
