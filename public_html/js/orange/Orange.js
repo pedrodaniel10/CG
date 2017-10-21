@@ -1,12 +1,13 @@
 'use strict';
 
-var ORANGE_RADIUS = 30;
+var ORANGE_RADIUS = 25;
+var LEAF_Y = ORANGE_RADIUS + 4
 
 class Orange extends SolidObject {
     constructor(x, y, z) {
         super(x, y, z);
         this.orangeBody = new OrangeBody(0, 0, 0);
-        this.orangeLeaf = new OrangeLeaf(5, 34, 5);
+        this.orangeLeaf = new OrangeLeaf(5, LEAF_Y, 5);
         this.boundingVolume = new BoundingSphere(0, 0, ORANGE_RADIUS);
 
         this.add(this.orangeBody);
@@ -23,7 +24,7 @@ class Orange extends SolidObject {
 
         //constants
         this.velocity = Math.random() * 75
-        this.velocityIncrement = 20;
+        this.velocityIncrement = 5;
         this.tickNumber = 20;
         this.ticksRespawn = 150;
     }
@@ -81,9 +82,9 @@ class Orange extends SolidObject {
     collided(solidObject, delta) {
         if (solidObject instanceof FieldLimit && !this.outOfBoard) {
             this.position.set(999,999,999);
-
             this.tickCounter = 0;
             this.outOfBoard = true;
         }
+        return 0;
     }
 }

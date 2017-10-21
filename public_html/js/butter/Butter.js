@@ -1,8 +1,7 @@
 'use strict';
 
-var BUTTER_RADIUS = 47.5;
-var BOUNDING_LENGTH = 75;
-var BOUNDING_WIDTH = 45;
+var BOUNDING_LENGTH = 60;
+var BOUNDING_WIDTH = 35;
 
 class Butter extends SolidObject {
     constructor(x, y, z, rot_y) {

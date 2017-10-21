@@ -58,8 +58,18 @@ class ObjectBase extends THREE.Object3D {
       for (let i = 0; i < this.objects.length; i++) {
           for (let j = 0; j < this.objects.length; j++) {
               if (i !== j && this.objects[i].collides(this.objects[j])) {
-                  this.objects[i].collided(this.objects[j], delta);
-                  this.objects[j].collided(this.objects[i], delta);
+                  let carLost1 = this.objects[i].collided(this.objects[j], delta);
+                  let carLost2 = this.objects[j].collided(this.objects[i], delta);
+
+                  //car fell or touched orange, so oranges reset
+                  if (carLost1 === 1 || carLost2 === 1) {
+                      for (let i = 1; i < NUM_ORANGES+1; i++) {
+                          this.objects[i].position.set(999,999,999);
+                          this.objects[i].tickCounter = 0;
+                          this.objects[i].outOfBoard = true;
+                          this.objects[i].velocity = Math.random() * 75;
+                      }
+                  }
               }
           }
       }
