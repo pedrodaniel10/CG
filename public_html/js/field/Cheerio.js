@@ -1,4 +1,4 @@
-class Cheerio extends Object3D {
+class Cheerio extends SolidObject {
   constructor(x, y, z, size, radius) {
       super();
       this.cheerioBody = new CheerioBody(0, 0, 0, size, radius);

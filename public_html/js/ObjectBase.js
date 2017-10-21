@@ -47,7 +47,19 @@ class ObjectBase extends THREE.Object3D {
     //override
     update(delta) {
       var delta = clock.getDelta();
-      for(let i=0; i<this.objects.length; i++)
+
+      // collisions
+      for (let i = 0; i < this.objects.length; i++) {
+          for (let j = 0; j < this.objects.length; j++) {
+              if (i !== j && this.objects[i].collides(this.objects[j])) {
+                  this.objects[i].collided(this.objects[j]);
+                  this.objects[j].collided(this.objects[i]);
+              }
+          }
+      }
+
+      // update object positions
+      for (let i = 0; i < this.objects.length; i++)
         this.objects[i].update(delta);
     }
 }

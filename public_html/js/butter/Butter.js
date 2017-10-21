@@ -2,7 +2,7 @@
 
 var BUTTER_RADIUS = 95;
 
-class Butter extends Object3D {
+class Butter extends SolidObject {
     constructor(x, y, z) {
         super(x, y, z);
         this.position.set(x, y+10, z);
@@ -12,11 +12,5 @@ class Butter extends Object3D {
 
         this.add(this.butterBody);
         this.add(this.boundingVolume);
-    }
-
-    //override
-    update(delta) {
-        // TODO
-        //this.boundingVolume.radius =
     }
 }

@@ -2,7 +2,7 @@
 
 var ORANGE_RADIUS = 30;
 
-class Orange extends Object3D {
+class Orange extends SolidObject {
     constructor(x, y, z) {
         super(x, y, z);
         this.orangeBody = new OrangeBody(0, 0, 0);

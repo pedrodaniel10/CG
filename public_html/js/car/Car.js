@@ -4,7 +4,7 @@ var shiet2 = false;
 
 var CAR_RADIUS = 22;
 
-class Car extends Object3D {
+class Car extends SolidObject {
     constructor() {
         super();
         //Car components
@@ -160,5 +160,10 @@ class Car extends Object3D {
    //override
    update(delta) {
       this.checkMove(delta);
+   }
+
+   //override
+   collided(solidObject) {
+       //console.log("Colidi");
    }
 }
