@@ -154,28 +154,6 @@ class Car extends SolidObject {
     turnLeft() {
         if(this.lastKeyPressed == 'u')
         this.rotateY(this.velocity * this.constantCurve);
-<<<<<<< HEAD
-     else {
-        this.rotateY(-this.velocity * this.constantCurve);
-     }
-   }
-   //override
-   update(delta) {
-      this.checkMove(delta);
-   }
-
-   //override
-   collided(solidObject, delta) {
-       if (solidObject instanceof Butter) {
-         let dof = this.getDOF();
-         if (this.velocity > 0) {
-           dof.negate();
-           this.accelerate(this.backwardAcceleration, delta, dof);
-         }
-         this.velocity = 0;
-       }
-       if (solidObject instanceof Orange) {
-=======
         else {
             this.rotateY(-this.velocity * this.constantCurve);
         }
@@ -188,13 +166,16 @@ class Car extends SolidObject {
     //override
     collided(solidObject, delta) {
         if (solidObject instanceof Butter) {
-            let negateDof = this.getDOF();
-            negateDof.negate();
-            this.accelerate(this.backwardAcceleration, delta, negateDof);
+          let dof = this.getDOF();
+          if (this.velocity > 0) {
+            dof.negate();
+            this.accelerate(this.backwardAcceleration, delta, dof);
+          }
+
+          this.velocity = 0;
         }
         if (solidObject instanceof Orange ||
             solidObject instanceof FieldLimit) {
->>>>>>> origin/master
             this.position.set(0, 0, 0);
             this.velocity = 0;
         }
