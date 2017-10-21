@@ -15,10 +15,10 @@ function collisionSphereToAABB(sphere, aabb) {
 }
 
 function collisionAABBToAABB(aabb1, aabb2) {
-    // TODO
     let pos1 = new THREE.Vector3();
     let pos2 = new THREE.Vector3();
     pos1.setFromMatrixPosition(aabb1.matrixWorld);
     pos2.setFromMatrixPosition(aabb2.matrixWorld);
-    //return sphere1.radius + sphere2.radius <= sphere1.centerDistanceTo(sphere2);
+    return Math.abs(pos1.x - pos2.x) <= (aabb1.hsize.x + aabb2.hsize.x) &&
+        Math.abs(pos1.z - pos2.z) <= (aabb1.hsize.z + aabb2.hsize.z);
 }
