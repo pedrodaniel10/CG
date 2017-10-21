@@ -39,7 +39,8 @@ class ObjectBase extends THREE.Object3D {
 
         this.field = new Field(this.table.SIZEX, this.table.SIZEY, this.table.SIZEZ);
 
-        this.objects = this.objects.concat(this.field.getCheerios());
+        this.objects = this.objects.concat(this.field.cheerios);
+        this.objects = this.objects.concat(this.field.fieldLimits);
 
         this.add(this.table);
         this.add(this.car);

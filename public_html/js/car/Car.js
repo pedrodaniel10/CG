@@ -1,4 +1,5 @@
 'use strict';
+
 var shiet1 = false;
 var shiet2 = false;
 
@@ -55,104 +56,105 @@ class Car extends SolidObject {
     }
 
     getDOF() {
-     var z_axis = this.getWorldDirection();
-     return new THREE.Vector3(z_axis.getComponent(2), 0, -z_axis.getComponent(0));
-   }
+        var z_axis = this.getWorldDirection();
+        return new THREE.Vector3(z_axis.getComponent(2), 0, -z_axis.getComponent(0));
+    }
 
-   checkMove(delta) {
-     var dof = this.getDOF();
-     var negateDof = this.getDOF();
-     negateDof.negate();
-     this.wheelFrontLeft.rotation.y = 0;
-     this.wheelFrontRight.rotation.y = 0;
+    checkMove(delta) {
+        var dof = this.getDOF();
+        var negateDof = this.getDOF();
+        negateDof.negate();
+        this.wheelFrontLeft.rotation.y = 0;
+        this.wheelFrontRight.rotation.y = 0;
 
-     if(!keyState[38] && keyState[40] && this.lastKeyPressed=='u') {
-       if(this.velocity != 0)
-          this.accelerate(-this.forwardAcceleration*this.breakingFoward, delta, dof);
-       else {
-          this.lastKeyPressed = 'd';
-       }
-     }
-     else if (keyState[38] && !keyState[40] && this.lastKeyPressed=='d') {
-       if(this.velocity != 0)
-          this.accelerate(-this.backwardAcceleration*this.breakingBackward, delta, negateDof);
-       else {
-         this.lastKeyPressed = 'u';
-       }
-     }
-     else if(keyState[38]) {
-       if(this.lastKeyPressed == 'd') {
-         this.velocity=0;
-         this.lastKeyPressed = 'u';
-       }
-       this.accelerate(this.forwardAcceleration, delta, dof);
-     }
-     else if (keyState[40]) {
-       if(this.lastKeyPressed == 'u') {
-         this.velocity=0;
-         this.lastKeyPressed = 'd';
-       }
-       this.accelerate(this.backwardAcceleration, delta, negateDof);
-     }
-     else if(!keyState[38] && !keyState[40] && this.lastKeyPressed=='u') {
-       if(this.velocity != 0)
-          this.accelerate(-this.forwardAcceleration, delta, dof);
-     }
-     else if (!keyState[38] && !keyState[40] && this.lastKeyPressed=='d') {
-       if(this.velocity != 0) {
-          this.accelerate(-this.backwardAcceleration * this.frictionBackwards, delta, negateDof);
-      }
-     }
-     if(keyState[39]) {
-       if (this.wheelFrontLeft.rotation.y > -this.wheelTurnAngle) {
-         this.wheelFrontLeft.rotateY(-this.wheelTurnAngle);
-         this.wheelFrontRight.rotateY(-this.wheelTurnAngle);
-       }
-       this.turnRight();
-     }
-     else if (keyState[37]) {
-       if (this.wheelFrontLeft.rotation.y < this.wheelTurnAngle) {
-         this.wheelFrontLeft.rotateY(this.wheelTurnAngle);
-         this.wheelFrontRight.rotateY(this.wheelTurnAngle);
-       }
-       this.turnLeft();
-     }
-   }
+        if(!keyState[38] && keyState[40] && this.lastKeyPressed=='u') {
+            if(this.velocity != 0)
+            this.accelerate(-this.forwardAcceleration*this.breakingFoward, delta, dof);
+            else {
+                this.lastKeyPressed = 'd';
+            }
+        }
+        else if (keyState[38] && !keyState[40] && this.lastKeyPressed=='d') {
+            if(this.velocity != 0)
+            this.accelerate(-this.backwardAcceleration*this.breakingBackward, delta, negateDof);
+            else {
+                this.lastKeyPressed = 'u';
+            }
+        }
+        else if(keyState[38]) {
+            if(this.lastKeyPressed == 'd') {
+                this.velocity=0;
+                this.lastKeyPressed = 'u';
+            }
+            this.accelerate(this.forwardAcceleration, delta, dof);
+        }
+        else if (keyState[40]) {
+            if(this.lastKeyPressed == 'u') {
+                this.velocity=0;
+                this.lastKeyPressed = 'd';
+            }
+            this.accelerate(this.backwardAcceleration, delta, negateDof);
+        }
+        else if(!keyState[38] && !keyState[40] && this.lastKeyPressed=='u') {
+            if(this.velocity != 0)
+            this.accelerate(-this.forwardAcceleration, delta, dof);
+        }
+        else if (!keyState[38] && !keyState[40] && this.lastKeyPressed=='d') {
+            if(this.velocity != 0) {
+                this.accelerate(-this.backwardAcceleration * this.frictionBackwards, delta, negateDof);
+            }
+        }
+        if(keyState[39]) {
+            if (this.wheelFrontLeft.rotation.y > -this.wheelTurnAngle) {
+                this.wheelFrontLeft.rotateY(-this.wheelTurnAngle);
+                this.wheelFrontRight.rotateY(-this.wheelTurnAngle);
+            }
+            this.turnRight();
+        }
+        else if (keyState[37]) {
+            if (this.wheelFrontLeft.rotation.y < this.wheelTurnAngle) {
+                this.wheelFrontLeft.rotateY(this.wheelTurnAngle);
+                this.wheelFrontRight.rotateY(this.wheelTurnAngle);
+            }
+            this.turnLeft();
+        }
+    }
 
-   accelerate(acceleration, delta, direction) {
-     var deslocation;
+    accelerate(acceleration, delta, direction) {
+        var deslocation;
 
-     this.directionMove = direction.clone();
-     if(this.velocity==0 && acceleration > 0) {
-       deslocation = Math.abs(Math.pow(delta,2)*acceleration/2);
-       direction.setLength(deslocation);
-       this.velocity = acceleration * delta;
-     }
-     else if (this.velocity!=0 && acceleration > 0) {
-       deslocation = Math.abs((Math.pow(delta,2)*acceleration)/2 + this.velocity * delta)
-       direction.setLength(deslocation);
-       this.velocity = Math.min(acceleration * delta + this.velocity, this.maximumSpeed);
-     }
-     else if (this.velocity!=0 && acceleration < 0) {
-       deslocation = Math.abs((Math.pow(delta,2)*acceleration)/2 + this.velocity * delta)
-       direction.setLength(deslocation);
-       this.velocity = Math.max(((acceleration*delta) + this.velocity), this.minimumSpeed);
-     }
-     this.position.x += direction.x;
-     this.position.y += direction.y;
-     this.position.z += direction.z;
-   }
+        this.directionMove = direction.clone();
+        if(this.velocity==0 && acceleration > 0) {
+            deslocation = Math.abs(Math.pow(delta,2)*acceleration/2);
+            direction.setLength(deslocation);
+            this.velocity = acceleration * delta;
+        }
+        else if (this.velocity!=0 && acceleration > 0) {
+            deslocation = Math.abs((Math.pow(delta,2)*acceleration)/2 + this.velocity * delta)
+            direction.setLength(deslocation);
+            this.velocity = Math.min(acceleration * delta + this.velocity, this.maximumSpeed);
+        }
+        else if (this.velocity!=0 && acceleration < 0) {
+            deslocation = Math.abs((Math.pow(delta,2)*acceleration)/2 + this.velocity * delta)
+            direction.setLength(deslocation);
+            this.velocity = Math.max(((acceleration*delta) + this.velocity), this.minimumSpeed);
+        }
+        this.position.x += direction.x;
+        this.position.y += direction.y;
+        this.position.z += direction.z;
+    }
 
-   turnRight() {
-     if(this.lastKeyPressed == 'u')
+    turnRight() {
+        if(this.lastKeyPressed == 'u')
         this.rotateY(-this.velocity * this.constantCurve);
-     else
+        else
         this.rotateY(this.velocity * this.constantCurve);
-   }
+    }
 
-   turnLeft() {
-     if(this.lastKeyPressed == 'u')
+    turnLeft() {
+        if(this.lastKeyPressed == 'u')
         this.rotateY(this.velocity * this.constantCurve);
+<<<<<<< HEAD
      else {
         this.rotateY(-this.velocity * this.constantCurve);
      }
@@ -173,9 +175,28 @@ class Car extends SolidObject {
          this.velocity = 0;
        }
        if (solidObject instanceof Orange) {
+=======
+        else {
+            this.rotateY(-this.velocity * this.constantCurve);
+        }
+    }
+    //override
+    update(delta) {
+        this.checkMove(delta);
+    }
+
+    //override
+    collided(solidObject, delta) {
+        if (solidObject instanceof Butter) {
+            let negateDof = this.getDOF();
+            negateDof.negate();
+            this.accelerate(this.backwardAcceleration, delta, negateDof);
+        }
+        if (solidObject instanceof Orange ||
+            solidObject instanceof FieldLimit) {
+>>>>>>> origin/master
             this.position.set(0, 0, 0);
             this.velocity = 0;
-
-       }
-   }
+        }
+    }
 }

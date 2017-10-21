@@ -1,7 +1,7 @@
 'use strict';
 
 class Field {
-    constructor(tableSIZEX,tableSIZEY,tableSIZEZ) {
+    constructor(tableSIZEX, tableSIZEY, tableSIZEZ) {
         this.SIZE = 3;
         this.RADIUS = 1;
         this.OUTSIDE_MARGIN = 20;
@@ -9,6 +9,7 @@ class Field {
         this.X_N = 30;
         this.Z_N = 15;
 
+        /* cheerios */
         this.cheerios = [];
 
         let k = this.OUTSIDE_MARGIN + this.SIZE;
@@ -42,10 +43,37 @@ class Field {
             this.cheerios.push(new Cheerio(fieldLength / 2, 0, z, this.SIZE, this.RADIUS));
             this.cheerios.push(new Cheerio(-fieldLength / 2, 0, z, this.SIZE, this.RADIUS));
         }
-    }
 
-    getCheerios() {
-        return this.cheerios;
-    }
+        /* field limits */
+        this.fieldLimits = [];
 
+        let wallThickness = 4;
+
+        this.fieldLimits = [
+            new FieldLimit(
+                /* X */ - (wallThickness / 2) - (tableSIZEX / 2),
+                /* Z */ 0,
+                /* SIZE X */ wallThickness,
+                /* SIZE Z */ tableSIZEZ
+            ),
+            new FieldLimit(
+                /* X */ (wallThickness / 2) + (tableSIZEX / 2),
+                /* Z */ 0,
+                /* SIZE X */ wallThickness,
+                /* SIZE Z */ tableSIZEZ
+            ),
+            new FieldLimit(
+                /* X */ 0,
+                /* Z */ - (wallThickness / 2) - (tableSIZEZ / 2),
+                /* SIZE X */ tableSIZEX,
+                /* SIZE Z */ wallThickness
+            ),
+            new FieldLimit(
+                /* X */ 0,
+                /* Z */ (wallThickness / 2) + (tableSIZEZ / 2),
+                /* SIZE X */ tableSIZEX,
+                /* SIZE Z */ wallThickness
+            )
+        ];
+    }
 }
