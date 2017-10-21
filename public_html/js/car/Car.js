@@ -167,7 +167,12 @@ class Car extends SolidObject {
        if (solidObject instanceof Butter) {
            let negateDof = this.getDOF();
            negateDof.negate();
-           this.accelerate(this.backwardAcceleration, delta, negateDof)
+           this.accelerate(this.backwardAcceleration, delta, negateDof);
+       }
+       if (solidObject instanceof Orange) {
+            this.position.set(0, 0, 0);
+            this.velocity = 0;
+
        }
    }
 }
