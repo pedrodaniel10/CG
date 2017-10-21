@@ -40,40 +40,21 @@ class Orange extends SolidObject {
         this.position.set(rand_x, ORANGE_RADIUS, rand_z)
     }
 
-    inTable() {
-        /*Returns true if the object is within the limits of the table */
-        let limitX = TABLE_SIZEX / 2 + ORANGE_RADIUS;
-        let limitZ = TABLE_SIZEZ / 2 + ORANGE_RADIUS;
-
-        return -limitX < this.position.x && this.position.x < limitX &&
-        -limitZ < this.position.z && this.position.z < limitZ;
-    }
-
     move(delta) {
         /* after tickNumber calls to update the velocity of this object
         * is incremented by velocityIncrement
         */
-        var inTable = this.inTable();
-
-        if(!inTable && !this.outOfBoard){
-            this.position.set(999,999,999);
-
-            this.tickCounter = 0;
-            this.outOfBoard = true;
-
-
+        if (this.tickCounter === 0 && !this.outOfBoard) {
+            this.velocity += this.velocityIncrement*Math.random();
         }
-        else if(this.tickCounter === 0 && !this.outOfBoard) {
-            this.velocity+= this.velocityIncrement*Math.random();
-        }
-        else if(this.tickCounter === 0 && this.outOfBoard) {
-            this.velocity+= this.velocityIncrement*Math.random();
+        else if (this.tickCounter === 0 && this.outOfBoard) {
+            this.velocity += this.velocityIncrement*Math.random();
             this.setRandomPosition();
             this.setRandomDirection();
             this.outOfBoard = false;
         }
 
-        if(inTable) {
+        if (!this.outOfBoard) {
             this.tickCounter = (this.tickCounter + 1) % this.tickNumber;
 
             var deslocation = this.velocity * delta;
@@ -91,7 +72,18 @@ class Orange extends SolidObject {
 
     }
 
-    update(delta){
+    //override
+    update(delta) {
         this.move(delta);
+    }
+
+    //override
+    collided(solidObject, delta) {
+        if (solidObject instanceof FieldLimit && !this.outOfBoard) {
+            this.position.set(999,999,999);
+
+            this.tickCounter = 0;
+            this.outOfBoard = true;
+        }
     }
 }
