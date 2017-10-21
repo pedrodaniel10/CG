@@ -22,7 +22,8 @@ class Orange extends SolidObject {
         this.outOfBoard = false;
 
         //constants
-        this.velocityIncrement = 10;
+        this.velocity = Math.random() * 75
+        this.velocityIncrement = 20;
         this.tickNumber = 20;
         this.ticksRespawn = 150;
     }
@@ -57,17 +58,16 @@ class Orange extends SolidObject {
         if(!inTable && !this.outOfBoard){
             this.position.set(999,999,999);
 
-            this.velocity = 0;
             this.tickCounter = 0;
             this.outOfBoard = true;
 
 
         }
         else if(this.tickCounter === 0 && !this.outOfBoard) {
-            this.velocity+= this.velocityIncrement;
+            this.velocity+= this.velocityIncrement*Math.random();
         }
         else if(this.tickCounter === 0 && this.outOfBoard) {
-            this.velocity+= this.velocityIncrement;
+            this.velocity+= this.velocityIncrement*Math.random();
             this.setRandomPosition();
             this.setRandomDirection();
             this.outOfBoard = false;
