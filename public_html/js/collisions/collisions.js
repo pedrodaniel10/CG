@@ -5,7 +5,7 @@ function collisionSphereToSphere(sphere1, sphere2) {
     let pos2 = new THREE.Vector3();
     pos1.setFromMatrixPosition(sphere1.matrixWorld);
     pos2.setFromMatrixPosition(sphere2.matrixWorld);
-    return sphere1.radius + sphere2.radius <= pos1.distanceTo(pos2);
+    return sphere1.radius + sphere2.radius >= pos1.distanceTo(pos2);
 }
 
 function collisionSphereToAABB(sphere, aabb) {
