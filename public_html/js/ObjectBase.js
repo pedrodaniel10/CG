@@ -26,7 +26,13 @@ class ObjectBase extends THREE.Object3D {
         for (let i = 0; i < this.NUM_BUTTER; i++) {
             let rand_x = (Math.random() - 1/2) * this.table.SIZEX * this.OBJ_MARGIN;
             let rand_z = (Math.random() - 1/2) * this.table.SIZEZ * this.OBJ_MARGIN;
-            let rot_y = Math.random()*2 - 1;
+            let rot_y;
+            if (Math.random() > 0.5) {
+                rot_y = Math.random()*0.4 + 1.4;
+            }
+            else {
+                rot_y = Math.random()*0.4 - 0.2;
+            }
             let new_butter = new Butter(rand_x, 0, rand_z, rot_y);
             this.objects.push(new_butter);
         }
