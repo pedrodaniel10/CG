@@ -3,9 +3,33 @@
 class AxisAlignedBoundingBox extends BoundingVolume {
     constructor(x, z, sx, sz) {
         super(x, z);
-        this.size = new THREE.Vector2(sx, sz);
+        this.hsize = new THREE.Vector2(sx / 2, sz / 2);
+        var geometry = new THREE.CubeGeometry(sx, 20, sz);
+        var material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true});
+        let mesh = new THREE.Mesh(geometry, material);
+        this.add(mesh);
     }
 
+    distanceTo(point) {
+        /* get global center positon */
+        let center = Vector3();
+        center.setFromMatrixPosition(this.matrixWorld);
+
+        /* get the corner points of the rectangle */
+        let minx = center.x - this.hsize.x;
+        let maxx = center.x + this.hsize.x;
+        let minz = center.z - this.hsize.y;
+        let maxz = center.z + this.hsize.y;
+
+        /* calculate distance */
+        var dist = THREE.Vector2(
+                Math.max(minx - point.x, 0, point.x - maxx),
+                Math.max(minz - point.y, 0, point.y - maxz)
+            );
+        return dist.length();
+    }
+
+    //override
     collides(boundingVolume) {
         if (boundingVolume instanceof BoundingSphere)
             return collisionSphereToAABB(boundingVolume, this);

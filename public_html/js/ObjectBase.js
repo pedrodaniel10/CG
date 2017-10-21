@@ -52,8 +52,8 @@ class ObjectBase extends THREE.Object3D {
       for (let i = 0; i < this.objects.length; i++) {
           for (let j = 0; j < this.objects.length; j++) {
               if (i !== j && this.objects[i].collides(this.objects[j])) {
-                  this.objects[i].collided(this.objects[j]);
-                  this.objects[j].collided(this.objects[i]);
+                  this.objects[i].collided(this.objects[j], delta);
+                  this.objects[j].collided(this.objects[i], delta);
               }
           }
       }

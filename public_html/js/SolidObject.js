@@ -12,7 +12,7 @@ class SolidObject extends Object3D {
             return this.boundingVolume.collides(solidObject.boundingVolume);
     }
 
-    collided(solidObject) {
+    collided(solidObject, delta) {
         // abstract
     }
 

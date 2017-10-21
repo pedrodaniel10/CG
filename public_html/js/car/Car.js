@@ -163,7 +163,11 @@ class Car extends SolidObject {
    }
 
    //override
-   collided(solidObject) {
-       //console.log("Colidi");
+   collided(solidObject, delta) {
+       if (solidObject instanceof Butter) {
+           let negateDof = this.getDOF();
+           negateDof.negate();
+           this.accelerate(this.backwardAcceleration, delta, negateDof)
+       }
    }
 }

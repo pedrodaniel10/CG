@@ -9,12 +9,9 @@ function collisionSphereToSphere(sphere1, sphere2) {
 }
 
 function collisionSphereToAABB(sphere, aabb) {
-    // TODO
-    let pos1 = new THREE.Vector3();
-    let pos2 = new THREE.Vector3();
-    pos1.setFromMatrixPosition(sphere.matrixWorld);
-    pos2.setFromMatrixPosition(aabb.matrixWorld);
-    //return sphere1.radius + sphere2.radius <= sphere1.centerDistanceTo(sphere2);
+    let pos_sphere = new THREE.Vector3();
+    pos_sphere.setFromMatrixPosition(sphere.matrixWorld);
+    return sphere.radius >= aabb.distanceTo(pos_sphere);
 }
 
 function collisionAABBToAABB(aabb1, aabb2) {

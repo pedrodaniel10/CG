@@ -10,6 +10,7 @@ class BoundingSphere extends BoundingVolume {
         this.add(mesh);*/
     }
 
+    //override
     collides(boundingVolume) {
         if (boundingVolume instanceof BoundingSphere)
             return collisionSphereToSphere(this, boundingVolume);
