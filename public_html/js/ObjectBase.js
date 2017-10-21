@@ -18,28 +18,23 @@ class ObjectBase extends THREE.Object3D {
 
         this.objects = [this.car];
 
-        this.oranges = [];
         for (let i = 0; i < this.NUM_ORANGES; i++) {
             let new_orange = new Orange(0, 0, 0);
-            this.oranges.push(new_orange);
+            this.objects.push(new_orange);
         }
 
-        this.butter = [];
         for (let i = 0; i < this.NUM_BUTTER; i++) {
             let rand_x = (Math.random() - 1/2) * this.table.SIZEX * this.OBJ_MARGIN;
             let rand_z = (Math.random() - 1/2) * this.table.SIZEZ * this.OBJ_MARGIN;
             let rot_y = Math.random()*2 - 1;
             let new_butter = new Butter(rand_x, 0, rand_z);
             new_butter.rotateY(rot_y);
-            this.butter.push(new_butter);
+            this.objects.push(new_butter);
         }
 
         this.field = new Field(this.table.SIZEX, this.table.SIZEY, this.table.SIZEZ);
-        this.cheerios = this.field.getCheerios();
 
-        this.objects = this.objects.concat(this.cheerios);
-        this.objects = this.objects.concat(this.oranges);
-        this.objects = this.objects.concat(this.butter);
+        this.objects = this.objects.concat(this.field.getCheerios());
 
         this.add(this.table);
         this.add(this.car);
