@@ -179,7 +179,6 @@ class Car extends SolidObject {
             solidObject instanceof FieldLimit) {
             this.position.set(0, 0, 0);
             this.velocity = 0;
-            solidObject.velocity = 0;
             return 1;
         }
         return 0;
