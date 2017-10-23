@@ -36,9 +36,4 @@ class AxisAlignedBoundingBox extends BoundingVolume {
         else
             return false;
     }
-
-    //override
-    update(delta) {
-        // TODO
-    }
 }

@@ -83,7 +83,7 @@ class Cheerio extends SolidObject {
         }
 
         else if (solidObject instanceof Cheerio) {
-          if (this.velocity == 0) {
+          if (this.velocity === 0) {
             this.velocity = solidObject.velocity;
             this.direction = solidObject.getDOF();
             this.moveNow = 1;

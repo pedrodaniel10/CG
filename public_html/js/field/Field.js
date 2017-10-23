@@ -23,7 +23,7 @@ class Field {
         }
 
         n = 18;
-        for (let z = - (fieldWidth / 2) + (fieldWidth / n); z <= (fieldWidth / 2) - (fieldWidth / n); z += fieldWidth / n) {
+        for (let z = - (fieldWidth / 2) + (fieldWidth / n); z <= (fieldWidth / 2); z += fieldWidth / n) {
             this.cheerios.push(new Cheerio(fieldLength / 2, 0, z, this.SIZE, this.RADIUS));
             this.cheerios.push(new Cheerio(-fieldLength / 2, 0, z, this.SIZE, this.RADIUS));
         }
