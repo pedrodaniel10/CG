@@ -31,6 +31,11 @@ class Orange extends SolidObject {
         this.secondsRespawn = 2;
     }
 
+    getDOF() {
+        var z_axis = this.getWorldDirection();
+        return new THREE.Vector3(z_axis.getComponent(2), 0, -z_axis.getComponent(0));
+    }
+
     setRandomDirection() {
         var newDirection = new THREE.Vector3(Math.random()*2 - 1, 0, Math.random()*2 - 1);
         newDirection.normalize();
@@ -48,6 +53,7 @@ class Orange extends SolidObject {
     }
 
     move(delta) {
+
         if ((this.secondsElapsed > this.secondsToIncrement) && !this.outOfBoard) {
             this.velocity += this.velocityIncrement*Math.random();
             this.secondsElapsed = 0;
@@ -105,6 +111,7 @@ class Orange extends SolidObject {
 
     //override
     collided(solidObject, delta) {
+
         if (solidObject instanceof FieldLimit && !this.outOfBoard) {
             this.position.set(0,999,0);
             this.outOfBoard = true;
@@ -121,17 +128,18 @@ class Orange extends SolidObject {
           var vectorAxis = new THREE.Vector3(-vectorAxisOrthogonal.z, 0, vectorAxisOrthogonal.x);
           vectorAxis.normalize();
 
-          console.log("Vetor1: x:" + this.direction.x + "z: " + this.direction.z +
+          /*console.log("Vetor1: x:" + this.direction.x + "z: " + this.direction.z +
           "\nVetor2: " + " x:"+ solidObject.direction.x + "z: " + solidObject.direction.z +
            "\nOrthogonal: " + vectorAxisOrthogonal.x + "z: " + vectorAxisOrthogonal.z +
            "\nAxis: " + vectorAxis.x + "z: " + vectorAxis.z );
-
-          this.direction.applyAxisAngle(vectorAxis, Math.PI);
-          solidObject.direction.applyAxisAngle(vectorAxis, Math.PI);
-          console.log("Vetor1: x:" + this.direction.x + "z: " + this.direction.z +
+           */
+          this.direction = this.getDOF().applyAxisAngle(vectorAxis, Math.PI);
+          solidObject.direction = solidObject.getDOF().applyAxisAngle(vectorAxis, Math.PI);
+          /*console.log("Vetor1: x:" + this.direction.x + "z: " + this.direction.z +
           "\nVetor2: " + " x:"+ solidObject.direction.x + "z: " + solidObject.direction.z +
            "\nOrthogonal: " + vectorAxisOrthogonal.x + "z: " + vectorAxisOrthogonal.z +
            "\nAxis: " + vectorAxis.x + "z: " + vectorAxis.z );
+           */
         }
     }
 }
