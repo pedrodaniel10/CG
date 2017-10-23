@@ -15,6 +15,9 @@ class Cheerio extends SolidObject {
         this.velocity = 0;
         this.acceleration = CHEERIO_ACC;
         this.moveNow = 0;
+        this.lastPosX = this.position.x;
+        this.lastPosY = this.position.y;
+        this.lastPosZ = this.position.z;
     }
 
     getDOF() {
@@ -34,6 +37,7 @@ class Cheerio extends SolidObject {
       else {
           deslocationVec.setLength(deslocation);
           this.velocity = 0;
+          this.moveNow = 0;
       }
 
       this.lastPosX = this.position.x;
@@ -77,9 +81,10 @@ class Cheerio extends SolidObject {
     //override
     collided(solidObject) {
         if (solidObject instanceof Car) {
-            this.lastObject = solidObject;
-            this.velocity = solidObject.velocity;
+          if (this.moveNow === 0) {
             this.direction = solidObject.getDOF();
+          }
+            this.velocity = solidObject.velocity;
             this.acceleration = CHEERIO_ACC;
             this.moveNow = 1;
             this.teleportPos();
@@ -87,13 +92,15 @@ class Cheerio extends SolidObject {
 
         else if (solidObject instanceof Cheerio) {
           if (this.velocity === 0) {
+            if (this.moveNow === 0) {
+              this.direction = solidObject.direction.clone();
+            }
             this.velocity = solidObject.velocity;
-            this.direction = solidObject.getDOF();
             this.acceleration = CHEERIO_ACC;
             this.moveNow = 1;
           }
           else {
-            this.acceleration = this.acceleration - 10;
+            this.acceleration = this.acceleration - 20;
           }
         }
 

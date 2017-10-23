@@ -185,7 +185,9 @@ class Car extends SolidObject {
         }
 
         else if (solidObject instanceof Cheerio) {
-            
+            if (this.velocity >= 75) {
+                this.velocity = this.velocity - 50;
+            }
         }
     }
 }
