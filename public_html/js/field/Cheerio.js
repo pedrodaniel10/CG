@@ -81,6 +81,7 @@ class Cheerio extends SolidObject {
             this.moveNow = 1;
             this.teleportPos();
         }
+
         else if (solidObject instanceof Cheerio) {
           if (this.velocity == 0) {
             this.velocity = solidObject.velocity;
@@ -92,10 +93,11 @@ class Cheerio extends SolidObject {
           }
         }
 
-
-
         else if (solidObject instanceof FieldLimit) {
-            scene.remove(this);
+            this.remove(this.cheerioBody);
+            this.remove(this.boundingVolume);
+
+            removeObj(this);
         }
     }
 }

@@ -83,6 +83,10 @@ function carLost() {
   }
 }
 
+function removeObj(object) {
+    scene.remove(object);
+}
+
 
 function onKeyDown(e) {
   'use strict'
