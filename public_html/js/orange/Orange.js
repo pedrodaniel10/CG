@@ -39,7 +39,7 @@ class Orange extends SolidObject {
     setRandomPosition() {
         let rand_x = (Math.random() - 1/2) * TABLE_SIZEX * OBJ_MARGIN;
         let rand_z = (Math.random() - 1/2) * TABLE_SIZEZ * OBJ_MARGIN;
-        this.position.set(rand_x, ORANGE_RADIUS, rand_z)
+        this.position.set(rand_x, ORANGE_RADIUS, rand_z);
     }
 
     setRandomVelocity(){
@@ -47,8 +47,8 @@ class Orange extends SolidObject {
     }
 
     move(delta) {
-        console.log("Time Elapsed: " + this.secondsElapsed + "\nOutOfBoard: " + this.outOfBoard +"\n");
-        if (this.secondsElapsed > this.secondsToIncrement && !this.outOfBoard) {
+        //console.log("Time Elapsed: " + this.secondsElapsed + "\nOutOfBoard: " + this.outOfBoard +"\n");
+        if ((this.secondsElapsed > this.secondsToIncrement) && !this.outOfBoard) {
             this.velocity += this.velocityIncrement*Math.random();
             this.secondsElapsed = 0;
         }
@@ -84,12 +84,12 @@ class Orange extends SolidObject {
             this.rotateAroundWorldAxis(Y_AXIS_WORLD, angleToXaxis);
             this.rotateAroundWorldAxis(Z_AXIS_WORLD, -totalRotation);
             this.rotateAroundWorldAxis(Y_AXIS_WORLD, -angleToXaxis);
-        }/*
+        }
         else if (deslocationVec.z <= 0){ //quadrantes negativos => angulos negativos
           this.rotateAroundWorldAxis(Y_AXIS_WORLD, -angleToXaxis);
           this.rotateAroundWorldAxis(Z_AXIS_WORLD, -totalRotation);
           this.rotateAroundWorldAxis(Y_AXIS_WORLD, angleToXaxis);
-        }*/
+        }
 
       }
 
@@ -101,7 +101,7 @@ class Orange extends SolidObject {
     //override
     collided(solidObject, delta) {
         if (solidObject instanceof FieldLimit && !this.outOfBoard) {
-            this.position.set(0,999,0);
+            this.position.set(999,999,999);
             this.outOfBoard = true;
         }
     }
