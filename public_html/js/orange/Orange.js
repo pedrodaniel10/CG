@@ -1,7 +1,7 @@
 'use strict';
 
 var ORANGE_RADIUS = 25;
-var LEAF_Y = ORANGE_RADIUS + 4
+var LEAF_Y = ORANGE_RADIUS + 1
 
 class Orange extends SolidObject {
     constructor(x, y, z) {
