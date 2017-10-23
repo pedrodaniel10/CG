@@ -19,16 +19,15 @@ class Orange extends SolidObject {
         this.setRandomDirection();
 
         //variables
-        this.tickCounter = 0;
         this.outOfBoard = false;
         this.rotationAngleX = 0;
         this.rotationAngleZ = 0;
+        this.velocity;
 
         //constants
-        this.velocity = Math.random() * 75
         this.velocityIncrement = 5;
-        this.tickNumber = 20;
-        this.ticksRespawn = 150;
+        this.velocityStartConst = 50;
+        this.secondsRespawn = 3;
     }
 
     setRandomDirection() {
@@ -43,47 +42,32 @@ class Orange extends SolidObject {
         this.position.set(rand_x, ORANGE_RADIUS, rand_z)
     }
 
+    setRandomVelocity() {
+      this.velocity = Math.random() * this.velocityStartConst;
+    }
+
+    getDof(){
+      return this.direction;
+    }
+
     move(delta) {
-        /* after tickNumber calls to update the velocity of this object
-        * is incremented by velocityIncrement
-        */
-        if (this.tickCounter === 0 && !this.outOfBoard) {
-            this.velocity += this.velocityIncrement*Math.random();
-        }
-        else if (this.tickCounter === 0 && this.outOfBoard) {
-            this.velocity += this.velocityIncrement*Math.random();
-            this.setRandomPosition();
-            this.setRandomDirection();
-            this.outOfBoard = false;
-        }
-
-        if (!this.outOfBoard) {
-            this.tickCounter = (this.tickCounter + 1) % this.tickNumber;
-
-            var deslocation = this.velocity * delta;
-
-            var deslocationVec = this.direction.clone();
-            deslocationVec.setLength(deslocation);
-
-            this.rollOver(deslocationVec);
-        }
-        else {
-            this.tickCounter = (this.tickCounter + 1) % this.ticksRespawn;
-        }
-
+        //this.rollOver(this.getDof(), 20);
     }
 
-    rollOver(deslocationVec){
-      var distanceX = deslocationVec.x;
-      var distanceZ = deslocationVec.z;
-      var angleX = distanceX / (2 * Math.PI * ORANGE_RADIUS) * 5*Math.PI;
-      var angleZ = distanceZ / (2 * Math.PI * ORANGE_RADIUS) * 5*Math.PI;
-
-      this.rotateAroundWorldAxis(Z_AXIS_WORLD, angleX);
-      this.rotateAroundWorldAxis(X_AXIS_WORLD, angleZ);
-      this.position.x += distanceX;
-      this.position.z += distanceZ;
-    }
+    rollOver(deslocationVec, distance){
+      var angleToXaxis = X_AXIS_WORLD.angleTo(deslocationVec);
+      var totalRotation = distance / (2*Math.PI*ORANGE_RADIUS);
+      if(deslocationVec.z > 0){ //quadrantes positivos => angulos positivos
+          this.rotateAroundWorldAxis(Y_AXIS_WORLD, angleToXaxis);
+          this.rotateAroundWorldAxis(Z_AXIS_WORLD, -totalRotation);
+          this.rotateAroundWorldAxis(Y_AXIS_WORLD, -angleToXaxis);
+      }
+      else{ //quadrantes negativos => angulos negativos
+        this.rotateAroundWorldAxis(Y_AXIS_WORLD, -angleToXaxis);
+        this.rotateAroundWorldAxis(Z_AXIS_WORLD, -totalRotation);
+        this.rotateAroundWorldAxis(Y_AXIS_WORLD, -angleToXaxis);
+      }
+      }
 
     //override
     update(delta) {
@@ -92,10 +76,8 @@ class Orange extends SolidObject {
 
     //override
     collided(solidObject, delta) {
-        if (solidObject instanceof FieldLimit && !this.outOfBoard) {
-            this.position.set(999,999,999);
-            this.tickCounter = 0;
-            this.outOfBoard = true;
+        if (solidObject instanceof FieldLimit) {
+            //this.position.set(999,999,999);
         }
     }
 }
