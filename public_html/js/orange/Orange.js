@@ -21,6 +21,8 @@ class Orange extends SolidObject {
         //variables
         this.tickCounter = 0;
         this.outOfBoard = false;
+        this.rotationAngleX = 0;
+        this.rotationAngleZ = 0;
 
         //constants
         this.velocity = Math.random() * 75
@@ -63,14 +65,24 @@ class Orange extends SolidObject {
             var deslocationVec = this.direction.clone();
             deslocationVec.setLength(deslocation);
 
-            this.position.x += deslocationVec.x;
-            this.position.y += deslocationVec.y;
-            this.position.z += deslocationVec.z;
+            this.rollOver(deslocationVec);
         }
         else {
             this.tickCounter = (this.tickCounter + 1) % this.ticksRespawn;
         }
 
+    }
+
+    rollOver(deslocationVec){
+      var distanceX = deslocationVec.x;
+      var distanceZ = deslocationVec.z;
+      var angleX = distanceX / (2 * Math.PI * ORANGE_RADIUS) * 5*Math.PI;
+      var angleZ = distanceZ / (2 * Math.PI * ORANGE_RADIUS) * 5*Math.PI;
+
+      this.rotateAroundWorldAxis(Z_AXIS_WORLD, angleX);
+      this.rotateAroundWorldAxis(X_AXIS_WORLD, angleZ);
+      this.position.x += distanceX;
+      this.position.z += distanceZ;
     }
 
     //override
