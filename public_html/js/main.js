@@ -2,6 +2,7 @@ var scene, renderer, baseObject;
 var cameras = [], cameraIndex=0;
 
 var aClicked = false;
+var wireframOn = true;
 
 var clock = new THREE.Clock();
 
@@ -113,9 +114,10 @@ function onKeyUp(e) {
 
 function update() {
   if(aClicked) {
+    wireframOn = !wireframOn;
     scene.traverse(function (node) {
       if (node instanceof THREE.Mesh) {
-        node.material.wireframe = !node.material.wireframe;
+        node.material.wireframe = wireframOn;
       }
     });
     aClicked = false;
