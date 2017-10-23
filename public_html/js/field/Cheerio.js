@@ -22,5 +22,8 @@ class Cheerio extends SolidObject {
             solidObject instanceof Cheerio) {
             // TODO mover cheerio
         }
+        else if (solidObject instanceof FieldLimit) {
+            scene.remove(this);
+        }
     }
 }
