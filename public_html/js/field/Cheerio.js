@@ -81,9 +81,14 @@ class Cheerio extends SolidObject {
     //override
     collided(solidObject) {
         if (solidObject instanceof Car) {
-          if (this.moveNow === 0) {
-            this.direction = solidObject.getDOF();
-          }
+            if (this.moveNow === 0) {
+                if (solidObject.goingBackwards == 1) {
+                    this.direction = solidObject.getDOF().negate();
+                }
+                else {
+                    this.direction = solidObject.getDOF();
+                }
+            }
             this.velocity = solidObject.velocity;
             this.acceleration = CHEERIO_ACC;
             this.moveNow = 1;

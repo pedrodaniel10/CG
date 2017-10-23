@@ -68,6 +68,7 @@ class Car extends SolidObject {
         this.wheelFrontRight.rotation.y = 0;
 
         if(!keyState[38] && keyState[40] && this.lastKeyPressed=='u') {
+            this.goingBackwards = 0;
             if(this.velocity != 0)
             this.accelerate(-this.forwardAcceleration*this.breakingFoward, delta, dof);
             else {
@@ -75,6 +76,7 @@ class Car extends SolidObject {
             }
         }
         else if (keyState[38] && !keyState[40] && this.lastKeyPressed=='d') {
+            this.goingBackwards = 1;
             if(this.velocity != 0)
             this.accelerate(-this.backwardAcceleration*this.breakingBackward, delta, negateDof);
             else {
@@ -82,6 +84,7 @@ class Car extends SolidObject {
             }
         }
         else if(keyState[38]) {
+            this.goingBackwards = 0;
             if(this.lastKeyPressed == 'd') {
                 this.velocity=0;
                 this.lastKeyPressed = 'u';
@@ -89,6 +92,7 @@ class Car extends SolidObject {
             this.accelerate(this.forwardAcceleration, delta, dof);
         }
         else if (keyState[40]) {
+            this.goingBackwards = 1;
             if(this.lastKeyPressed == 'u') {
                 this.velocity=0;
                 this.lastKeyPressed = 'd';
@@ -96,10 +100,12 @@ class Car extends SolidObject {
             this.accelerate(this.backwardAcceleration, delta, negateDof);
         }
         else if(!keyState[38] && !keyState[40] && this.lastKeyPressed=='u') {
+            this.goingBackwards = 0;
             if(this.velocity != 0)
             this.accelerate(-this.forwardAcceleration, delta, dof);
         }
         else if (!keyState[38] && !keyState[40] && this.lastKeyPressed=='d') {
+            this.goingBackwards = 1;
             if(this.velocity != 0) {
                 this.accelerate(-this.backwardAcceleration * this.frictionBackwards, delta, negateDof);
             }
