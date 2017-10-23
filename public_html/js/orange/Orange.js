@@ -27,7 +27,7 @@ class Orange extends SolidObject {
         this.velocityInitialConstant = 20;
         this.velocityIncrement = 5;
         this.secondsToIncrement = 2;
-        this.secondssRespawn = 2;
+        this.secondsRespawn = 2;
     }
 
     setRandomDirection() {
@@ -53,6 +53,7 @@ class Orange extends SolidObject {
             this.secondsElapsed = 0;
         }
         else if (this.outOfBoard && (this.secondsElapsed > this.secondsRespawn)) {
+            console.log("here");
             this.setRandomVelocity();
             this.setRandomPosition();
             this.setRandomDirection();
@@ -79,7 +80,7 @@ class Orange extends SolidObject {
 
     rollOver(deslocationVec, distance){
         var angleToXaxis = X_AXIS_WORLD.angleTo(deslocationVec);
-        var totalRotation = distance / (2 * Math.PI * ORANGE_RADIUS);
+        var totalRotation = distance / ORANGE_RADIUS;
         if(deslocationVec.z > 0){ //quadrantes positivos => angulos positivos
             this.rotateAroundWorldAxis(Y_AXIS_WORLD, angleToXaxis);
             this.rotateAroundWorldAxis(Z_AXIS_WORLD, -totalRotation);
@@ -103,6 +104,7 @@ class Orange extends SolidObject {
         if (solidObject instanceof FieldLimit && !this.outOfBoard) {
             this.position.set(999,999,999);
             this.outOfBoard = true;
+            this.secondsElapsed = 0;
         }
     }
 }
