@@ -65,7 +65,7 @@ class Orange extends SolidObject {
             var deslocationVec = this.direction.clone();
             deslocationVec.setLength(deslocation);
 
-            this.rollOver(deslocationVec);
+            this.rollOver(deslocationVec,deslocation);
         }
         else {
             this.tickCounter = (this.tickCounter + 1) % this.ticksRespawn;
@@ -73,17 +73,21 @@ class Orange extends SolidObject {
 
     }
 
-    rollOver(deslocationVec){
-      var distanceX = deslocationVec.x;
-      var distanceZ = deslocationVec.z;
-      var angleX = distanceX / (2 * Math.PI * ORANGE_RADIUS) * 5*Math.PI;
-      var angleZ = distanceZ / (2 * Math.PI * ORANGE_RADIUS) * 5*Math.PI;
-
-      this.rotateAroundWorldAxis(Z_AXIS_WORLD, angleX);
-      this.rotateAroundWorldAxis(X_AXIS_WORLD, angleZ);
-      this.position.x += distanceX;
-      this.position.z += distanceZ;
-    }
+    rollOver(deslocationVec, distance){
+        var angleToXaxis = X_AXIS_WORLD.angleTo(deslocationVec);
+        var totalRotation = distance / (2*Math.PI*ORANGE_RADIUS);
+        console.log(distance);
+        if(deslocationVec.z > 0){ //quadrantes positivos => angulos positivos
+            this.rotateAroundWorldAxis(Y_AXIS_WORLD, angleToXaxis);
+            this.rotateAroundWorldAxis(Z_AXIS_WORLD, -totalRotation);
+            this.rotateAroundWorldAxis(Y_AXIS_WORLD, -angleToXaxis);
+        }
+        else{ //quadrantes negativos => angulos negativos
+          this.rotateAroundWorldAxis(Y_AXIS_WORLD, -angleToXaxis);
+          this.rotateAroundWorldAxis(Z_AXIS_WORLD, -totalRotation);
+          this.rotateAroundWorldAxis(Y_AXIS_WORLD, -angleToXaxis);
+        }
+      }
 
     //override
     update(delta) {
