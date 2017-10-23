@@ -139,6 +139,11 @@ class Car extends SolidObject {
             direction.setLength(deslocation);
             this.velocity = Math.max(((acceleration*delta) + this.velocity), this.minimumSpeed);
         }
+
+        this.lastPosX = this.position.x;
+        this.lastPosY = this.position.y;
+        this.lastPosZ = this.position.z;
+
         this.position.x += direction.x;
         this.position.y += direction.y;
         this.position.z += direction.z;
@@ -168,10 +173,10 @@ class Car extends SolidObject {
         if (solidObject instanceof Butter) {
           let dof = this.getDOF();
           if (this.velocity > 0) {
-            dof.negate();
-            this.accelerate(this.backwardAcceleration, delta, dof);
+            this.position.x = this.lastPosX;
+            this.position.y = this.lastPosY;
+            this.position.z = this.lastPosZ;
           }
-
           this.velocity = 0;
         }
         //car lost game, orange velocities must reset
