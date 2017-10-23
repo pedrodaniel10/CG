@@ -20,11 +20,11 @@ class Orange extends SolidObject {
         this.setRandomVelocity();
 
         //variables
-        this.secondsElapsed = 0;
+        this.secondsElapsed = this.secondsRespawn;
         this.outOfBoard = false;
 
         //constants
-        this.velocityInitialConstant = 20;
+        this.velocityInitialConstant = 75;
         this.velocityIncrement = 5;
         this.secondsToIncrement = 2;
         this.secondsRespawn = 2;
@@ -47,13 +47,11 @@ class Orange extends SolidObject {
     }
 
     move(delta) {
-        //console.log("Time Elapsed: " + this.secondsElapsed + "\nOutOfBoard: " + this.outOfBoard +"\n");
         if ((this.secondsElapsed > this.secondsToIncrement) && !this.outOfBoard) {
             this.velocity += this.velocityIncrement*Math.random();
             this.secondsElapsed = 0;
         }
         else if (this.outOfBoard && (this.secondsElapsed > this.secondsRespawn)) {
-            console.log("here");
             this.setRandomVelocity();
             this.setRandomPosition();
             this.setRandomDirection();
@@ -102,7 +100,7 @@ class Orange extends SolidObject {
     //override
     collided(solidObject, delta) {
         if (solidObject instanceof FieldLimit && !this.outOfBoard) {
-            this.position.set(999,999,999);
+            this.position.set(0,999,0);
             this.outOfBoard = true;
             this.secondsElapsed = 0;
         }
