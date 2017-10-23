@@ -1,6 +1,6 @@
 'use strict';
 
-var CHEERIO_ACC = -50;
+var CHEERIO_ACC = -75;
 
 class Cheerio extends SolidObject {
     constructor(x, y, z, size, radius) {
