@@ -33,6 +33,25 @@ class Cheerio extends SolidObject {
           deslocationVec.setLength(deslocation);
           this.velocity = 0;
       }
+
+      this.lastPosX = this.position.x;
+      this.lastPosY = this.position.y;
+      this.lastPosZ = this.position.z;
+
+      this.position.x += deslocationVec.x;
+      this.position.y += deslocationVec.y;
+      this.position.z += deslocationVec.z;
+    }
+
+    teleportPos() {
+      var deslocationVec = this.direction.clone();
+      var deslocation = 1;
+      deslocationVec.setLength(deslocation);
+
+      this.lastPosX = this.position.x;
+      this.lastPosY = this.position.y;
+      this.lastPosZ = this.position.z;
+
       this.position.x += deslocationVec.x;
       this.position.y += deslocationVec.y;
       this.position.z += deslocationVec.z;
@@ -60,14 +79,16 @@ class Cheerio extends SolidObject {
             this.velocity = solidObject.velocity;
             this.direction = solidObject.getDOF();
             this.moveNow = 1;
+            this.teleportPos();
         }
         else if (solidObject instanceof Cheerio) {
-          if (this.velocity === 0) {
+          if (this.velocity == 0) {
             this.velocity = solidObject.velocity;
             this.direction = solidObject.getDOF();
+            this.moveNow = 1;
           }
           else {
-            this.acceleration = this.acceleration - 5;
+            this.acceleration = this.acceleration - 10;
           }
         }
 
