@@ -24,7 +24,7 @@ class Orange extends SolidObject {
         this.outOfBoard = false;
 
         //constants
-        this.velocityInitialConstant = 75;
+        this.velocityInitialConstant = 50;
         this.velocityIncrement = 5;
         this.secondsToIncrement = 2;
         this.secondsRespawn = 2;
@@ -43,7 +43,7 @@ class Orange extends SolidObject {
     }
 
     setRandomVelocity(){
-      this.velocity = Math.random() * this.velocityInitialConstant + 1;
+      this.velocity += Math.random() * this.velocityInitialConstant;
     }
 
     move(delta) {

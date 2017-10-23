@@ -79,7 +79,7 @@ function carLost() {
       baseObject.objects[i].position.set(0,999,0);
       baseObject.objects[i].secondsElapsed = baseObject.objects[i].secondsRespawn;
       baseObject.objects[i].outOfBoard = true;
-      baseObject.objects[i].velocity = Math.random() * 75;
+      baseObject.objects[i].velocity = Math.random() * 50;
   }
 }
 
