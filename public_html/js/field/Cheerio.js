@@ -1,5 +1,7 @@
 'use strict';
 
+var CHEERIO_ACC = -50;
+
 class Cheerio extends SolidObject {
     constructor(x, y, z, size, radius) {
         super();
@@ -11,7 +13,7 @@ class Cheerio extends SolidObject {
         this.position.set(x, y, z);
 
         this.velocity = 0;
-        this.acceleration = -50;
+        this.acceleration = CHEERIO_ACC;
         this.moveNow = 0;
     }
 
@@ -78,6 +80,7 @@ class Cheerio extends SolidObject {
             this.lastObject = solidObject;
             this.velocity = solidObject.velocity;
             this.direction = solidObject.getDOF();
+            this.acceleration = CHEERIO_ACC;
             this.moveNow = 1;
             this.teleportPos();
         }
@@ -86,6 +89,7 @@ class Cheerio extends SolidObject {
           if (this.velocity === 0) {
             this.velocity = solidObject.velocity;
             this.direction = solidObject.getDOF();
+            this.acceleration = CHEERIO_ACC;
             this.moveNow = 1;
           }
           else {
