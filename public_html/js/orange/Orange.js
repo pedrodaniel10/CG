@@ -27,7 +27,7 @@ class Orange extends SolidObject {
         this.velocityInitialConstant = 20;
         this.velocityIncrement = 5;
         this.secondsToIncrement = 2;
-        this.secondssRespawn = 5;
+        this.secondssRespawn = 2;
     }
 
     setRandomDirection() {
@@ -47,16 +47,15 @@ class Orange extends SolidObject {
     }
 
     move(delta) {
+        console.log("Time Elapsed: " + this.secondsElapsed + "\nOutOfBoard: " + this.outOfBoard +"\n");
         if (this.secondsElapsed > this.secondsToIncrement && !this.outOfBoard) {
             this.velocity += this.velocityIncrement*Math.random();
             this.secondsElapsed = 0;
         }
-        else if (this.outOfBoard && this.secondsElapsed > this.secondsRespawn) {
+        else if (this.outOfBoard && (this.secondsElapsed > this.secondsRespawn)) {
             this.setRandomVelocity();
             this.setRandomPosition();
             this.setRandomDirection();
-            this.add(this.orangeBody);
-            this.add(this.orangeLeaf);
             this.outOfBoard = false;
             this.secondsElapsed = 0;
         }
@@ -102,8 +101,7 @@ class Orange extends SolidObject {
     //override
     collided(solidObject, delta) {
         if (solidObject instanceof FieldLimit && !this.outOfBoard) {
-            this.remove(this.orangeBody);
-            this.remove(this.orangeLeaf);
+            this.position.set(0,999,0);
             this.outOfBoard = true;
         }
     }
