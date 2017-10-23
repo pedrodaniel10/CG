@@ -22,6 +22,7 @@ class Orange extends SolidObject {
         //variables
         this.secondsElapsed = this.secondsRespawn;
         this.outOfBoard = false;
+        this.lastPosition = this.position;
 
         //constants
         this.velocityInitialConstant = 50;
@@ -68,6 +69,11 @@ class Orange extends SolidObject {
             deslocationVec.setLength(deslocation);
 
             this.rollOver(deslocationVec,deslocation);
+
+            this.lastPosition.x = this.position.x;
+            this.lastPosition.y = this.position.y;
+            this.lastPosition.z = this.position.z;
+
             this.position.x += deslocationVec.x;
             this.position.z += deslocationVec.z;
         }
@@ -103,6 +109,29 @@ class Orange extends SolidObject {
             this.position.set(0,999,0);
             this.outOfBoard = true;
             this.secondsElapsed = 0;
+        }
+        else if(solidObject instanceof Orange && !this.outOfBoard){
+          this.position.x = this.lastPosition.x;
+          this.position.y = this.lastPosition.y;
+          this.position.z = this.lastPosition.z;
+
+          var vectorAxisOrthogonal = new THREE.Vector3(this.position.x - solidObject.position.x, 0, this.position.z - solidObject.position.z);
+          vectorAxisOrthogonal.normalize();
+
+          var vectorAxis = new THREE.Vector3(-vectorAxisOrthogonal.z, 0, vectorAxisOrthogonal.x);
+          vectorAxis.normalize();
+
+          console.log("Vetor1: x:" + this.direction.x + "z: " + this.direction.z +
+          "\nVetor2: " + " x:"+ solidObject.direction.x + "z: " + solidObject.direction.z +
+           "\nOrthogonal: " + vectorAxisOrthogonal.x + "z: " + vectorAxisOrthogonal.z +
+           "\nAxis: " + vectorAxis.x + "z: " + vectorAxis.z );
+
+          this.direction.applyAxisAngle(vectorAxis, Math.PI);
+          solidObject.direction.applyAxisAngle(vectorAxis, Math.PI);
+          console.log("Vetor1: x:" + this.direction.x + "z: " + this.direction.z +
+          "\nVetor2: " + " x:"+ solidObject.direction.x + "z: " + solidObject.direction.z +
+           "\nOrthogonal: " + vectorAxisOrthogonal.x + "z: " + vectorAxisOrthogonal.z +
+           "\nAxis: " + vectorAxis.x + "z: " + vectorAxis.z );
         }
     }
 }
