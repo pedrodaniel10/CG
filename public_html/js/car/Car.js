@@ -175,12 +175,11 @@ class Car extends SolidObject {
           this.velocity = 0;
         }
         //car lost game, orange velocities must reset
-        if (solidObject instanceof Orange ||
+        else if (solidObject instanceof Orange ||
             solidObject instanceof FieldLimit) {
             this.position.set(0, 0, 0);
             this.velocity = 0;
-            return 1;
+            carLost();
         }
-        return 0;
     }
 }

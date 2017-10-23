@@ -22,6 +22,5 @@ class Cheerio extends SolidObject {
             solidObject instanceof Cheerio) {
             // TODO mover cheerio
         }
-        return 0;
     }
 }

@@ -97,6 +97,5 @@ class Orange extends SolidObject {
             this.tickCounter = 0;
             this.outOfBoard = true;
         }
-        return 0;
     }
 }

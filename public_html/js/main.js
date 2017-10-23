@@ -73,6 +73,15 @@ function onResize() {
   }
 }
 
+function carLost() {
+  for (let i = 1; i < NUM_ORANGES+1; i++) {
+      baseObject.objects[i].position.set(999,999,999);
+      baseObject.objects[i].tickCounter = 0;
+      baseObject.objects[i].outOfBoard = true;
+      baseObject.objects[i].velocity = Math.random() * 75;
+  }
+}
+
 
 function onKeyDown(e) {
   'use strict'
