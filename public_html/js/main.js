@@ -1,7 +1,7 @@
 var scene, renderer, baseObject;
 var cameras = [], cameraIndex=0;
 
-var aClicked = false;
+var aClicked = true;
 var wireframOn = true;
 
 var clock = new THREE.Clock();
@@ -125,7 +125,7 @@ function onKeyUp(e) {
 }
 
 function update() {
-    if(aClicked) {
+    if (aClicked) {
         wireframOn = !wireframOn;
         scene.traverse(function (node) {
             if (node instanceof THREE.Mesh) {
