@@ -62,6 +62,7 @@ class Orange extends SolidObject {
             this.setRandomVelocity();
             this.setRandomPosition();
             this.setRandomDirection();
+            addObj(this);
             this.outOfBoard = false;
             this.secondsElapsed = 0;
         }
@@ -74,7 +75,7 @@ class Orange extends SolidObject {
             var deslocationVec = this.direction.clone();
             deslocationVec.setLength(deslocation);
 
-            this.rollOver(deslocationVec,deslocation);
+            this.rollOver(deslocationVec, deslocation);
 
             this.lastPosition.x = this.position.x;
             this.lastPosition.y = this.position.y;
@@ -113,7 +114,7 @@ class Orange extends SolidObject {
     collided(solidObject, delta) {
 
         if (solidObject instanceof FieldLimit && !this.outOfBoard) {
-            this.position.set(0,999,0);
+            removeObj(this);
             this.outOfBoard = true;
             this.secondsElapsed = 0;
         }

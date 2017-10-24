@@ -47,7 +47,7 @@ class Field {
         /* field limits */
         this.fieldLimits = [];
 
-        let wallThickness = 4;
+        let wallThickness = 128;
 
         this.fieldLimits = [
             new FieldLimit(
