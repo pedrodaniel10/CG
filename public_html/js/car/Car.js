@@ -180,7 +180,10 @@ class Car extends SolidObject {
             this.position.x = lastCarPosX;
             this.position.z = lastCarPosZ;
             let dof = this.getDOF();
-            this.accelerate(10000, delta, dof);
+                if (!this.goingBackwards) {
+                    dof.negate();
+                }
+            this.accelerate(500, delta, dof);
             this.velocity = 0;
         }
         //car lost game, orange velocities must reset
