@@ -4,6 +4,9 @@ var NUM_ORANGES = 3;
 var NUM_BUTTER = 5;
 var OBJ_MARGIN = 0.8;
 
+var lastCarPosX;
+var lastCarPosZ;
+
 class ObjectBase extends THREE.Object3D {
     constructor() {
         super();
@@ -59,6 +62,10 @@ class ObjectBase extends THREE.Object3D {
     //override
     update(delta) {
         var delta = clock.getDelta();
+
+        lastCarPosX = this.car.position.x;
+        lastCarPosZ = this.car.position.z;
+        
 
         // update object positions
         for (let i = 0; i < this.objects.length; i++)

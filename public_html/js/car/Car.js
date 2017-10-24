@@ -177,10 +177,11 @@ class Car extends SolidObject {
     //override
     collided(solidObject, delta) {
         if (solidObject instanceof Butter) {
+            this.position.x = lastCarPosX;
+            this.position.z = lastCarPosZ;
+            let dof = this.getDOF();
+            this.accelerate(10000, delta, dof);
             this.velocity = 0;
-            this.position.x = this.lastPosX;
-            this.position.y = this.lastPosY;
-            this.position.z = this.lastPosZ;
         }
         //car lost game, orange velocities must reset
         else if (solidObject instanceof Orange ||
