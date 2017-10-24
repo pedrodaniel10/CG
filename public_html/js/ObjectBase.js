@@ -31,7 +31,7 @@ class ObjectBase extends THREE.Object3D {
             do {
                 rand_x = (Math.random() - 1/2) * this.table.SIZEX * this.OBJ_MARGIN;
                 rand_z = (Math.random() - 1/2) * this.table.SIZEZ * this.OBJ_MARGIN;
-            } while (rand_x < 60 && rand_z < 60);
+            } while (Math.abs(rand_x) < 60 && rand_z > 70);
 
             let rot_y;
             if (Math.random() > 0.5) {

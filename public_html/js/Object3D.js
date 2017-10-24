@@ -28,11 +28,11 @@ class Object3D extends THREE.Object3D {
     }
 
     setAxisOn() {
-      this.add(this.axisHelper);
+      baseObject.add(this.axisHelper);
     }
 
     setAxisOff() {
-      this.remove(this.axisHelper);
+      baseObject.remove(this.axisHelper);
     }
 
     getDOF() {
