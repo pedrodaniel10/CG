@@ -72,6 +72,9 @@ class ObjectBase extends THREE.Object3D {
         for (let i = 0; i < this.objects.length; i++)
             this.objects[i].update(delta);
 
-        this.collisionsOn = true;
+        if (!this.collisionsOn) {
+            this.collisionsOn = true;
+            carLost();
+        }
     }
 }

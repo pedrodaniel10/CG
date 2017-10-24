@@ -117,6 +117,7 @@ class Orange extends SolidObject {
             this.outOfBoard = true;
             this.secondsElapsed = 0;
         }
+        /*
         else if(solidObject instanceof Orange && !this.outOfBoard){
           this.position.x = this.lastPosition.x;
           this.position.y = this.lastPosition.y;
@@ -127,19 +128,19 @@ class Orange extends SolidObject {
 
           var vectorAxis = new THREE.Vector3(-vectorAxisOrthogonal.z, 0, vectorAxisOrthogonal.x);
           vectorAxis.normalize();
-
+          */
           /*console.log("Vetor1: x:" + this.direction.x + "z: " + this.direction.z +
           "\nVetor2: " + " x:"+ solidObject.direction.x + "z: " + solidObject.direction.z +
            "\nOrthogonal: " + vectorAxisOrthogonal.x + "z: " + vectorAxisOrthogonal.z +
            "\nAxis: " + vectorAxis.x + "z: " + vectorAxis.z );
            */
-          this.direction = this.getDOF().applyAxisAngle(vectorAxis, Math.PI);
-          solidObject.direction = solidObject.getDOF().applyAxisAngle(vectorAxis, Math.PI);
+          /*this.direction = this.getDOF().applyAxisAngle(vectorAxis, Math.PI);
+          solidObject.direction = solidObject.getDOF().applyAxisAngle(vectorAxis, Math.PI);*/
           /*console.log("Vetor1: x:" + this.direction.x + "z: " + this.direction.z +
           "\nVetor2: " + " x:"+ solidObject.direction.x + "z: " + solidObject.direction.z +
            "\nOrthogonal: " + vectorAxisOrthogonal.x + "z: " + vectorAxisOrthogonal.z +
            "\nAxis: " + vectorAxis.x + "z: " + vectorAxis.z );
            */
-        }
+        //}
     }
 }
