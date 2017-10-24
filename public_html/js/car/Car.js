@@ -18,6 +18,8 @@ class Car extends SolidObject {
         this.wheelFrontRight = new CarWheel(16, 0, 11, 0);
         this.wheelBack = new CarWheel(-1, 5, 5, 1);
 
+        this.setInitialPosition();
+
         //collisions
         // ISTO TA MAL
         this.boundingVolume = new BoundingSphere(0, 0, CAR_RADIUS);
@@ -169,6 +171,23 @@ class Car extends SolidObject {
             this.rotateY(-this.velocity * this.constantCurve);
         }
     }
+
+    setInitialPosition(){
+      this.position.set(0,0,130);
+    }
+
+    setInitialDirection(){
+      var dof = this.getDOF();
+      var angle = dof.angleTo(X_AXIS_WORLD);
+
+      if(dof.z > 0){
+        this.rotateY(angle);
+      }
+      else{
+        this.rotateY(-angle);
+      }
+    }
+
     //override
     update(delta) {
         this.checkMove(delta);

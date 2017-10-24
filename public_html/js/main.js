@@ -83,6 +83,8 @@ function createCamera() {
                     baseObject.objects[i].velocity = Math.random() * 50;
                 }
             }
+            baseObject.car.setInitialPosition();
+            baseObject.car.setInitialDirection();
             baseObject.field.placeCheerios();
         }
 
