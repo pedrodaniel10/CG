@@ -60,6 +60,10 @@ class ObjectBase extends THREE.Object3D {
     update(delta) {
         var delta = clock.getDelta();
 
+        // update object positions
+        for (let i = 0; i < this.objects.length; i++)
+            this.objects[i].update(delta);
+
         // collisions
         if (this.collisionsOn) {
             for (let i = 0; i < this.objects.length; i++) {
@@ -71,10 +75,6 @@ class ObjectBase extends THREE.Object3D {
                 }
             }
         }
-
-        // update object positions
-        for (let i = 0; i < this.objects.length; i++)
-            this.objects[i].update(delta);
 
         if (!this.collisionsOn) {
             this.collisionsOn = true;
