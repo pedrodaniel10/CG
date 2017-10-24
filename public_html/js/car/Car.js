@@ -183,7 +183,7 @@ class Car extends SolidObject {
                 if (!this.goingBackwards) {
                     dof.negate();
                 }
-            this.accelerate(500, delta, dof);
+            this.accelerate(1000, delta, dof);
             this.velocity = 0;
         }
         //car lost game, orange velocities must reset
