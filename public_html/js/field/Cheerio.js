@@ -110,10 +110,8 @@ class Cheerio extends SolidObject {
         }
 
         else if (solidObject instanceof FieldLimit) {
-            this.remove(this.cheerioBody);
-            this.remove(this.boundingVolume);
-
-            removeObj(this);
+            this.position.set(9999,9999,9999);
+            this.stop();
         }
     }
 }

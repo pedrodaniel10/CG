@@ -83,6 +83,7 @@ function createCamera() {
                     baseObject.objects[i].velocity = Math.random() * 50;
                 }
             }
+            baseObject.field.placeCheerios();
         }
 
         function removeObj(object) {
