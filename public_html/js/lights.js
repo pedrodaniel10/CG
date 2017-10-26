@@ -2,8 +2,8 @@
 
 var lights = [];
 
-var sunLight = new THREE.DirectionalLight( 0xffffff, 0.5);
-sunLight.position.set( 2, 5, 6 );
+var sunLight = new THREE.DirectionalLight( 0xfff8e8, 0.9);
+sunLight.position.set( 3, 6, 5 );
 lights.push(sunLight);
 
 //Create a sphere that cast shadows (but does not receive them)

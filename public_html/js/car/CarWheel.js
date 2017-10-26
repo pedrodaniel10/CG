@@ -7,7 +7,7 @@ class CarWheel extends Mesh {
         this.translateY(3);
         this.translateZ(-5);
         this.geometry = new THREE.TorusGeometry(1, 1, 8, 16);
-        this.material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true});
+        this.material = new THREE.MeshLambertMaterial({ color: 0x000000, wireframe: true});
         this.rotation.y = r * Math.PI / 2;
     }
 }
