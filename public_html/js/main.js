@@ -4,6 +4,9 @@ var cameras = [], cameraIndex=0;
 var aClicked = true;
 var wireframOn = true;
 
+var nClicked = false;
+var lClicked = false;
+
 var clock = new THREE.Clock();
 
 var screenConst = 450000;
@@ -44,12 +47,15 @@ function createCamera() {
         cameras.push(baseObject.car.camera);
 }
 
-
 function createScene() {
     'use strict';
     scene = new THREE.Scene();
     baseObject = new ObjectBase();
     scene.add(baseObject);
+
+    //lights:
+    scene.add(sunLight);
+    scene.add(sphere);
     //scene.add(new THREE.AxisHelper(100));
 }
 
@@ -114,6 +120,12 @@ function onKeyDown(e) {
         case 51: //3
         cameraIndex = 2;
         break;
+        case 78: //N
+        nClicked = !nClicked;
+        break;
+        case 76:
+        lClicked = !lClicked;
+        break;
     }
 }
 
@@ -134,6 +146,14 @@ function update() {
         });
         aClicked = false;
     }
+    if (nClicked) {
+        setSunLight();
+        nClicked = false;
+    }
+    if (lClicked) {
+        setLightCalculations();
+        lClicked = false;
+    }
     baseObject.update();
 }
 
@@ -149,6 +169,7 @@ function animate() {
         renderer = new THREE.WebGLRenderer({ antialias: true });
 
         renderer.setSize(window.innerWidth, window.innerHeight);
+
         document.body.appendChild(renderer.domElement);
 
         createScene();
