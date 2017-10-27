@@ -14,6 +14,13 @@ class Mesh extends THREE.Mesh {
     }
 
     update() {
+    }
 
+    toGouraud() {
+        this.material = new THREE.MeshLambertMaterial({ color: this.material.color, wireframe: this.material.wireframe});
+    }
+
+    toPhong() {
+        this.material = new THREE.MeshPhongMaterial({ color: this.material.color, wireframe: this.material.wireframe});
     }
 }

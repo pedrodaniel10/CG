@@ -49,6 +49,12 @@ class LightBase extends THREE.Object3D {
         lightsOn = !lightsOn;
     }
 
+    switchAllShading() {
+        for (let i = 0; i < this.lights.length; i++) {
+            this.lights[i].switchShading();
+        }
+    }
+
     createCandles() {
       this.lights.push(new CandleLight(-CANDLE_X, -CANDLE_Z));
       this.lights.push(new CandleLight(0, -CANDLE_Z));

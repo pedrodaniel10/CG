@@ -18,6 +18,16 @@ class Car extends SolidObject {
         this.wheelFrontRight = new CarWheel(16, 0, 11, 0);
         this.wheelBack = new CarWheel(-1, 5, 5, 1);
 
+
+        this.meshList.push(this.carBack);
+        this.meshList.push(this.carFront);
+        this.meshList.push(this.carTop);
+        this.meshList.push(this.wheelBackLeft);
+        this.meshList.push(this.wheelBackRight);
+        this.meshList.push(this.wheelFrontLeft);
+        this.meshList.push(this.wheelFrontRight);
+        this.meshList.push(this.wheelBack);
+
         this.setInitialPosition();
 
         //collisions

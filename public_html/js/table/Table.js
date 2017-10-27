@@ -10,11 +10,9 @@ class Table extends Object3D {
         this.SIZEY = TABLE_SIZEY;
         this.SIZEZ = TABLE_SIZEZ;
         this.tableTop = new TableTop(0, 0, 0, this.SIZEX, this.SIZEY, this.SIZEZ);
+        this.meshList.push(this.tableTop);
 
         this.add(this.tableTop);
         this.position.y -= this.SIZEY/2;
-    }
-
-    switchShading() {
     }
 }

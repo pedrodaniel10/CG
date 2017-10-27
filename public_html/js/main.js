@@ -7,8 +7,10 @@ var wireframOn = true;
 var nClicked = false;
 var lClicked = false;
 var cClicked = false;
+var gClicked = false;
 
 var lightsOn = true;
+var gouraudOn = true;
 
 var clock = new THREE.Clock();
 
@@ -132,6 +134,9 @@ function onKeyDown(e) {
         case 67: //C
         cClicked = !cClicked;
         break;
+        case 71: //G
+        gClicked = !gClicked;
+        break;
 
     }
 }
@@ -165,6 +170,13 @@ function update() {
         lightBase.setCandleLights();
         cClicked = false;
     }
+    if (gClicked) {
+        baseObject.switchAllShading();
+        lightBase.switchAllShading();
+        gouraudOn = !gouraudOn;
+        gClicked = false;
+    }
+
     baseObject.update();
 }
 

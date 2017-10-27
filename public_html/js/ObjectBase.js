@@ -59,13 +59,19 @@ class ObjectBase extends THREE.Object3D {
         this.collisionsOn = false;
     }
 
+    switchAllShading() {
+        for (let i = 0; i < this.objects.length; i++) {
+            this.objects[i].switchShading();
+        }
+    }
+
     //override
     update(delta) {
         var delta = clock.getDelta();
 
         lastCarPosX = this.car.position.x;
         lastCarPosZ = this.car.position.z;
-        
+
 
         // update object positions
         for (let i = 0; i < this.objects.length; i++)

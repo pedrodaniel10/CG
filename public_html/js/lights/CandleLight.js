@@ -8,6 +8,7 @@ class CandleLight extends Object3D {
         this.add(this.light);
 
         this.candleBody = new CandleBody(0, 0, 0);
+        this.meshList.push(this.candleBody);
         this.add(this.candleBody);
 
         this.position.set(x, 10, z);

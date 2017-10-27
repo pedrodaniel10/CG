@@ -8,6 +8,8 @@ class Cheerio extends SolidObject {
         this.cheerioBody = new CheerioBody(0, 0, 0, size, radius);
         this.boundingVolume = new BoundingSphere(0, 0, size + radius);
 
+        this.meshList.push(this.cheerioBody);
+
         this.add(this.cheerioBody);
         this.add(this.boundingVolume);
         this.position.set(x, y, z);

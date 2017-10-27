@@ -8,6 +8,9 @@ class Butter extends SolidObject {
         super(x, y, z);
         this.position.set(x, y+10, z);
         this.butterBody = new ButterBody(0, 0, 0);
+
+        this.meshList.push(this.butterBody);
+
         if (rot_y < 0.78) {
             this.boundingVolume = new AxisAlignedBoundingBox(0, 0, BOUNDING_LENGTH, BOUNDING_WIDTH);
         }

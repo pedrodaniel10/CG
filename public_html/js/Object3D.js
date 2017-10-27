@@ -14,6 +14,9 @@ class Object3D extends THREE.Object3D {
         this.breakingFoward = 0;
         this.breakingBackward = 0;
 
+        //list of meshes on object, facilitates switching shading
+        this.meshList = [];
+
         this.direction = new THREE.Vector3(1,0,0);
 
         this.axisHelper = new THREE.AxisHelper(100);
@@ -45,6 +48,16 @@ class Object3D extends THREE.Object3D {
     }
 
     switchShading() {
+      if (gouraudOn) {
+          for (let i = 0; i < this.meshList.length; i++) {
+              this.meshList[i].toPhong();
+          }
+      }
+      else {
+          for (let i = 0; i < this.meshList.length; i++) {
+              this.meshList[i].toGouraud();
+          }
+      }
     }
 
 }
