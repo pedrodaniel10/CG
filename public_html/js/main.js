@@ -1,4 +1,4 @@
-var scene, renderer, baseObject;
+var scene, renderer, baseObject, lightBase;
 var cameras = [], cameraIndex=0;
 
 var aClicked = true;
@@ -6,6 +6,7 @@ var wireframOn = true;
 
 var nClicked = false;
 var lClicked = false;
+var cClicked = false;
 
 var lightsOn = true;
 
@@ -56,9 +57,8 @@ function createScene() {
     scene.add(baseObject);
 
     //lights:
-    scene.add(sunLight);
-    scene.add(candleLight);
-    scene.add( helper );
+    lightBase = new LightBase();
+    scene.add(lightBase);
     //scene.add(new THREE.AxisHelper(100));
 }
 
@@ -126,9 +126,13 @@ function onKeyDown(e) {
         case 78: //N
         nClicked = !nClicked;
         break;
-        case 76:
+        case 76: //L
         lClicked = !lClicked;
         break;
+        case 67: //C
+        cClicked = !cClicked;
+        break;
+
     }
 }
 
@@ -150,12 +154,16 @@ function update() {
         aClicked = false;
     }
     if (nClicked) {
-        setSunLight();
+        lightBase.setSunLight();
         nClicked = false;
     }
     if (lClicked) {
-        setLightCalculations();
+        lightBase.setLightCalculations();
         lClicked = false;
+    }
+    if (cClicked) {
+        lightBase.setCandleLights();
+        cClicked = false;
     }
     baseObject.update();
 }
