@@ -4,6 +4,6 @@ class SunLight extends Object3D {
         super();
         this.light = new THREE.DirectionalLight( 0xfff8e8, 0.9);
         this.add(this.light);
-        this.position.set( 2, 9, 5 );
+        this.position.set( 7, 9, 5 );
     }
 }
