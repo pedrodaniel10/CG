@@ -7,6 +7,8 @@ var wireframOn = true;
 var nClicked = false;
 var lClicked = false;
 
+var lightsOn = true;
+
 var clock = new THREE.Clock();
 
 var screenConst = 450000;
@@ -55,7 +57,8 @@ function createScene() {
 
     //lights:
     scene.add(sunLight);
-    scene.add(sphere);
+    scene.add(candleLight);
+    scene.add( helper );
     //scene.add(new THREE.AxisHelper(100));
 }
 
