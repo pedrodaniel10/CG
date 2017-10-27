@@ -1,7 +1,7 @@
 'use strict';
 
-var CANDLE_X = 450 - 110;
-var CANDLE_Z = 200 - 110;
+var CANDLE_X = 320;
+var CANDLE_Z = 70;
 
 class LightBase extends THREE.Object3D {
     constructor() {
@@ -21,7 +21,7 @@ class LightBase extends THREE.Object3D {
 
     setSunLight() {
         if (lightsOn) {
-            this.sunLight.visible = !this.sunLight.visible;
+            this.sunLight.light.visible = !this.sunLight.light.visible;
         }
     }
 
@@ -29,7 +29,7 @@ class LightBase extends THREE.Object3D {
         if (lightsOn) {
             for (let i = 0; i < this.lights.length; i++) {
                 if (this.lights[i] instanceof CandleLight) {
-                    this.lights[i].visible = !this.lights[i].visible;
+                    this.lights[i].light.visible = !this.lights[i].light.visible;
                 }
             }
         }
@@ -38,12 +38,12 @@ class LightBase extends THREE.Object3D {
     setLightCalculations() {
         if (lightsOn) {
             for (let i = 0; i < this.lights.length; i++) {
-                this.lights[i].visible = false;
+                this.lights[i].light.visible = false;
             }
         }
         else {
           for (let i = 0; i < this.lights.length; i++) {
-              this.lights[i].visible = true;
+              this.lights[i].light.visible = true;
           }
         }
         lightsOn = !lightsOn;

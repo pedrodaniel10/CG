@@ -44,4 +44,7 @@ class Object3D extends THREE.Object3D {
     update(delta) {
     }
 
+    switchShading() {
+    }
+
 }

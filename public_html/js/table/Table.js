@@ -14,4 +14,7 @@ class Table extends Object3D {
         this.add(this.tableTop);
         this.position.y -= this.SIZEY/2;
     }
+
+    switchShading() {
+    }
 }
