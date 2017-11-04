@@ -31,7 +31,6 @@ class Car extends SolidObject {
         this.setInitialPosition();
 
         //collisions
-        // ISTO TA MAL
         this.boundingVolume = new BoundingSphere(0, 0, CAR_RADIUS);
 
         //camera

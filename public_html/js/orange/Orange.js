@@ -56,7 +56,6 @@ class Orange extends SolidObject {
     }
 
     move(delta) {
-
         if ((this.secondsElapsed > this.secondsToIncrement) && !this.outOfBoard) {
             this.velocity += this.velocityIncrement*Math.random();
             this.secondsElapsed = 0;
@@ -78,10 +77,6 @@ class Orange extends SolidObject {
             deslocationVec.setLength(deslocation);
 
             this.rollOver(deslocationVec, deslocation);
-
-            this.lastPosition.x = this.position.x;
-            this.lastPosition.y = this.position.y;
-            this.lastPosition.z = this.position.z;
 
             this.position.x += deslocationVec.x;
             this.position.z += deslocationVec.z;
