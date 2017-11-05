@@ -8,14 +8,17 @@ var CAR_RADIUS = 12;
 class Car extends SolidObject {
     constructor() {
         super();
+
+        this.wheelRadius = 2.8;
+
         //Car components
-        this.carBody = new CarBody(0, 3, 0);
-        this.carHood = new CarHood(1, 7, 0, 5);
-        this.wheelBackLeft = new CarWheel(5, 0, -1, 0);
-        this.wheelBackRight = new CarWheel(5, 0, 11, 0);
-        this.wheelFrontLeft = new CarWheel(16, 0, -1, 0);
-        this.wheelFrontRight = new CarWheel(16, 0, 11, 0);
-        this.wheelBack = new CarWheel(-1, 5, 5, 1);
+        this.carBody = new CarBody(0, this.wheelRadius, 0);
+        this.carHood = new CarHood(1, this.wheelRadius+4, 0, 5);
+        this.wheelBackLeft = new CarWheel(-5, this.wheelRadius, 6, 0, this.wheelRadius);
+        this.wheelBackRight = new CarWheel(-5, this.wheelRadius, -6, 0, this.wheelRadius);
+        this.wheelFrontLeft = new CarWheel(6, this.wheelRadius, 6, 0, this.wheelRadius);
+        this.wheelFrontRight = new CarWheel(6, this.wheelRadius, -6, 0, this.wheelRadius);
+        this.wheelBack = new CarWheel(-11, this.wheelRadius+5, 0, 1, this.wheelRadius);
 
 
         this.meshList.push(this.carBody);

@@ -20,12 +20,12 @@ var orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
 var geometry, material, mesh;
 
 var keyState = {};
-window.addEventListener('keydown',function(e){
+window.addEventListener('keydown', function(e) {
     keyState[e.keyCode || e.which] = true;
-},true);
-window.addEventListener('keyup',function(e){
+}, true);
+window.addEventListener('keyup', function(e) {
     keyState[e.keyCode || e.which] = false;
-},true);
+}, true);
 
 function render() {
     'use strict';
@@ -69,7 +69,6 @@ function onResize() {
     orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
     renderer.setSize(window.innerWidth, window.innerHeight);
     if (window.innerHeight > 0 && window.innerWidth > 0) {
-
         cameras[0].left = renderer.getSize().width / -orthographicScale;
         cameras[0].right = renderer.getSize().width / orthographicScale;
         cameras[0].top = renderer.getSize().height / orthographicScale;
@@ -187,18 +186,18 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-    function init() {
-        'use strict';
-        renderer = new THREE.WebGLRenderer({ antialias: true });
+function init() {
+    'use strict';
+    renderer = new THREE.WebGLRenderer({ antialias: true });
 
-        renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight);
 
-        document.body.appendChild(renderer.domElement);
+    document.body.appendChild(renderer.domElement);
 
-        createScene();
-        createCamera();
+    createScene();
+    createCamera();
 
-        window.addEventListener("resize", onResize);
-        window.addEventListener("keydown", onKeyDown)
-        window.addEventListener("keyup", onKeyUp)
+    window.addEventListener("resize", onResize);
+    window.addEventListener("keydown", onKeyDown)
+    window.addEventListener("keyup", onKeyUp)
 }
