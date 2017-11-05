@@ -9,9 +9,8 @@ class Car extends SolidObject {
     constructor() {
         super();
         //Car components
-        this.carBack = new CarBack(5.5, 4.5, 5);
-        this.carFront = new CarFront(16, 2, 5);
-        this.carTop = new CarTop(15.5, 4.5, 5);
+        this.carBody = new CarBody(0, 3, 0);
+        this.carHood = new CarHood(1, 7, 0, 5);
         this.wheelBackLeft = new CarWheel(5, 0, -1, 0);
         this.wheelBackRight = new CarWheel(5, 0, 11, 0);
         this.wheelFrontLeft = new CarWheel(16, 0, -1, 0);
@@ -19,9 +18,8 @@ class Car extends SolidObject {
         this.wheelBack = new CarWheel(-1, 5, 5, 1);
 
 
-        this.meshList.push(this.carBack);
-        this.meshList.push(this.carFront);
-        this.meshList.push(this.carTop);
+        this.meshList.push(this.carBody);
+        this.meshList.push(this.carHood);
         this.meshList.push(this.wheelBackLeft);
         this.meshList.push(this.wheelBackRight);
         this.meshList.push(this.wheelFrontLeft);
@@ -54,14 +52,7 @@ class Car extends SolidObject {
         this.wheelTurnAngle = 0.58904862;
 
         //add elements
-        this.add(this.carBack);
-        this.add(this.carFront);
-        this.add(this.carTop);
-        this.add(this.wheelBackLeft);
-        this.add(this.wheelBackRight);
-        this.add(this.wheelFrontLeft);
-        this.add(this.wheelFrontRight);
-        this.add(this.wheelBack);
+        this.addMeshesFromList();
         this.add(this.boundingVolume)
         this.add(this.camera);
     }

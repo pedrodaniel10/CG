@@ -13,8 +13,7 @@ class Orange extends SolidObject {
         this.meshList.push(this.orangeBody);
         this.meshList.push(this.orangeLeaf);
 
-        this.add(this.orangeBody);
-        this.add(this.orangeLeaf);
+        this.addMeshesFromList();
         this.add(this.boundingVolume);
 
         //random ATRIBUTES

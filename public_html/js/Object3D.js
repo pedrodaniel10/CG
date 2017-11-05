@@ -22,6 +22,12 @@ class Object3D extends THREE.Object3D {
         this.axisHelper = new THREE.AxisHelper(100);
     }
 
+    addMeshesFromList() {
+        for (let i = 0; i < this.meshList.length; i++) {
+            this.add(this.meshList[i]);
+        }
+    }
+
     rotateAroundWorldAxis(axis, radians) {
         var rotWorldMatrix = new THREE.Matrix4();
         rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);

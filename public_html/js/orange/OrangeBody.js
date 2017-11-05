@@ -33,13 +33,10 @@ class OrangeBody extends Mesh {
 		// generate vertices, normals and uvs
 
 		for (let iy = 0; iy <= heightSegments; iy ++ ) {
-
 			var verticesRow = [];
-
 			var v = iy / heightSegments;
 
 			for (let ix = 0; ix <= widthSegments; ix ++ ) {
-
 				let u = ix / widthSegments;
 
 				// vertex
@@ -49,15 +46,14 @@ class OrangeBody extends Mesh {
 				vertex.y = radius * Math.cos(v * Math.PI);
 				vertex.z = radius * Math.sin(u * 2 * Math.PI) * Math.sin(v * Math.PI);
 
-				vertices.push(vertex.x, vertex.y, vertex.z);
+				//vertices.push(vertex.x, vertex.y, vertex.z);
+                geometry.vertices.push(vertex);
 
 				// normal
-
 				normal.set(vertex.x, vertex.y, vertex.z).normalize();
 				normals.push(normal.x, normal.y, normal.z);
 
 				// uv
-
 				uvs.push(u, 1 - v);
 
 				verticesRow.push(index++);
@@ -71,9 +67,7 @@ class OrangeBody extends Mesh {
 		// indices
 
 		for (let iy = 0; iy < heightSegments; iy ++) {
-
 			for (let ix = 0; ix < widthSegments; ix ++) {
-
 				var a = grid[ iy ][ ix + 1 ];
 				var b = grid[ iy ][ ix ];
 				var c = grid[ iy + 1 ][ ix ];
@@ -81,9 +75,7 @@ class OrangeBody extends Mesh {
 
 				if (iy !== 0) indices.push(a, b, d);
 				if (iy !== heightSegments-1) indices.push(b, c, d);
-
 			}
-
 		}
 
 		// build geometry
