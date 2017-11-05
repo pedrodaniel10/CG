@@ -54,7 +54,12 @@ class Object3D extends THREE.Object3D {
     }
 
     switchShading() {
-      if (gouraudOn) {
+      if (basicOn) {
+          for (let i = 0; i < this.meshList.length; i++) {
+              this.meshList[i].toBasic();
+          }
+      }
+      else if (gouraudOn) {
           for (let i = 0; i < this.meshList.length; i++) {
               this.meshList[i].toPhong();
           }

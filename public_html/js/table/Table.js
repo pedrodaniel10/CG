@@ -12,6 +12,7 @@ class Table extends Object3D {
         this.tableTop = new TableTop(0, 0, 0, this.SIZEX, this.SIZEY, this.SIZEZ);
         this.meshList.push(this.tableTop);
 
+        this.addMeshesFromList(); 
         this.add(this.tableTop);
     }
 }

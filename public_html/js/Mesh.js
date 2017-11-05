@@ -84,4 +84,8 @@ class Mesh extends THREE.Mesh {
     toPhong() {
         this.material = new THREE.MeshPhongMaterial({ color: this.material.color, wireframe: this.material.wireframe});
     }
+
+    toBasic() {
+        this.material = new THREE.MeshBasicMaterial({ color: this.material.color, wireframe: this.material.wireframe});
+    }
 }

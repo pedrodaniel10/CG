@@ -56,12 +56,15 @@ class ObjectBase extends THREE.Object3D {
             this.add(this.objects[i]);
         }
 
+        this.allObjectsScene = this.objects.slice();
+        this.allObjectsScene.push(this.table);
+
         this.collisionsOn = false;
     }
 
     switchAllShading() {
-        for (let i = 0; i < this.objects.length; i++) {
-            this.objects[i].switchShading();
+        for (let i = 0; i < this.allObjectsScene.length; i++) {
+            this.allObjectsScene[i].switchShading();
         }
     }
 

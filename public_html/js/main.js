@@ -11,6 +11,7 @@ var gClicked = false;
 
 var lightsOn = true;
 var gouraudOn = true;
+var basicOn = false;
 
 var clock = new THREE.Clock();
 
@@ -165,11 +166,9 @@ function update() {
         lightBase.setLightCalculations();
         lClicked = false;
     }
-    if (cClicked) {
         lightBase.setCandleLights();
         cClicked = false;
     }
-    if (gClicked) {
         baseObject.switchAllShading();
         lightBase.switchAllShading();
         gouraudOn = !gouraudOn;
