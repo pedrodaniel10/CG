@@ -4,8 +4,8 @@ var TABLE_SIZEY = 20;
 var TABLE_SIZEZ = 400;
 
 class Table extends Object3D {
-    constructor() {
-        super();
+    constructor(x, y, z) {
+        super(x, y, z);
         this.SIZEX = TABLE_SIZEX;
         this.SIZEY = TABLE_SIZEY;
         this.SIZEZ = TABLE_SIZEZ;
@@ -13,6 +13,5 @@ class Table extends Object3D {
         this.meshList.push(this.tableTop);
 
         this.add(this.tableTop);
-        this.position.y -= this.SIZEY/2;
     }
 }

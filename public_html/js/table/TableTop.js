@@ -2,8 +2,8 @@
 
 class TableTop extends Mesh {
     constructor(x, y, z, sx, sy, sz) {
-        super(x, y, z);
-        this.geometry = new THREE.CubeGeometry(sx, sy, sz);
+        super(x, y - (sy / 2), z);
+        this.geometry = new THREE.CubeGeometry(sx, sy, sz, 30, 1, 15);
         this.material = new THREE.MeshLambertMaterial({ color: 0xc4f6ff, wireframe: true});
     }
 }
