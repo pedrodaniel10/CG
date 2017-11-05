@@ -163,12 +163,17 @@ function update() {
         nClicked = false;
     }
     if (lClicked) {
+        basicOn = !basicOn;
         lightBase.setLightCalculations();
+        baseObject.switchAllShading();
+        lightBase.switchAllShading();
         lClicked = false;
     }
+    if (cClicked && !basicOn) {
         lightBase.setCandleLights();
         cClicked = false;
     }
+    if (gClicked && !basicOn) {
         baseObject.switchAllShading();
         lightBase.switchAllShading();
         gouraudOn = !gouraudOn;
