@@ -166,7 +166,6 @@ function update() {
         basicOn = !basicOn;
         lightBase.setLightCalculations();
         baseObject.switchAllShading();
-        lightBase.switchAllShading();
         lClicked = false;
     }
     if (cClicked && !basicOn) {
@@ -175,7 +174,6 @@ function update() {
     }
     if (gClicked && !basicOn) {
         baseObject.switchAllShading();
-        lightBase.switchAllShading();
         gouraudOn = !gouraudOn;
         gClicked = false;
     }
