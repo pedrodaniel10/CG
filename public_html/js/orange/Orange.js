@@ -51,14 +51,14 @@ class Orange extends SolidObject {
     }
 
     setRandomVelocity() {
-      if (this.velocity < 250) {
+      if (this.velocity < 150) {
         this.velocity += Math.random() * this.velocityInitialConstant;
       }
     }
 
     move(delta) {
         if ((this.secondsElapsed > this.secondsToIncrement) && !this.outOfBoard) {
-          if (this.velocity < 250) {
+          if (this.velocity < 150) {
             this.velocity += this.velocityIncrement*Math.random();
           }
             this.secondsElapsed = 0;
