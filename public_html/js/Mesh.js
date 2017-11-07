@@ -22,7 +22,8 @@ class Mesh extends THREE.Mesh {
     addVertexCircunference(x, y, z, r, n) {
         /* Creates a "circle" of n vertices around x, y, z
           with radius r on the XY plane. */
-        for (let theta = 0; theta < 2 * Math.PI; theta += (2 * Math.PI) / n) {
+        for (let i = 0; i < n; i++) {
+            let theta = (i * 2 * Math.PI) / n;
             this.addVertex(x + (r * Math.cos(theta)), y + (r * Math.sin(theta)), z);
         }
     }
@@ -62,6 +63,7 @@ class Mesh extends THREE.Mesh {
 
         let startV1 = startV2 - n;
         let endV1 = endV2 - n;
+
         this.addFace(startV1, startV2, endV2);
         this.addFace(startV1, endV2, endV1);
     }
