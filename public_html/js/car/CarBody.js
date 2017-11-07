@@ -4,7 +4,7 @@ class CarBody extends Mesh {
     this.material = new THREE.MeshLambertMaterial({ color: 0xff2b2b, emissive: this.emissive, wireframe: true});
     this.emissive = 1;
     this.specular = 1;
-    this.shininess = 30;
+    this.shininess = 300;
 
 
     // sides

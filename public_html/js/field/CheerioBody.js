@@ -9,6 +9,6 @@ class CheerioBody extends Mesh {
         this.position.y = y + r;
         this.emissive = 1;
         this.specular = 1;
-        this.shininess = 30;
+        this.shininess = 20;
     }
 }

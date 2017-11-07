@@ -8,6 +8,6 @@ class OrangeBody extends Mesh {
         this.material = new THREE.MeshLambertMaterial({ color: 0xff8c00, emissive: this.emissive, wireframe: true});
         this.emissive = 1;
         this.specular = 1;
-        this.shininess = 30;
+        this.shininess = 50;
     }
 }

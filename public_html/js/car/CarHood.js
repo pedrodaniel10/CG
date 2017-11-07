@@ -6,7 +6,7 @@ class CarHood extends Mesh {
         this.material = new THREE.MeshLambertMaterial({ color: 0xffffff, emissive: this.emissive, wireframe: true});
         this.emissive = 1;
         this.specular = 1;
-        this.shininess = 30;
+        this.shininess = 300;
 
         // bottom vertices
         let w2 = w / 2;
