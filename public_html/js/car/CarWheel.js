@@ -4,7 +4,7 @@ class CarWheel extends Mesh {
     constructor(x, y, z, rot, radius) {
         super(x, y, z);
         this.material = new THREE.MeshLambertMaterial({ color: 0x000000, emissive: this.emissive, wireframe: true});
-        this.shininess = 100;
+        this.shininess = 10;
 
         let nSegments = 16;
 
