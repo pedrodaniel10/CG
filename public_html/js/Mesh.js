@@ -4,6 +4,10 @@ class Mesh extends THREE.Mesh {
         this.position.set(x, y, z);
         this.axisHelper = new THREE.AxisHelper(100);
         this.geometry = new THREE.Geometry();
+
+        this.emissive = 1;
+        this.specular = 1;
+        this.shininess = 30;
     }
 
     addVertex(x, y, z) {
@@ -80,11 +84,11 @@ class Mesh extends THREE.Mesh {
     }
 
     toGouraud() {
-        this.material = new THREE.MeshLambertMaterial({ color: this.material.color, wireframe: this.material.wireframe});
+        this.material = new THREE.MeshLambertMaterial({ color: this.material.color, emissive: this.emissive, wireframe: this.material.wireframe});
     }
 
     toPhong() {
-        this.material = new THREE.MeshPhongMaterial({ color: this.material.color, wireframe: this.material.wireframe});
+        this.material = new THREE.MeshPhongMaterial({ color: this.material.color, emissive: this.emissive, specular: this.specualar, shininess: this.shininess, wireframe: this.material.wireframe});
     }
 
     toBasic() {
