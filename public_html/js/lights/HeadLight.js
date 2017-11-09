@@ -13,30 +13,16 @@ class HeadLight extends Object3D {
       this.updateLightPosition();
   }
 
-  updateLightPosition() {
-      var lightPosition = new THREE.Vector4(0,0,0,1);
-      var targetPosition = new THREE.Vector4(1,0,0,1);
+  updateLightPosition(){
+    var lightPosition = new THREE.Vector3(0,0,0);
+    var targetPosition = new THREE.Vector3(1,0,0);
 
-      var newLightPosition = this.multiplyMatrixVector(this.matrixWorld, lightPosition);
-      var newTargetPosition = this.multiplyMatrixVector(this.matrixWorld, targetPosition);
+    this.localToWorld(lightPosition);
+    this.localToWorld(targetPosition);
 
-      this.light.position.set(newLightPosition.x, newLightPosition.y, newLightPosition.z);
-      this.light.target.position.set(newTargetPosition.x, newTargetPosition.y, newTargetPosition.z);
-      this.light.target.updateMatrixWorld();
-  }
-
-  multiplyMatrixVector(matrix, vector){
-    var matrixArray = matrix.toArray();
-    var vectorArray = vector.toArray();
-    var vectorRes = [0,0,0,0];
-
-    for(var i=0; i<4; i++){
-      for(var j=0; i<4; i++){
-        vectorRes[i]+= matrixArray[i*4+j] * vectorArray[j];
-      }
-    }
-
-    return new THREE.Vector3(vectorRes[0], vectorRes[1], vectorRes[2]);
+    this.light.position.set(lightPosition.x, lightPosition.y, lightPosition.z);
+    this.light.target.position.set(targetPosition.x, targetPosition.y, targetPosition.z);
+    this.light.target.updateMatrixWorld();
   }
 
   setHeadLight(boolean){
