@@ -11,6 +11,8 @@ class LightBase extends THREE.Object3D {
         this.sunLight = new SunLight();
         this.lights.push(this.sunLight);
 
+        this.headLights = [];
+
         this.createCandles();
 
         for (let i = 0; i < this.lights.length; i++) {
@@ -56,8 +58,5 @@ class LightBase extends THREE.Object3D {
       this.lights.push(new CandleLight(-CANDLE_X, CANDLE_Z));
       this.lights.push(new CandleLight(0, CANDLE_Z));
       this.lights.push(new CandleLight(CANDLE_X, CANDLE_Z));
-
-
     }
-
 }

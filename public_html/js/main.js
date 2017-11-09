@@ -8,10 +8,12 @@ var nClicked = false;
 var lClicked = false;
 var cClicked = false;
 var gClicked = false;
+var hClicked = false;
 
 var lightsOn = true;
 var gouraudOn = true;
 var basicOn = false;
+var headLightsOn = true;
 
 var clock = new THREE.Clock();
 
@@ -62,6 +64,7 @@ function createScene() {
     //lights:
     lightBase = new LightBase();
     scene.add(lightBase);
+
     //scene.add(new THREE.AxisHelper(100));
 }
 
@@ -137,6 +140,9 @@ function onKeyDown(e) {
         case 71: //G
         gClicked = !gClicked;
         break;
+        case 72:
+        hClicked = !hClicked;
+        break;
 
     }
 }
@@ -176,6 +182,11 @@ function update() {
         baseObject.switchAllShading();
         gouraudOn = !gouraudOn;
         gClicked = false;
+    }
+    if (hClicked && !basicOn) {
+        headLightsOn = !headLightsOn;
+        baseObject.car.setHeadLight(headLightsOn);
+        hClicked = false;
     }
 
     baseObject.update();

@@ -29,6 +29,11 @@ class Car extends SolidObject {
         this.meshList.push(this.wheelFrontRight);
         this.meshList.push(this.wheelBack);
 
+        //HeadLights
+        this.leftHeadLight = new HeadLight(11,7,-5);
+        this.rightHeadLight = new HeadLight(11,7,5);
+        this.add(this.leftHeadLight);
+        this.add(this.rightHeadLight);
         this.setInitialPosition();
 
         //collisions
@@ -189,6 +194,11 @@ class Car extends SolidObject {
       else{
         this.rotateY(-angle);
       }
+    }
+
+    setHeadLight(boolean){
+      this.rightHeadLight.setHeadLight(boolean);
+      this.leftHeadLight.setHeadLight(boolean);
     }
 
     //override
