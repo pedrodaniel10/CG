@@ -1,4 +1,4 @@
-var scene, renderer, baseObject, lightBase;
+var scene, sceneLifes, renderer, rendererLifes, baseObject, lightBase, lifes;
 var cameras = [], cameraIndex=0;
 
 var aClicked = true;
@@ -32,7 +32,12 @@ window.addEventListener('keyup', function(e) {
 
 function render() {
     'use strict';
+    renderer.clear();
+    renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.render(scene, cameras[cameraIndex]);
+
+    renderer.setViewport(lifes.x, lifes.y, lifes.width, lifes.height);
+    renderer.render(sceneLifes, lifes.camera);
 }
 
 function createCamera() {
@@ -47,7 +52,7 @@ function createCamera() {
         window.innerWidth / orthographicScale,
         window.innerHeight / orthographicScale,
         window.innerHeight / -orthographicScale, 1, 450);
-        cameraOrthographic.position.set(0,250,0)
+        cameraOrthographic.position.set(0,250,0);
         cameraOrthographic.lookAt(scene.position);
 
         cameras.push(cameraOrthographic);
@@ -68,6 +73,13 @@ function createScene() {
     //scene.add(new THREE.AxisHelper(100));
 }
 
+function createSceneLifes(){
+    sceneLifes = new THREE.Scene();
+    lifes = new Lifes();
+
+    sceneLifes.add(lifes);
+}
+
 function onResize() {
     'use strict';
     orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
@@ -85,6 +97,8 @@ function onResize() {
 
         cameras[2].aspect = renderer.getSize().width / renderer.getSize().height;
         cameras[2].updateProjectionMatrix();
+
+        lifes.cameraOnResize(renderer.getSize().width, renderer.getSize().height);
     }
 }
 
@@ -100,6 +114,10 @@ function carLost() {
     baseObject.car.setInitialPosition();
     baseObject.car.setInitialDirection();
     baseObject.field.placeCheerios();
+    lifes.takeLife();
+    if(lifes.lifesRemaining == 0){
+      lifes.restart();
+    }
 }
 
 function removeObj(object) {
@@ -202,13 +220,20 @@ function animate() {
 function init() {
     'use strict';
     renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.autoClear = false;
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    //renderer.setSize(window.innerWidth, window.innerHeight);
+    //rendererLifes.setViewport(0,0, 1/4 * window.innerWidth, 1/8 * window.innerHeight);
 
     document.body.appendChild(renderer.domElement);
+    //document.body.appendChild(rendererLifes.domElement);
 
     createScene();
+    createSceneLifes();
     createCamera();
+
+
 
     window.addEventListener("resize", onResize);
     window.addEventListener("keydown", onKeyDown)

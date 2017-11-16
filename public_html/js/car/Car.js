@@ -8,6 +8,7 @@ var CAR_RADIUS = 12;
 class Car extends SolidObject {
     constructor() {
         super();
+        this.setInitialPosition();
 
         this.wheelRadius = 2.8;
 
@@ -34,7 +35,6 @@ class Car extends SolidObject {
         this.rightHeadLight = new HeadLight(11,7,5);
         this.add(this.leftHeadLight);
         this.add(this.rightHeadLight);
-        this.setInitialPosition();
 
         //collisions
         this.boundingVolume = new BoundingSphere(0, 0, CAR_RADIUS);
@@ -194,6 +194,25 @@ class Car extends SolidObject {
       else{
         this.rotateY(-angle);
       }
+    }
+
+    setPosition(x,y,z){
+      this.position.set(x,y,z);
+    }
+
+    setDirection(direction){
+      var dof = this.getDOF();
+      var angle = dof.angleTo(direction);
+      if(dof.z > 0){
+        this.rotateY(angle);
+      }
+      else{
+        this.rotateY(-angle);
+      }
+    }
+
+    resize(factor){
+      this.scale.set(factor,factor,factor);
     }
 
     setHeadLight(boolean){

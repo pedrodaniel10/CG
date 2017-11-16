@@ -71,4 +71,16 @@ class Object3D extends THREE.Object3D {
       }
     }
 
+    toBasic(){
+      for (let i = 0; i < this.meshList.length; i++) {
+          this.meshList[i].toBasic();
+      }
+    }
+
+    wireframeOn(){
+      for (let i = 0; i < this.meshList.length; i++) {
+          this.meshList[i].material.wireframe = false;
+      }
+    }
+
 }

@@ -3,7 +3,8 @@ class HeadLight extends Object3D {
   constructor(x, y, z) {
       super();
 
-      this.light = new THREE.SpotLight( 0xffffff, 1, 300, 0.9, 0.2, 2);
+      /*SpotLight( color, intensity, distance, angle, penumbra, decay )*/
+      this.light = new THREE.SpotLight( 0xffffff, 1, 300, 0.8, 0.2, 2);
       this.light.castShadow = true;
 
       this.add(this.light);
@@ -14,14 +15,8 @@ class HeadLight extends Object3D {
   }
 
   updateLightPosition(){
-    var lightPosition = new THREE.Vector3(0,0,0);
-    var targetPosition = new THREE.Vector3(1,0,0);
-
-    this.localToWorld(lightPosition);
-    this.localToWorld(targetPosition);
-
-    this.light.position.set(lightPosition.x, lightPosition.y, lightPosition.z);
-    this.light.target.position.set(targetPosition.x, targetPosition.y, targetPosition.z);
+    this.light.position.set(0, 0, 0);
+    this.light.target.position.set(1, 0, 0);
     this.light.target.updateMatrixWorld();
   }
 
