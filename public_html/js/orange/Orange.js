@@ -51,16 +51,16 @@ class Orange extends SolidObject {
     }
 
     setRandomVelocity() {
-      if (this.velocity < 150) {
-        this.velocity += Math.random() * this.velocityInitialConstant;
-      }
+        if (this.velocity < 150) {
+            this.velocity += Math.random() * this.velocityInitialConstant;
+        }
     }
 
     move(delta) {
         if ((this.secondsElapsed > this.secondsToIncrement) && !this.outOfBoard) {
-          if (this.velocity < 150) {
-            this.velocity += this.velocityIncrement*Math.random();
-          }
+            if (this.velocity < 150) {
+                this.velocity += this.velocityIncrement*Math.random();
+            }
             this.secondsElapsed = 0;
         }
         else if (this.outOfBoard && (this.secondsElapsed > this.secondsRespawn)) {
@@ -98,12 +98,19 @@ class Orange extends SolidObject {
             this.rotateAroundWorldAxis(Y_AXIS_WORLD, -angleToXaxis);
         }
         else if (deslocationVec.z <= 0){ //quadrantes negativos => angulos negativos
-          this.rotateAroundWorldAxis(Y_AXIS_WORLD, -angleToXaxis);
-          this.rotateAroundWorldAxis(Z_AXIS_WORLD, -totalRotation);
-          this.rotateAroundWorldAxis(Y_AXIS_WORLD, angleToXaxis);
+            this.rotateAroundWorldAxis(Y_AXIS_WORLD, -angleToXaxis);
+            this.rotateAroundWorldAxis(Z_AXIS_WORLD, -totalRotation);
+            this.rotateAroundWorldAxis(Y_AXIS_WORLD, angleToXaxis);
         }
 
-      }
+    }
+
+    resetMovement() {
+        this.position.set(999,999,999);
+        this.secondsElapsed = this.secondsRespawn;
+        this.outOfBoard = true;
+        this.velocity = Math.random() * 50;
+    }
 
     //override
     update(delta) {

@@ -115,14 +115,7 @@ function onResize() {
 }
 
 function carLost() {
-    for (let i = 0; i < baseObject.objects.length; i++) {
-        if (baseObject.objects[i] instanceof Orange) {
-            baseObject.objects[i].position.set(999,999,999);
-            baseObject.objects[i].secondsElapsed = baseObject.objects[i].secondsRespawn;
-            baseObject.objects[i].outOfBoard = true;
-            baseObject.objects[i].velocity = Math.random() * 50;
-        }
-    }
+    resetOranges();
     baseObject.car.setInitialPosition();
     baseObject.car.setInitialDirection();
     baseObject.field.placeCheerios();
@@ -130,6 +123,14 @@ function carLost() {
     if(lifes.lifesRemaining == 0){
       restartScreen.setScreen();
       lifes.restart();
+    }
+}
+
+function resetOranges() {
+    for (let i = 0; i < baseObject.objects.length; i++) {
+        if (baseObject.objects[i] instanceof Orange) {
+            baseObject.objects[i].resetMovement();
+        }
     }
 }
 

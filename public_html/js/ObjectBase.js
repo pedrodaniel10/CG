@@ -94,7 +94,7 @@ class ObjectBase extends THREE.Object3D {
 
           if (!this.collisionsOn) {
               this.collisionsOn = true;
-              carLost();
+              resetOranges();
           }
         }
     }
