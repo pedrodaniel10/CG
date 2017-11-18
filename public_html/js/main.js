@@ -71,7 +71,7 @@ function createScene() {
     baseObject = new ObjectBase();
     scene.add(baseObject);
 
-    pauseScreen = new InterruptionScreen(0, 248, 0);
+    pauseScreen = new InterruptionScreen(0, 248, 0, PAUSE);
     scene.add(pauseScreen);
 
     //lights:
@@ -87,20 +87,6 @@ function createSceneLifes(){
 
     sceneLifes.add(lifes);
 }
-
-function setPauseScreen() {
-    pauseOn = !pauseOn;
-    if (pauseOn) {
-        cameraIndex = 0;
-        pauseScreen.visible = true;
-    }
-    else {
-        cameraIndex = lastCameraIndex;
-        pauseScreen.visible = false;
-        nClicked = lClicked = cClicked = gClicked = hClicked = sClicked = false;
-    }
-}
-
 
 function onResize() {
     'use strict';
@@ -246,7 +232,7 @@ function update() {
 
 
   if (sClicked) {
-      setPauseScreen();
+      pauseScreen.setPauseScreen();
       sClicked = false;
   }
 }
