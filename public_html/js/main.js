@@ -1,5 +1,6 @@
 var scene, sceneLifes, renderer, rendererLifes, baseObject, lightBase, lifes;
 var cameras = [], cameraIndex=0;
+var lastCameraIndex = 0;
 
 var aClicked = true;
 var wireframOn = true;
@@ -9,11 +10,13 @@ var lClicked = false;
 var cClicked = false;
 var gClicked = false;
 var hClicked = false;
+var sClicked = false;
 
 var lightsOn = true;
 var gouraudOn = true;
 var basicOn = false;
 var headLightsOn = true;
+var pauseOn = false;
 
 var clock = new THREE.Clock();
 
@@ -21,6 +24,8 @@ var screenConst = 450000;
 var orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
 
 var geometry, material, mesh;
+
+var pauseScreen = new InterruptionScreen(0, 249, 0);
 
 var keyState = {};
 window.addEventListener('keydown', function(e) {
@@ -80,6 +85,19 @@ function createSceneLifes(){
     sceneLifes.add(lifes);
 }
 
+function setPauseScreen() {
+    pauseOn = !pauseOn;
+    if (pauseOn) {
+        cameraIndex = 0;
+        pauseScreen.visible = true;
+    }
+    else {
+        cameraIndex = lastCameraIndex;
+        pauseScreen.visible = false;
+    }
+}
+
+
 function onResize() {
     'use strict';
     orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
@@ -138,12 +156,15 @@ function onKeyDown(e) {
         aClicked = !aClicked;
         break;
         case 49: //1
+        lastCameraIndex = 0;
         cameraIndex = 0;
         break;
         case 50: //2
+        lastCameraIndex = 1;
         cameraIndex = 1;
         break;
         case 51: //3
+        lastCameraIndex = 2;
         cameraIndex = 2;
         break;
         case 78: //N
@@ -161,7 +182,9 @@ function onKeyDown(e) {
         case 72:
         hClicked = !hClicked;
         break;
-
+        case 83:
+        sClicked = !sClicked;
+        break;
     }
 }
 
@@ -205,6 +228,10 @@ function update() {
         headLightsOn = !headLightsOn;
         baseObject.car.setHeadLight(headLightsOn);
         hClicked = false;
+    }
+    if (sClicked) {
+        setPauseScreen();
+        sClicked = false;
     }
 
     baseObject.update();
