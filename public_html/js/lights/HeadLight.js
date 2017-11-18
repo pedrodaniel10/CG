@@ -4,7 +4,7 @@ class HeadLight extends Object3D {
       super();
 
       /*SpotLight( color, intensity, distance, angle, penumbra, decay )*/
-      this.light = new THREE.SpotLight( 0xffffff, 1, 300, 0.8, 0.2, 2);
+      this.light = new THREE.SpotLight( 0xffffff, 2, 300, 0.8, 0.2, 2);
       this.light.castShadow = true;
 
       this.add(this.light);
