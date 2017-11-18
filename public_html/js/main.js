@@ -11,12 +11,14 @@ var cClicked = false;
 var gClicked = false;
 var hClicked = false;
 var sClicked = false;
+var rClicked = false;
 
 var lightsOn = true;
 var gouraudOn = true;
 var basicOn = false;
 var headLightsOn = true;
 var pauseOn = false;
+var restartOn = false;
 
 var clock = new THREE.Clock();
 
@@ -25,7 +27,7 @@ var orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
 
 var geometry, material, mesh;
 
-var pauseScreen;
+var pauseScreen, restartScreen;
 
 var keyState = {};
 window.addEventListener('keydown', function(e) {
@@ -73,6 +75,8 @@ function createScene() {
 
     pauseScreen = new InterruptionScreen(0, 248, 0, PAUSE);
     scene.add(pauseScreen);
+    restartScreen = new InterruptionScreen(0, 248, 0, RESTART);
+    scene.add(restartScreen);
 
     //lights:
     lightBase = new LightBase();
@@ -124,6 +128,7 @@ function carLost() {
     baseObject.field.placeCheerios();
     lifes.takeLife();
     if(lifes.lifesRemaining == 0){
+      restartScreen.setScreen();
       lifes.restart();
     }
 }
@@ -181,6 +186,9 @@ function onKeyDown(e) {
         case 83:
         sClicked = !sClicked;
         break;
+        case 82:
+        rClicked = !rClicked;
+        break;
     }
 }
 
@@ -193,48 +201,54 @@ function onKeyUp(e) {
 
 function update() {
 
-    if(!pauseOn){
-      if (aClicked) {
-          wireframOn = !wireframOn;
-          scene.traverse(function (node) {
-              if (node instanceof THREE.Mesh) {
-                  node.material.wireframe = wireframOn;
-              }
-          });
-          aClicked = false;
-      }
-      if (nClicked) {
-          lightBase.setSunLight();
-          nClicked = false;
-      }
-      if (lClicked) {
-          basicOn = !basicOn;
-          lightBase.setLightCalculations();
-          baseObject.switchAllShading();
-          lClicked = false;
-      }
-      if (cClicked && !basicOn) {
-          lightBase.setCandleLights();
-          cClicked = false;
-      }
-      if (gClicked && !basicOn) {
-          baseObject.switchAllShading();
-          gouraudOn = !gouraudOn;
-          gClicked = false;
-      }
-      if (hClicked && !basicOn) {
-          headLightsOn = !headLightsOn;
-          baseObject.car.setHeadLight(headLightsOn);
-          hClicked = false;
-      }
+    if (!restartOn) {
+        if(!pauseOn){
+          if (aClicked) {
+              wireframOn = !wireframOn;
+              scene.traverse(function (node) {
+                  if (node instanceof THREE.Mesh) {
+                      node.material.wireframe = wireframOn;
+                  }
+              });
+              aClicked = false;
+          }
+          if (nClicked) {
+              lightBase.setSunLight();
+              nClicked = false;
+          }
+          if (lClicked) {
+              basicOn = !basicOn;
+              lightBase.setLightCalculations();
+              baseObject.switchAllShading();
+              lClicked = false;
+          }
+          if (cClicked && !basicOn) {
+              lightBase.setCandleLights();
+              cClicked = false;
+          }
+          if (gClicked && !basicOn) {
+              baseObject.switchAllShading();
+              gouraudOn = !gouraudOn;
+              gClicked = false;
+          }
+          if (hClicked && !basicOn) {
+              headLightsOn = !headLightsOn;
+              baseObject.car.setHeadLight(headLightsOn);
+              hClicked = false;
+          }
+        }
+        baseObject.update();
+
+
+        if (sClicked) {
+            pauseScreen.setScreen();
+            sClicked = false;
+        }
     }
-    baseObject.update();
-
-
-  if (sClicked) {
-      pauseScreen.setPauseScreen();
-      sClicked = false;
-  }
+    if (rClicked && restartOn) {
+        restartScreen.setScreen();
+        rClicked = false;
+    }
 }
 
 function animate() {

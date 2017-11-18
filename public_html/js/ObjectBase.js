@@ -75,7 +75,7 @@ class ObjectBase extends THREE.Object3D {
         lastCarPosX = this.car.position.x;
         lastCarPosZ = this.car.position.z;
 
-        if(!pauseOn){
+        if(!pauseOn && !restartOn){
           // update object positions
           for (let i = 0; i < this.objects.length; i++)
               this.objects[i].update(delta);

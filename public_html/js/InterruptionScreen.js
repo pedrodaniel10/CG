@@ -14,6 +14,9 @@ class InterruptionScreen extends Object3D {
     else{
       //should not happen
     }
+
+    this.type = texture;
+
     this.texture = new THREE.TextureLoader().load(this.texturePath);
 
     this.geometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
@@ -27,16 +30,34 @@ class InterruptionScreen extends Object3D {
     this.add(this.mesh);
   }
 
-  setPauseScreen() {
-      pauseOn = !pauseOn;
-      if (pauseOn) {
-          cameraIndex = 0;
-          pauseScreen.visible = true;
+  setScreen() {
+      if (this.type == PAUSE) {
+          pauseOn = !pauseOn;
+          if (pauseOn) {
+              cameraIndex = 0;
+              pauseScreen.visible = true;
+          }
+          else {
+              cameraIndex = lastCameraIndex;
+              pauseScreen.visible = false;
+              nClicked = lClicked = cClicked = gClicked = hClicked = sClicked = false;
+          }
+      }
+      else if (this.type == RESTART) {
+          restartOn = !restartOn;
+          if (restartOn) {
+              cameraIndex = 0;
+              restartScreen.visible = true;
+          }
+          else {
+              cameraIndex = lastCameraIndex;
+              restartScreen.visible = false;
+              nClicked = lClicked = cClicked = gClicked = hClicked = sClicked = false;
+          }
       }
       else {
-          cameraIndex = lastCameraIndex;
-          pauseScreen.visible = false;
-          nClicked = lClicked = cClicked = gClicked = hClicked = sClicked = false;
+          //should not happen
       }
   }
+
 }
