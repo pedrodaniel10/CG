@@ -71,6 +71,9 @@ function createScene() {
     baseObject = new ObjectBase();
     scene.add(baseObject);
 
+    pauseScreen = new InterruptionScreen(0, 248, 0);
+    scene.add(pauseScreen);
+
     //lights:
     lightBase = new LightBase();
     scene.add(lightBase);
@@ -156,16 +159,22 @@ function onKeyDown(e) {
         aClicked = !aClicked;
         break;
         case 49: //1
-        lastCameraIndex = 0;
-        cameraIndex = 0;
+        if (!pauseOn) {
+          lastCameraIndex = 0;
+          cameraIndex = 0;
+        }
         break;
         case 50: //2
-        lastCameraIndex = 1;
-        cameraIndex = 1;
+        if (!pauseOn) {
+          lastCameraIndex = 1;
+          cameraIndex = 1;
+        }
         break;
         case 51: //3
-        lastCameraIndex = 2;
-        cameraIndex = 2;
+        if (!pauseOn) {
+          lastCameraIndex = 2;
+          cameraIndex = 2;
+        }
         break;
         case 78: //N
         nClicked = !nClicked;
@@ -196,6 +205,7 @@ function onKeyUp(e) {
 }
 
 function update() {
+  if (!pauseOn) {
     if (aClicked) {
         wireframOn = !wireframOn;
         scene.traverse(function (node) {
@@ -229,12 +239,14 @@ function update() {
         baseObject.car.setHeadLight(headLightsOn);
         hClicked = false;
     }
-    if (sClicked) {
-        setPauseScreen();
-        sClicked = false;
-    }
 
     baseObject.update();
+  }
+
+  if (sClicked) {
+      setPauseScreen();
+      sClicked = false;
+  }
 }
 
 function animate() {
@@ -248,8 +260,6 @@ function init() {
     'use strict';
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.autoClear = false;
-
-    pauseScreen = new InterruptionScreen(0, 249, 0);
 
 
     //renderer.setSize(window.innerWidth, window.innerHeight);
