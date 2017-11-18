@@ -97,6 +97,7 @@ function setPauseScreen() {
     else {
         cameraIndex = lastCameraIndex;
         pauseScreen.visible = false;
+        nClicked = lClicked = cClicked = gClicked = hClicked = sClicked = false;
     }
 }
 
@@ -205,43 +206,44 @@ function onKeyUp(e) {
 }
 
 function update() {
-  if (!pauseOn) {
-    if (aClicked) {
-        wireframOn = !wireframOn;
-        scene.traverse(function (node) {
-            if (node instanceof THREE.Mesh) {
-                node.material.wireframe = wireframOn;
-            }
-        });
-        aClicked = false;
-    }
-    if (nClicked) {
-        lightBase.setSunLight();
-        nClicked = false;
-    }
-    if (lClicked) {
-        basicOn = !basicOn;
-        lightBase.setLightCalculations();
-        baseObject.switchAllShading();
-        lClicked = false;
-    }
-    if (cClicked && !basicOn) {
-        lightBase.setCandleLights();
-        cClicked = false;
-    }
-    if (gClicked && !basicOn) {
-        baseObject.switchAllShading();
-        gouraudOn = !gouraudOn;
-        gClicked = false;
-    }
-    if (hClicked && !basicOn) {
-        headLightsOn = !headLightsOn;
-        baseObject.car.setHeadLight(headLightsOn);
-        hClicked = false;
-    }
 
+    if(!pauseOn){
+      if (aClicked) {
+          wireframOn = !wireframOn;
+          scene.traverse(function (node) {
+              if (node instanceof THREE.Mesh) {
+                  node.material.wireframe = wireframOn;
+              }
+          });
+          aClicked = false;
+      }
+      if (nClicked) {
+          lightBase.setSunLight();
+          nClicked = false;
+      }
+      if (lClicked) {
+          basicOn = !basicOn;
+          lightBase.setLightCalculations();
+          baseObject.switchAllShading();
+          lClicked = false;
+      }
+      if (cClicked && !basicOn) {
+          lightBase.setCandleLights();
+          cClicked = false;
+      }
+      if (gClicked && !basicOn) {
+          baseObject.switchAllShading();
+          gouraudOn = !gouraudOn;
+          gClicked = false;
+      }
+      if (hClicked && !basicOn) {
+          headLightsOn = !headLightsOn;
+          baseObject.car.setHeadLight(headLightsOn);
+          hClicked = false;
+      }
+    }
     baseObject.update();
-  }
+
 
   if (sClicked) {
       setPauseScreen();
@@ -261,18 +263,11 @@ function init() {
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.autoClear = false;
 
-
-    //renderer.setSize(window.innerWidth, window.innerHeight);
-    //rendererLifes.setViewport(0,0, 1/4 * window.innerWidth, 1/8 * window.innerHeight);
-
     document.body.appendChild(renderer.domElement);
-    //document.body.appendChild(rendererLifes.domElement);
 
     createScene();
     createSceneLifes();
     createCamera();
-
-
 
     window.addEventListener("resize", onResize);
     window.addEventListener("keydown", onKeyDown)

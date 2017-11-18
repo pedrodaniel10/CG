@@ -75,26 +75,27 @@ class ObjectBase extends THREE.Object3D {
         lastCarPosX = this.car.position.x;
         lastCarPosZ = this.car.position.z;
 
+        if(!pauseOn){
+          // update object positions
+          for (let i = 0; i < this.objects.length; i++)
+              this.objects[i].update(delta);
 
-        // update object positions
-        for (let i = 0; i < this.objects.length; i++)
-            this.objects[i].update(delta);
+          // collisions
+          if (this.collisionsOn) {
+              for (let i = 0; i < this.objects.length; i++) {
+                  for (let j = 0; j < this.objects.length; j++) {
+                      if (i !== j && this.objects[i].collides(this.objects[j])) {
+                          this.objects[i].collided(this.objects[j], delta);
+                          this.objects[j].collided(this.objects[i], delta);
+                      }
+                  }
+              }
+          }
 
-        // collisions
-        if (this.collisionsOn) {
-            for (let i = 0; i < this.objects.length; i++) {
-                for (let j = 0; j < this.objects.length; j++) {
-                    if (i !== j && this.objects[i].collides(this.objects[j])) {
-                        this.objects[i].collided(this.objects[j], delta);
-                        this.objects[j].collided(this.objects[i], delta);
-                    }
-                }
-            }
-        }
-
-        if (!this.collisionsOn) {
-            this.collisionsOn = true;
-            carLost();
+          if (!this.collisionsOn) {
+              this.collisionsOn = true;
+              carLost();
+          }
         }
     }
 }
