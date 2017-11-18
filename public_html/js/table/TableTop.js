@@ -10,7 +10,7 @@ class TableTop extends Mesh {
         this.texture.wrapT = THREE.RepeatWrapping;
         this.texture.repeat.set( 15, 10 );
 
-        this.geometry = new THREE.CubeGeometry(sx, sy, sz, 30, 1, 15);
+        this.geometry = new THREE.CubeGeometry(sx, sy, sz, 300, 1, 150);
         this.material = new THREE.MeshLambertMaterial({ color: 0xc4f6ff, emissive: this.emissive, map: this.texture, wireframe: true});
 
     }
