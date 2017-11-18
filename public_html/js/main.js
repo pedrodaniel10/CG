@@ -25,7 +25,7 @@ var orthographicScale = (window.innerWidth * window.innerHeight)/screenConst;
 
 var geometry, material, mesh;
 
-var pauseScreen = new InterruptionScreen(0, 249, 0);
+var pauseScreen;
 
 var keyState = {};
 window.addEventListener('keydown', function(e) {
@@ -248,6 +248,8 @@ function init() {
     'use strict';
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.autoClear = false;
+
+    pauseScreen = new InterruptionScreen(0, 249, 0);
 
 
     //renderer.setSize(window.innerWidth, window.innerHeight);
